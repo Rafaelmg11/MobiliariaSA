@@ -5,6 +5,7 @@ valorDeCompra = []
 valorDeVenda = []
 fornecedor = []
 
+
 #CADASTRO DE PRODUTO:
 cont = int(input("Digite quantos produtos você deseja cadastrar: "))
 
@@ -29,31 +30,45 @@ while inf == 'sim' or inf == 's':
         quantidade.append(input("Digite a quantia para o estoque"))
         valorDeCompra.append(float (input("Digite qual é o valor de compra desse produto(valor do fornecidor): ")))
         valorDeVenda.append(float (input("Digite o valor de venda desse produto: ")))
-        fornecedor.append(input ("Digite qual é o fornecedor: "))
+        fornecedor.append(input ("Digite qual é o fornecedor:\n "))
 
-        inf = input("Deseja cadastrar mais produtos? ")
+    
+    inf = input("Deseja cadastrar mais produtos? ")
 
 print("FIM CADASTRO")
 print("INCIO EDITAR")
-#EDITAR PRODUTO:
-pesquisarProduto = input("Digite o produto que você deseja pesquisar: ")
-try:
-    if pesquisarProduto in produtos:
-        i = produtos.index(pesquisarProduto)
-        respostaEditarP = input("Você deja alterar {} ?".format(pesquisarProduto))
-        respostaEditarP.lower()
-        if respostaEditarP == "sim" or "s":
-            produtos[i] = (input("Digite qual é o produto: "))
-            valorDeCompra[i] = (float (input("Digite qual é o valor de compra desse produto(valor do fornecidor): ")))
-            valorDeVenda[i] = (float (input("Digite o valor de venda desse produto: ")))
-            fornecedor[i] = (input ("Digite qual é o fornecedor: "))
 
-            print (produtos)
-            print(valorDeCompra)
-            print(valorDeVenda)
-            print(fornecedor)
-except:
-    print(oi)
+#EDITAR PRODUTO:
+inf = input("Você deseja editar algum produto? ")
+
+if inf == 'sim' or inf == 's':
+    pesquisarProduto = input("Digite o produto que você deseja editar: ")
+    try:
+        if pesquisarProduto in produtos:
+            i = produtos.index(pesquisarProduto)
+            respostaEditarP = input("Você deja alterar {} ?".format(pesquisarProduto))
+            respostaEditarP.lower()
+            if respostaEditarP == "sim" or "s":
+                produtos[i] = (input("Digite qual é o produto: "))
+                quantidade[i] = int(input("Digite a quantidade de ".format(produtos[i])))
+                valorDeCompra[i] = (float (input("Digite qual é o valor de compra desse produto(valor do fornecidor): ")))
+                valorDeVenda[i] = (float (input("Digite o valor de venda desse produto: ")))
+                fornecedor[i] = (input ("Digite qual é o fornecedor: "))
+
+                print("Informações alteradas com sucesso! ")
+
+                print("Produtos: ")
+                print("Estoque: ")
+
+                # print(produtos)
+                # print(quantidade)
+                # print(valorDeCompra)
+                # print(valorDeVenda)
+                # print(fornecedor)
+
+            
+    except:
+        print(oi)
 
 
 
