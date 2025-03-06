@@ -82,7 +82,33 @@ while inf == 'sim' or inf == 's':
 
 #EXCLUIR PRODUTO:
 
+inf = input("Você deseja excluir algum produto? ")
 
+while inf == 'sim' or inf == 's':
+
+    excluirProduto = input("Digite o produto que você deseja excluir: ")
+    try:
+        i = produtos.index(excluirProduto)
+        if excluirProduto in produtos:
+            inf("Você deseja exlcuir {}? ".format(produtos[i]))
+            if inf == 'sim' or inf == 's':
+                produtos.pop(i)
+                quantidade.pop(i)
+                valorDeCompra.pop(i)
+                valorDeVenda.pop(i)
+                fornecedor.pop(i)
+
+                inf = input("Você deseja excluir mais algum produto? ")
+
+                print(produtos)
+                print(quantidade)
+                print(valorDeCompra)
+                print(valorDeVenda)
+                print(fornecedor)
+
+    except:
+        print("Produto invalido!!")
+        inf = input("Deseja tentar novamente? ")
 
 
 
