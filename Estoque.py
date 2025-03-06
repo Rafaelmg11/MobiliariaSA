@@ -39,13 +39,15 @@ print("FIM CADASTRO")
 print("INCIO EDITAR")
 
 #EDITAR PRODUTO:
+
 inf = input("Você deseja editar algum produto? ")
 
-if inf == 'sim' or inf == 's':
+while inf == 'sim' or inf == 's':
+
     pesquisarProduto = input("Digite o produto que você deseja editar: ")
     try:
+        i = produtos.index(pesquisarProduto)
         if pesquisarProduto in produtos:
-            i = produtos.index(pesquisarProduto)
             respostaEditarP = input("Você deja alterar {} ?".format(pesquisarProduto))
             respostaEditarP.lower()
             if respostaEditarP == "sim" or "s":
@@ -57,8 +59,13 @@ if inf == 'sim' or inf == 's':
 
                 print("Informações alteradas com sucesso! ")
 
-                print("Produtos: ")
-                print("Estoque: ")
+                print("Produtos: {}".format(produtos))
+                print("Estoque: {}".format(quantidade))
+                print("Valores de compra: {}".format(valorDeCompra))
+                print("Valores de venda: {}".format(valorDeVenda))
+                print("Fornecedores: {}".format(fornecedor))
+
+                inf = input("Você deseja editar algum produto? ")
 
                 # print(produtos)
                 # print(quantidade)
@@ -66,9 +73,15 @@ if inf == 'sim' or inf == 's':
                 # print(valorDeVenda)
                 # print(fornecedor)
 
-            
+
+                
     except:
-        print(oi)
+        print("Produto invalido!!")
+        inf = input("Deseja tentar novamente? ")
+
+
+#EXCLUIR PRODUTO:
+
 
 
 
