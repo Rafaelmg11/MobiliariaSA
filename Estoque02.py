@@ -46,10 +46,7 @@ ValorDeCompra = ttk.Entry(width=30)
 ValorDeVenda = ttk.Entry(width=30)
 Fornecedor = ttk.Entry(width=30)
 
-entry = ttk.Entry(jfont = ("Arial",16),bd=5,relief="solid")
-entry.pack(pady = 20,ipadx=10,ipady=10)
-
 #POSICIONA OS CAMPOS DE ENTRADAS:
 
-ProdutoEntry.place(x=135,y=100,ipadx = 10,impady = 10)
+ProdutoEntry.place(x=135,y=100)
 jan.mainloop()
