@@ -8,7 +8,7 @@ from database import Database #Importa a classe Database do modulo database
 jan = Tk()
 jan.title("Cadastro de produto")#Define o titulo
 jan.geometry("600x480") #Define o tamanho da janela
-jan.configure(background="white")#Configura a cor de fundo da janela
+jan.configure(background="BLUE")#Configura a cor de fundo da janela
 jan.resizable(width = False,height = False)#Impede que a janela seja redimensionada 
 
 #CARREGAR IMAGEM:
@@ -21,20 +21,35 @@ jan.resizable(width = False,height = False)#Impede que a janela seja redimension
 #CRIANDO LABELS:
 TituloLabel = Label (text="PRODUTOS: ",font=("Century Gothic",25),bg = "BLACK",fg = "WHITE") #Cria Label TITULO
 
-ProdutoLabel = Label(text = "Produto: ",font = ("Century Gothic",10)) #Cria Label Produtos
-DescricaoLabel = Label(text= "Descrição: ",font= ("Century Gothic",10)) #Cria Label Descrição
-QuantidadeLabel = Label (text= "Quantidade: ",font=("Century Gothic",10)) #Cria Label Quantidade
-ValorDeCompraLabel = Label(text="Valor de Compra: ",font=("Century Gothic",10)) #Cria Label Valor de Compra
-ValorDeVendaLabel = Label (text="Valor de Venda: ",font=("Century Gothic",10)) #Cria Label Valor de Venda
-FornecedorLabel = Label (text="Fornecedor: ",font = ("Century Gothic",10)) #Cria Label Fornecedor
+ProdutoLabel = Label(text = "Produto: ",font = ("Century Gothic",13)) #Cria Label Produtos
+DescricaoLabel = Label(text= "Descrição: ",font= ("Century Gothic",13))#Cria Label Descrição
+QuantidadeLabel = Label (text= "Quantidade: ",font=("Century Gothic",13)) #Cria Label Quantidade
+ValorDeCompraLabel = Label(text="Valor de Compra: ",font=("Century Gothic",13)) #Cria Label Valor de Compra
+ValorDeVendaLabel = Label (text="Valor de Venda: ",font=("Century Gothic",13)) #Cria Label Valor de Venda
+FornecedorLabel = Label (text="Fornecedor: ",font = ("Century Gothic",13)) #Cria Label Fornecedor
 
 #POSICIONANDO LABELS:
-TituloLabel.pack(pady=40,anchor="center") #POSICIONA O TITULO
+#TituloLabel.pack(pady=40,anchor="center") #POSICIONA O TITULO
 
-ProdutoLabel.grid (row = 1, column = 0)
-DescricaoLabel.grid (row = 1,column=0)
-QuantidadeLabel.grid (row = 2,column=0)
-ValorDeCompraLabel.grid (row = 3,column=0)
-ValorDeVendaLabel.grid (row = 4,column=0)
-FornecedorLabel.grid (row = 5,column=0)
+ProdutoLabel.place(x=50,y=100)
+DescricaoLabel.place(x=50,y=130)
+QuantidadeLabel.place(x=50,y=160)
+ValorDeCompraLabel.place(x=50,y=190)
+ValorDeVendaLabel.place(x=50,y=220)
+FornecedorLabel.place(x=50,y=250)
+
+#CRIANDO CAMPOS DE ENTRADAS:
+ProdutoEntry = ttk.Entry(width=30)
+Descricao = ttk.Entry(width=30)
+Quantidade = ttk.Entry(width=30)
+ValorDeCompra = ttk.Entry(width=30)
+ValorDeVenda = ttk.Entry(width=30)
+Fornecedor = ttk.Entry(width=30)
+
+entry = ttk.Entry(jfont = ("Arial",16),bd=5,relief="solid")
+entry.pack(pady = 20,ipadx=10,ipady=10)
+
+#POSICIONA OS CAMPOS DE ENTRADAS:
+
+ProdutoEntry.place(x=135,y=100,ipadx = 10,impady = 10)
 jan.mainloop()
