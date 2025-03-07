@@ -55,7 +55,7 @@ ValorDeVendaEntry.place(x=205, y= 225)
 FornecedorEntry.place(x=165, y= 255)
 
 #CRIANDO BOTÃO:
-#CadastrarButton = ttk.Button(text = "CADASTRAR",width=15)
+#CadastrarButton = ttk.Button(text = "CADASTRAR",width=15,command=cadastrarProduto())
 AlterarButton = ttk.Button(text = "ALTERAR",width=15)
 ExcluirButton = ttk.Button(text = "EXCLUIR",width = 15)
 ListarButton = ttk.Button(text = "LISTAR",width=15)
