@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import messagebox
+from database import Database
 
 class fornecedores:
     def __init__(self,root):
@@ -50,7 +51,7 @@ class fornecedores:
         
 
         if nome and telefone and email and endereco and produtos:
-            add_fornecedores(nome,telefone,email,endereco,produtos)
+            add_fornecedores = (nome,telefone,email,endereco,produtos)
             self.nome_entry.delete(0,tk.END)
             self.telefone_entry.delete(0,tk.END)
             self.email_entry.delete(0,tk.END)
@@ -98,5 +99,5 @@ class fornecedores:
 
 if __name__ == "__main__":
     root = tk.Tk()
-    app = CRUDApp(root)
+    app = fornecedores(root)
     root.mainloop()
