@@ -7,6 +7,7 @@ create table produto(
     quantidade int,
     valordecompra float,
     valordevenda float,
+    fornecedor text,
     primary key (codproduto)
 
 );

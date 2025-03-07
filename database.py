@@ -13,8 +13,10 @@ class Database:
             database = "mobiliariasa_db"
         )
         self.cursor = self.conn.cursor() #Cria um cursor
+
         print("Concetado ao banco de dados!") #Mensagem de confirmação
 
     #REGISTRAR UM NOVO PRODUTO NO BANCO DE DADOS:
-    def RegistrarProduto(self,produto,descricao,quantidade,valorDeCompra,valorDeVenda,fornecedor):
-        self.cursor.execute("INSERT INTO produto (produto,descricao,quantida,valorDeCompra,valorDeVenda,fornecedor)VALUES (%s,%s,%s,%s,%s,%s)",(produto,descricao,quantidade,valorDeCompra,valorDeVenda,fornecedor)) #INSERE OS DADOS NO BANCO DE DADOS
+    def cadastrarProduto(self,produto,descricao,quantidade,valorDeCompra,valorDeVenda,fornecedor):
+        self.cursor.execute("INSERT INTO produto (produto,descricao,quantidade,valordecompra,valordevenda,fornecedor)VALUES (%s,%s,%s,%s,%s,%s)",(produto,descricao,quantidade,valorDeCompra,valorDeVenda,fornecedor)) #INSERE OS DADOS NO BANCO DE DADOS
+        self.conn.commit()
