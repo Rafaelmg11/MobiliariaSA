@@ -5,7 +5,7 @@ create table fornecedor(
     nome_impressa text,
     telefone text,
     endereco text,
-    produto int
+    produto text,
     primary key (idfornecedor)
 
 );
