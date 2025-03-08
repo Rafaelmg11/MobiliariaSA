@@ -13,7 +13,7 @@ def create_produto(produto,descricao,quantidade,valorDeCompra,valorDeVenda,forne
 
     conn = get_connection()
     cursor = conn.cursor()
-    query = "insert produto (produto,descricao,quantidade,valorDeCompra,valorDeVenda,fornecidor) VALUES (%s, %s, %s, %s, %s, %s)"
+    query = "insert produto (produto,descricao,quantidade,valorDeCompra,valorDeVenda,fornecedor) VALUES (%s, %s, %s, %s, %s, %s)"
     cursor.execute(query, (produto,descricao,quantidade,valorDeCompra,valorDeVenda,fornecedor))
     conn.commit()
     cursor.close()
