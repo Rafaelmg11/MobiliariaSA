@@ -153,7 +153,7 @@ entry_produto.place(x=900,y=131)
 
 # Botões de ação
 botao_adicionar = tk.Button(root, text="Adicionar Fornecedor", command=adicionar_fornecedores)
-botao_adicionar.place(x=889,y=110)
+botao_adicionar.place(x=309,y=310)
 
 botao_atualizar = tk.Button(root, text="Atualizar Fornecedor", command=atualizar_fornecedor)
 botao_atualizar.place(x=891,y=150)
@@ -165,8 +165,8 @@ botao_limpar = tk.Button(root, text="Limpar campos", command=limpar_campos)
 botao_limpar.place(x=905,y=230)
 
 # Lista de funcionários
-listbox_fornecedores = tk.Listbox(root, width=50, height=20)
-listbox_fornecedores.place(x=800,y=360)
+listbox_fornecedores = tk.Listbox(root, width=100, height=30)
+listbox_fornecedores.place(x=650,y=360)
 listbox_fornecedores.bind("<ButtonRelease-1>", selecionar_fornecedor)
 
 # Inicializa a lista
