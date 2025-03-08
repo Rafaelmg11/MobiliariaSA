@@ -1,6 +1,23 @@
 import tkinter as tk
 from tkinter import messagebox
 from database import Database
+import mysql.connector 
+
+#PARA RODAR O PROJETO NAO POSSO ESQUECER DE DIGITAR O CODIGO ABAIXO NO CONSOLE(TELA DE EXECUÇÃO)
+# pip install mysql-connector-python
+
+class Database:
+    def __init__(self):
+        #Conecta o banco de dados:
+        self.conn = mysql.connector.connect(
+            host = "localhost",
+            user = "root",
+            password = "",
+            database = "mobiliariasa_db"
+        )
+        self.cursor = self.conn.cursor() #Cria um cursor
+
+        print("Concetado ao banco de dados!") #Mensagem de confirmação
 
 class fornecedores:
     def __init__(self,root):
@@ -88,10 +105,10 @@ class fornecedores:
         else:
             messagebox.showerror("erro","todos os campos sao obrigatorios")
 
-    def delete_user(self):
+    def delete_fornecedores(self):
         user_id = self.user_id_entry.get()
         if user_id:
-            delete_user(user_id)
+            delete_fornecedores(user_id)
             self.user_id_entry.delete(0,tk.END)
             messagebox.showinfo("Sussesso","ID do usuario excluido com sucesso!")
         else:
