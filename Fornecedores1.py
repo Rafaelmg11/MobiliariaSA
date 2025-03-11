@@ -116,57 +116,57 @@ root = tk.Tk()
 root.title("Fornecedores")
 
 #Tamanho da janela
-root.geometry("1920x1080")
+root.geometry("800x730")
 
 # Labels
-label_nome_fornecedor = tk.Label(root, text="Nome do fornecedor:")
-label_nome_fornecedor.place(x=770,y=10)
+label_nome_fornecedor = tk.Label(root, text="Fornecedor :")
+label_nome_fornecedor.place(x=350,y=110)
 
-label_endereco = tk.Label(root, text="Endereço:")
-label_endereco.place(x=830,y=40)
+label_endereco = tk.Label(root, text="Endereço :")
+label_endereco.place(x=650,y=140)
 
-label_telefone = tk.Label(root, text="Telefone:")
-label_telefone.place(x=850,y=70)
+label_telefone = tk.Label(root, text="Telefone :")
+label_telefone.place(x=650,y=170)
 
-label_email = tk.Label(root, text="Email:")
-label_email.place(x=850,y=100)
+label_email = tk.Label(root, text="Email :")
+label_email.place(x=650,y=200)
 
-label_produto = tk.Label(root, text="Produto:")
-label_produto.place(x=850,y=130)
+label_produto = tk.Label(root, text="Produto :")
+label_produto.place(x=650,y=230)
 
 # Entradas de texto
 entry_nome_fornecedor = tk.Entry(root)
-entry_nome_fornecedor.place(x=900,y=11)
+entry_nome_fornecedor.place(x=730,y=110)
 
 entry_endereco = tk.Entry(root)
-entry_endereco.place(x=900,y=41)
+entry_endereco.place(x=730,y=140)
 
 entry_telefone = tk.Entry(root)
-entry_telefone.place(x=900,y=71)
+entry_telefone.place(x=730,y=170)
 
 entry_email = tk.Entry(root)
-entry_email.place(x=900,y=101)
+entry_email.place(x=730,y=200)
 
 entry_produto = tk.Entry(root)
-entry_produto.place(x=900,y=131)
+entry_produto.place(x=730,y=230)
 
 
 # Botões de ação
 botao_adicionar = tk.Button(root, text="Adicionar Fornecedor", command=adicionar_fornecedores)
-botao_adicionar.place(x=309,y=310)
+botao_adicionar.place(x=650, y=280)
 
 botao_atualizar = tk.Button(root, text="Atualizar Fornecedor", command=atualizar_fornecedor)
-botao_atualizar.place(x=891,y=150)
+botao_atualizar.place(x=650,y=310)
 
 botao_deletar = tk.Button(root, text="Deletar Fornecedor", command=deletar_fornecedor)
-botao_deletar.place(x=896,y=190)
+botao_deletar.place(x=800,y=280)
 
 botao_limpar = tk.Button(root, text="Limpar campos", command=limpar_campos)
-botao_limpar.place(x=905,y=230)
+botao_limpar.place(x=800,y=310)
 
 # Lista de funcionários
-listbox_fornecedores = tk.Listbox(root, width=100, height=30)
-listbox_fornecedores.place(x=650,y=360)
+listbox_fornecedores = tk.Listbox(root, width=140, height=30)
+listbox_fornecedores.place(x=0,y=360)
 listbox_fornecedores.bind("<ButtonRelease-1>", selecionar_fornecedor)
 
 # Inicializa a lista
