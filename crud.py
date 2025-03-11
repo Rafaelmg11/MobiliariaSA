@@ -38,3 +38,23 @@ def update_produto(produto,descricao,quantidade,valorDeCompra,valorDeVenda,forne
     conn.commit()
     cursor.close()
     conn.close()
+
+def delete_produto(codigo_produto):
+    conn = get_connection()
+    cursor = conn.cursor()
+    query = "DELETE FROM produto WHERE codproduto = %s"
+    cursor.execute(query, (codigo_produto,))
+    conn.commit()
+    cursor.close()
+    conn.close()
+
+def buscar_produto():
+    conn = get_connection()
+    cursor = conn.cursor()
+    query = "SELECT codproduto,produto,descricao,quantidade,valorDeCompra,valorDeVenda,fornecedor FROM produto WHERE buscar = %s"
+    cursor.execute(query)
+    produto = cursor.fetchone()
+    cursor.close()
+    conn.close()
+    return produto
+

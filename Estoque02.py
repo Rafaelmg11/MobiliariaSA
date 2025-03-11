@@ -2,7 +2,7 @@
 from tkinter import* #Importa tudo do tkinter
 from tkinter import messagebox #Importa as caixas de mensagem
 from tkinter import ttk #Importa o widgets tematicos do tkinter
-from crud import create_produto, read_produto , update_produto
+from crud import create_produto, read_produto , update_produto , delete_produto , buscar_produto
 import tkinter as tk
 
 
@@ -57,6 +57,7 @@ class CRUDApp:
         self.ValorDeVendaEntry = tk.Entry(self.root, width=23,font=("Century Gothic",13))
         self.FornecedorEntry = tk.Entry(self.root, width=27,font=("Century Gothic",13))
         self.CodigoEntry = tk.Entry(self.root, width=21,font=("Century Gothic",13))
+        self.PesquisaEntry = tk.Entry(self.root, width=47,font= ("Century Gothic",13))
 
         #POSICIONA OS CAMPOS DE ENTRADAS:
         self.ProdutoEntry.place(x=135,y=101)
@@ -66,23 +67,13 @@ class CRUDApp:
         self.ValorDeVendaEntry.place(x=205, y= 221)
         self.FornecedorEntry.place(x=165, y= 251)
         self.CodigoEntry.place(x=233,y=281)
+        self.PesquisaEntry.place(x=155,y=405)
 
         #CRIANDO A LISTA DE CADASTRO DE PRODUTOS:
         self.text_area = tk.Text(self.root, height=11,width=70)
-        self.text_area.place(x=18,y=415)
+        self.text_area.place(x=18,y=440)
     
-        #CRIANDO BOTÃO:
-        #CadastrarButton = ttk.Button(text = "CADASTRAR",width=15,command=cadastrarProduto())
-        #AlterarButton = ttk.Button(text = "ALTERAR",width=15)
-        ExcluirButton = tk.Button(text = "EXCLUIR",width = 15)
-        #ListarButton = tk.Button(text = "LISTAR",width=15,command = read_produto)
-        #tk.Button(self.root, text="LISTAR", width= 15,command=self.read_produto).place(x=178,y=365)
-
-        #POSICIONANDO OS BOTOES:
-        #CadastrarButton.place(x=178,y=300)
-        #AlterarButton.place(x=312,y =300)
-        #ListarButton.place(x=178,y=335)
-        ExcluirButton.place(x=312,y=365)
+        
 
         #FUNÇÃO PRA REGISTRAR NO BANCO DE DADOS:
 
@@ -152,7 +143,52 @@ class CRUDApp:
                     messagebox.showerror("Error","Todos os campos são obrigatórios")
             
         AlterarButton = tk.Button(self.root,text = "ALTERAR",width=15,command=alterar_produto)
-        AlterarButton.place(x=312,y=330)        
+        AlterarButton.place(x=312,y=330)  
+
+        def excluir_produto():
+            codigo_produto = self.CodigoEntry.get()
+            if codigo_produto:
+                delete_produto(codigo_produto)
+                self.ProdutoEntry.delete(0, tk.END)
+                self.DescricaoEntry.delete(0, tk.END)
+                self.QuantidadeEntry.delete(0, tk.END)
+                self.ValorDeCompraEntry.delete(0, tk.END)
+                self.ValorDeVendaEntry.delete(0, tk.END)
+                self.FornecedorEntry.delete(0, tk.END)
+                self.CodigoEntry.delete(0, tk.END)
+                messagebox.showinfo("Success","Produto excluido com sucesso")
+            else:
+                messagebox.showerror("Error","O Codigo de Produto é obrigatório")
+
+        ExcluirButton = tk.Button(self.root,text = "EXCLUIR",width = 15,command=excluir_produto)
+        ExcluirButton.place(x=312,y=365)
+
+        def pesquisar_produto():
+            buscar = self.PesquisaEntry.get()
+            produto = buscar_produto(buscar)
+
+            if produto:
+                self.ProdutoEntry.delete(0, tk.END)
+                self.ProdutoEntry.insert(0, produto[1])
+                self.DescricaoEntry.delete(0, tk.END)
+                self.DescricaoEntry.insert(0, produto[2])
+                self.QuantidadeEntry.delete(0, tk.END)
+                self.QuantidadeEntry.insert(0, produto[3])
+                self.ValorDeCompraEntry.delete(0, tk.END)
+                self.ValorDeCompraEntry.insert(0, produto[4])
+                self.ValorDeVendaEntry.delete(0, tk.END)
+                self.ValorDeVendaEntry.insert(0, produto[5])
+                self.FornecedorEntry.delete(0, tk.END)
+                self.FornecedorEntry.insert(0, produto[6])
+                self.CodigoEntry.delete(0, tk.END)
+                self.CodigoEntry.insert(0, produto[7])
+
+            else:
+                messagebox.showerror("Produto não encontrando, verifique a informação dada!")
+
+        PesquisarButton = tk.Button(self.root,text = "Pesquisar",width = 15,command=pesquisar_produto)
+        PesquisarButton.place(x = 20,y=405)
+
 
 
 if __name__ == "__main__":
