@@ -85,6 +85,7 @@ class CRUDApp:
         ExcluirButton.place(x=312,y=365)
 
         #FUNÇÃO PRA REGISTRAR NO BANCO DE DADOS:
+
         def cadastrarProduto():
             #OBTENDO AS INFORMAÇÕES DOS CAMPOS DE TEXTOS
             produto = self.ProdutoEntry.get()
@@ -104,6 +105,8 @@ class CRUDApp:
                 self.ValorDeCompraEntry.delete(0, tk.END)
                 self.ValorDeVendaEntry.delete(0, tk.END)
                 self.FornecedorEntry.delete(0, tk.END)
+                self.CodigoEntry.delete(0, tk.END)
+
                 messagebox.showinfo("Success","Usuario criado com sucesso!")
             else:
                 messagebox.showerror("Error","Todos os campos são obrigatórios" )
@@ -112,27 +115,31 @@ class CRUDApp:
         CadastrarButton.place(x=178,y=330)
 
 
-        def read_produto(self):
+        def listar_produto():
             produtos = read_produto()
             self.text_area.delete(1.0, tk.END)
             for produto in produtos:
                 self.text_area.insert(tk.END, f"COD.PRODUTO: {produto[0]}, Produto: {produto[1]}, Descricao: {produto[2]},Quantidade: {produto[3]},Valor de compra: {produto[4]},Valor de Venda: {produto[5]},Fornecedor: {produto[6]}\n")
     
-        ListarButton = tk.Button (self.root,text="LISTAR",width=15,command=read_produto)
+        ListarButton = tk.Button (self.root,text="LISTAR",width=15,command=listar_produto)
         ListarButton.place(x=178,y=365)
 
-        def update_produto(self):
-                codigo_produto = self.CodigoEntry.get()
+        def alterar_produto():
+                
                 produto = self.ProdutoEntry.get()
                 descricao = self.DescricaoEntry.get()
                 quantidade = self.QuantidadeEntry.get()
                 valorDeCompra = self.ValorDeCompraEntry.get()
                 valorDeVenda = self.ValorDeVendaEntry.get()
                 fornecedor = self.FornecedorEntry.get()
-                self.CodigoEntry.delete(0, tk.END)
+                codigo_produto = self.CodigoEntry.get()
+        
 
+                verificar = self.CodigoEntry.get()
+                
+                
                 if codigo_produto and produto and descricao and quantidade and valorDeCompra and valorDeVenda and fornecedor:
-                    update_produto(produto,descricao,quantidade,valorDeCompra,valorDeVenda,fornecedor)
+                    update_produto(produto,descricao,quantidade,valorDeCompra,valorDeVenda,fornecedor,codigo_produto)
                     self.ProdutoEntry.delete(0, tk.END)
                     self.DescricaoEntry.delete(0, tk.END)
                     self.QuantidadeEntry.delete(0, tk.END)
@@ -141,12 +148,12 @@ class CRUDApp:
                     self.FornecedorEntry.delete(0, tk.END)
                     self.CodigoEntry.delete(0, tk.END)
                     messagebox.showinfo("Success","Produto alterado com sucesso!")
-
                 else:
-                    messagebox.showerror("Error","O Codigo de produto digitado não existe")
+                    messagebox.showerror("Error","Todos os campos são obrigatórios")
             
-        AlterarButton = tk.Button(self.root,text = "ALTERAR",width=15,command=update_produto)
+        AlterarButton = tk.Button(self.root,text = "ALTERAR",width=15,command=alterar_produto)
         AlterarButton.place(x=312,y=330)        
+
 
 if __name__ == "__main__":
     root = tk.Tk()

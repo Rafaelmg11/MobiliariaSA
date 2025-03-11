@@ -35,6 +35,6 @@ def update_produto(produto,descricao,quantidade,valorDeCompra,valorDeVenda,forne
     cursor = conn.cursor()
     query = "UPDATE produto SET produto = %s, descricao = %s, quantidade = %s, valorDeCompra = %s, valorDeVenda = %s, fornecedor = %s WHERE codproduto = %s"
     cursor.execute(query,(produto,descricao,quantidade,valorDeCompra,valorDeVenda,fornecedor,codigo_produto))
-    cursor.commit()
+    conn.commit()
     cursor.close()
     conn.close()
