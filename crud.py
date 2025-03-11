@@ -48,13 +48,15 @@ def delete_produto(codigo_produto):
     cursor.close()
     conn.close()
 
-def buscar_produto():
+def buscar_produto(buscar):
     conn = get_connection()
     cursor = conn.cursor()
-    query = "SELECT codproduto,produto,descricao,quantidade,valorDeCompra,valorDeVenda,fornecedor FROM produto WHERE buscar = %s"
-    cursor.execute(query)
-    produto = cursor.fetchone()
+    query = "SELECT * FROM produto WHERE buscar = %s"
+    lista = []
+    lista.append(query)
+    print(lista)
+    produto = cursor.fetchone(buscar)
+    cursor.execute(query,produto)
     cursor.close()
     conn.close()
-    return produto
 
