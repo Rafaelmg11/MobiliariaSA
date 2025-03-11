@@ -12,5 +12,25 @@ create table produto(
 
 );
 
+create table fornecedor(
+    idfornecedor int not null auto_increment,
+    nome_fornecedor text,
+    endereco text,
+    telefone text,
+    email text,
+    produto text,
+    primary key (idfornecedor)
+);
+
+create table funcionario(
+    idfuncionario int not null auto_increment,
+    nome text,
+    cargo text,
+    salario text,
+    primary key (idfuncionario)
+);
+
+
+
 # pip install mysql-connector-python
 
