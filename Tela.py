@@ -25,7 +25,7 @@ UsuarioEntry = ttk.Entry(RightFrame,width=30)
 UsuarioEntry.place(x=120, y=115)
 SenhaLabel = Label(RightFrame,text="Senha: ",font=("Century Gothic",20), bg="MIDNIGHTBLUE", fg="White")
 SenhaLabel.place(x=5,y=150)
-SenhaEntry = ttk.Entry(RightFrame, wifth=30,show=".")
+SenhaEntry = ttk.Entry(RightFrame, width = 30, show =".")
 SenhaEntry.place(x=120, y=165)
 
 #FUNÇÃO DE LOGIN 
@@ -100,7 +100,7 @@ def VoltarLogin():
         Registrar.Button.place(x=150) 
 
 Voltar = ttk.Button(RightFrame, text="VOLTAR", width=15, command=VoltarLogin) 
-Voltar.palace(x=150, y=225) 
+Voltar.place(x=150, y=225) 
 
 #INICIAR O LOOP PRINCIPAL
 jan.mainloop()
