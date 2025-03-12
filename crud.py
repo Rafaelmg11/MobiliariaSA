@@ -48,15 +48,22 @@ def delete_produto(codigo_produto):
     cursor.close()
     conn.close()
 
-def buscar_produto(buscar):
+def buscar_produto(self, codigo_produto):
     conn = get_connection()
-    cursor = conn.cursor()
-    query = "SELECT * FROM produto WHERE buscar = %s"
-    lista = []
-    lista.append(query)
-    print(lista)
-    produto = cursor.fetchone(buscar)
-    cursor.execute(query,produto)
-    cursor.close()
-    conn.close()
+    try:
+        cursor = conn.conexao.cursor()
+        cursor.execute ("SELECT * FROM produto WHERE codigo_produto=%s",(codigo_produto))
+        produto = cursor.fetchone()
+        if produto:
+            self.produto,self.descricao,self.quantidade,self.valorDeCompra,self.valorDeVenda,self.fornecedor,self.codigo_produto = produto
+        cursor.close()
+        return "Busca feita com sucesso!"
+    except Exception as e:
+        return f"Ocorreu um erro na busca de usuario: {e}"
+            
+
+    
+  
+    
+
 

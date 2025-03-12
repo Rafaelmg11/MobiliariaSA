@@ -4,10 +4,11 @@ from tkinter import messagebox #Importa as caixas de mensagem
 from tkinter import ttk #Importa o widgets tematicos do tkinter
 from crud import create_produto, read_produto , update_produto , delete_produto , buscar_produto
 import tkinter as tk
+import mysql.connector
 
 
 class CRUDApp:
-
+        
     def __init__(self,root):
         self.root = root
         self.root.title("CADASTRO DE PRODUTOS") #Define o titulo
@@ -16,6 +17,15 @@ class CRUDApp:
         self.root.resizable(width = False,height = False) #Impede que a janela seja redimensionada 
         #Criação de Widgets
         self.create_widgets()
+
+    def conectarBanco(self):
+        self.conn = mysql.connector.connect(
+            host = "localhost",
+            user = "root",
+            password = "",
+            database = "mobiliariasa_db"
+        )
+        self.cursor = self.conn.cursor()
 
 
     def create_widgets(self):
@@ -75,7 +85,7 @@ class CRUDApp:
     
         
 
-        #FUNÇÃO PRA REGISTRAR NO BANCO DE DADOS:
+    #FUNÇÃO PRA REGISTRAR NO BANCO DE DADOS:
 
         def cadastrarProduto():
             #OBTENDO AS INFORMAÇÕES DOS CAMPOS DE TEXTOS
@@ -86,10 +96,10 @@ class CRUDApp:
             valorDeVenda = self.ValorDeVendaEntry.get()
             fornecedor = self.FornecedorEntry.get()
 
-            #VERIFICANDO SE TODOS OS CAMPOS ESTÂO PREENCHIDOS:
+        #VERIFICANDO SE TODOS OS CAMPOS ESTÂO PREENCHIDOS:
             if produto and descricao and quantidade and valorDeCompra and valorDeVenda and fornecedor:
                 create_produto(produto,descricao,quantidade,valorDeCompra,valorDeVenda,fornecedor)
-                #Limpar campos:
+            #Limpar campos:
                 self.ProdutoEntry.delete(0, tk.END)
                 self.DescricaoEntry.delete(0, tk.END)
                 self.QuantidadeEntry.delete(0, tk.END)
@@ -100,7 +110,7 @@ class CRUDApp:
 
                 messagebox.showinfo("Success","Usuario criado com sucesso!")
             else:
-                messagebox.showerror("Error","Todos os campos são obrigatórios" )
+             messagebox.showerror("Error","Todos os campos são obrigatórios" )
 
         CadastrarButton = tk.Button (self.root,text = "CADASTRAR",width=15,command=cadastrarProduto)
         CadastrarButton.place(x=178,y=330)
@@ -164,27 +174,27 @@ class CRUDApp:
         ExcluirButton.place(x=312,y=365)
 
         def pesquisar_produto():
-            buscar = self.PesquisaEntry.get()
-            produto = buscar_produto(buscar)
-
+            codigo_produto = self.CodigoEntry.get()
+            self.cursor.execute("SELECT * FROM produto WHERE codigo_produto=%s",(codigo_produto))
+            produto = self.cursor.fetchone()
             if produto:
-                self.ProdutoEntry.delete(0, tk.END)
                 self.ProdutoEntry.insert(0, produto[1])
-                self.DescricaoEntry.delete(0, tk.END)
                 self.DescricaoEntry.insert(0, produto[2])
-                self.QuantidadeEntry.delete(0, tk.END)
                 self.QuantidadeEntry.insert(0, produto[3])
-                self.ValorDeCompraEntry.delete(0, tk.END)
                 self.ValorDeCompraEntry.insert(0, produto[4])
-                self.ValorDeVendaEntry.delete(0, tk.END)
                 self.ValorDeVendaEntry.insert(0, produto[5])
-                self.FornecedorEntry.delete(0, tk.END)
                 self.FornecedorEntry.insert(0, produto[6])
-                self.CodigoEntry.delete(0, tk.END)
-                self.CodigoEntry.insert(0, produto[7])
-
+                self.CodigoEntry.insert(0, produto[0])
+                messagebox.showinfo("Success","Usuario encontrado")
             else:
-                messagebox.showerror("Produto não encontrando, verifique a informação dada!")
+                messagebox.showerror("Error","Usuario não encontado")
+
+
+
+           
+
+
+       
 
         PesquisarButton = tk.Button(self.root,text = "Pesquisar",width = 15,command=pesquisar_produto)
         PesquisarButton.place(x = 20,y=405)
