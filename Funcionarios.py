@@ -28,11 +28,11 @@ class CRUDApp:
         # LogoLabel.place(x=50,y=100)#Posiciona o label da imagem
 
         #CRIANDO LABELS:
-        TituloLabel = Label(self.root,text="FUNCIONARIOS: ",font=("Century Gothic",25),bg = "BLACK",fg = "WHITE") #Cria Label TITULO
+        TituloLabel = Label(self.root,text="CADASTRAR FUNCIONÁRIOS: ",font=("Century Gothic",25),bg = "BLACK",fg = "WHITE") #Cria Label TITULO
 
-        nome = Label(self.root,text = "Produto: ",font = ("Century Gothic",13)) #Cria Label Nome
-        cargo = Label(self.root,text= "Descrição: ",font= ("Century Gothic",13))#Cria Label Salari0
-        salario = Label (self.root,text= "Quantidade: ",font=("Century Gothic",13)) #Cria Label Cargo
+        nome = Label(self.root,text = "Nome: ",font = ("Century Gothic",13)) #Cria Label Nome
+        cargo = Label(self.root,text= "Cargo: ",font= ("Century Gothic",13))#Cria Label Salario
+        salario = Label (self.root,text= "Salário: ",font=("Century Gothic",13)) #Cria Label Cargo
       
         #POSICIONANDO LABELS:
         TituloLabel.pack(pady=40,anchor="center") #POSICIONA O TITULO
@@ -43,13 +43,13 @@ class CRUDApp:
 
         #CRIANDO CAMPOS DE ENTRADAS:
         self.NomeEntry = tk.Entry(self.root, width=30,font=("Century Gothic",13))
-        self.CargoEntry = tk.Entry(self.root, width=28,font=("Century Gothic",13))
-        self.SalarioEntry = tk.Entry(self.root, width=25,font=("Century Gothic",13))
+        self.CargoEntry = tk.Entry(self.root, width=30,font=("Century Gothic",13))
+        self.SalarioEntry = tk.Entry(self.root, width=30,font=("Century Gothic",13))
 
         #POSICIONA OS CAMPOS DE ENTRADAS:
         self.NomeEntry.place(x=135,y=101)
-        self.CargoEntry.place(x=155, y= 131)
-        self.SalarioEntryEntry.place(x=175, y= 161)
+        self.CargoEntry.place(x=135,y=131)
+        self.SalarioEntry.place(x=135,y=161)
      
         #CRIANDO A LISTA DE CADASTRO DE FUNCIONARIOS:
         self.text_area = tk.Text(self.root, height=11,width=70)
@@ -60,21 +60,21 @@ class CRUDApp:
 
         def cadastrarFuncionario():
             #OBTENDO AS INFORMAÇÕES DOS CAMPOS DE TEXTOS
-            nome = self.NomeEntryEntry.get()
-            cargo = self.CargoEntryEntry.get()
-            salario = self.SalarioEntryEntry.get()
+            nome = self.NomeEntry.get()
+            cargo = self.CargoEntry.get()
+            salario = self.SalarioEntry.get()
 
             #VERIFICANDO SE TODOS OS CAMPOS ESTÂO PREENCHIDOS:
             if nome and cargo and salario:
                 create_funcionario(nome,cargo,salario)
                 #Limpar campos:
-                self.NomeEntryEntry.delete(0, tk.END)
-                self.CargoEntryEntry.delete(0, tk.END)
-                self.SalarioEntryEntry.delete(0, tk.END)
+                self.NomeEntry.delete(0, tk.END)
+                self.CargoEntry.delete(0, tk.END)
+                self.SalarioEntry.delete(0, tk.END)
 
                 messagebox.showinfo("Success","Usuario criado com sucesso!")
             else:
-                messagebox.showerror("Error","Todos os campos são obrigatórios" )
+                messagebox.showerror("Error","Todos os campos são obrigatórios")
 
         CadastrarButton = tk.Button (self.root,text = "CADASTRAR",width=15,command=cadastrarFuncionario)
         CadastrarButton.place(x=178,y=330)
@@ -91,19 +91,19 @@ class CRUDApp:
 
         def alterar_funcionario():
                 
-                nome = self.NomeEntryEntry.get()
-                cargo = self.CargoEntryEntry.get()
-                salario= self.SalarioEntryEntry.get()
+                nome = self.NomeEntry.get()
+                cargo = self.CargoEntry.get()
+                salario= self.SalarioEntry.get()
 
-                verificar = self.CodigoEntry.get()
+                verificar = self.idusuario.get()
                 
                 
                 if nome and cargo and salario:
                     update_funcionario(nome,cargo,salario)
-                    self.NomeEntryEntry.delete(0, tk.END)
-                    self.CargoEntryEntry.delete(0, tk.END)
-                    self.SalarioEntryEntry.delete(0, tk.END)
-                    messagebox.showinfo("Success","Produto alterado com sucesso!")
+                    self.NomeEntry.delete(0, tk.END)
+                    self.CargoEntry.delete(0, tk.END)
+                    self.SalarioEntry.delete(0, tk.END)
+                    messagebox.showinfo("Success","Funcionário alterado com sucesso!")
                 else:
                     messagebox.showerror("Error","Todos os campos são obrigatórios")
             
@@ -114,9 +114,9 @@ class CRUDApp:
             idfuncionario = self.CodigoEntry.get()
             if idfuncionario:
                 delete_funcionario(idfuncionario)
-                self.NomeEntryEntry.delete(0, tk.END)
-                self.CargoEntryEntry.delete(0, tk.END)
-                self.SalarioEntryEntry.delete(0, tk.END)
+                self.NomeEntry.delete(0, tk.END)
+                self.CargoEntry.delete(0, tk.END)
+                self.SalarioEntry.delete(0, tk.END)
 
                 messagebox.showinfo("Success","Funcionario excluido com sucesso")
             else:
@@ -130,12 +130,12 @@ class CRUDApp:
             funcionario = buscar_funcionario(buscar)
 
             if funcionario:
-                self.NomeEntryEntry.delete(0, tk.END)
-                self.NomeEntryEntry.insert(0, funcionario[1])
-                self.CargoEntryEntry.delete(0, tk.END)
-                self.CargoEntryEntry.insert(0, funcionario[2])
-                self.SalarioEntryEntry.delete(0, tk.END)
-                self.SalarioEntryEntry.insert(0, funcionario[3])
+                self.NomeEntry.delete(0, tk.END)
+                self.NomeEntry.insert(0, funcionario[1])
+                self.CargoEntry.delete(0, tk.END)
+                self.CargoEntry.insert(0, funcionario[2])
+                self.SalarioEntry.delete(0, tk.END)
+                self.SalarioEntry.insert(0, funcionario[3])
             else:
                 messagebox.showerror("Funcionário não encontrando, verifique a informação dada!")
 
