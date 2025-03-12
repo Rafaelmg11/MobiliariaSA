@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import messagebox
+from crud import up_fornecedores,atualizar_fornecedor,deletar_fornecedor
 
 #Lista
 fornecedores = []
@@ -13,6 +14,7 @@ def adicionar_fornecedores():
     produto = entry_produto.get()
 
     if not nome_fornecedor or not endereco or not telefone or not email or not produto:
+        up_fornecedores(nome_fornecedor,endereco,telefone,email,produto)
         messagebox.showerror("Erro", "Por favor, preencha todos os campos.")
         return
 

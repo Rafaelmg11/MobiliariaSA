@@ -9,7 +9,7 @@ def get_connection():
         database = MYSQL_DATABASE,
     )
 
-def adicionar_fornecedores(nome_fornecedor,endereco,telefone,email,produto):
+def up_fornecedores(nome_fornecedor,endereco,telefone,email,produto):
 
     conn = get_connection()
     cursor = conn.cursor()
