@@ -9,49 +9,49 @@ def get_connection():
         database = MYSQL_DATABASE,
     )
 
-def create_produto(produto,descricao,quantidade,valorDeCompra,valorDeVenda,fornecedor):
+def create_funcionario(nome,cargo,salario):
 
     conn = get_connection()
     cursor = conn.cursor()
-    query = "insert produto (produto,descricao,quantidade,valorDeCompra,valorDeVenda,fornecedor) VALUES (%s, %s, %s, %s, %s, %s)"
-    cursor.execute(query, (produto,descricao,quantidade,valorDeCompra,valorDeVenda,fornecedor))
+    query = "insert funcionario (nome,cargo,salario) VALUES (%s, %s, %s)"
+    cursor.execute(query, (nome,cargo,salario))
     conn.commit()
     cursor.close()
     conn.close()
 
-def read_produto():
+def read_funcionario():
 
     conn = get_connection()
     cursor = conn.cursor()
-    query = "SELECT * FROM produto"
+    query = "SELECT * FROM funcionarios"
     cursor.execute(query)
     result = cursor.fetchall()
     cursor.close()
     conn.close()
     return result
 
-def update_produto(produto,descricao,quantidade,valorDeCompra,valorDeVenda,fornecedor,codigo_produto):
+def update_funcionario(nome,cargo,salario):
     conn = get_connection()
     cursor = conn.cursor()
-    query = "UPDATE produto SET produto = %s, descricao = %s, quantidade = %s, valorDeCompra = %s, valorDeVenda = %s, fornecedor = %s WHERE codproduto = %s"
-    cursor.execute(query,(produto,descricao,quantidade,valorDeCompra,valorDeVenda,fornecedor,codigo_produto))
+    query = "UPDATE funcionario SET funcionario = %s, nome = %s, cargo = %s, salario = %s"
+    cursor.execute(query,(nome,cargo,salario))
     conn.commit()
     cursor.close()
     conn.close()
 
-def delete_produto(codigo_produto):
+def delete_funcionario(idfuncionario):
     conn = get_connection()
     cursor = conn.cursor()
-    query = "DELETE FROM produto WHERE codproduto = %s"
-    cursor.execute(query, (codigo_produto,))
+    query = "DELETE FROM funcionario WHERE idfuncionario = %s"
+    cursor.execute(query, (idfuncionario,))
     conn.commit()
     cursor.close()
     conn.close()
 
-def buscar_produto(buscar):
+def buscar_funcionario(buscar):
     conn = get_connection()
     cursor = conn.cursor()
-    query = "SELECT * FROM produto WHERE buscar = %s"
+    query = "SELECT * FROM funcionario WHERE buscar = %s"
     lista = []
     lista.append(query)
     print(lista)

@@ -1,141 +1,150 @@
+#IMPORTAR BIBLIOTECAS:
+from tkinter import* #Importa tudo do tkinter
+from tkinter import messagebox #Importa as caixas de mensagem
+from tkinter import ttk #Importa o widgets tematicos do tkinter
+from FuncionariosCrud import create_funcionario, read_funcionario, update_funcionario , delete_funcionario , buscar_funcionario
 import tkinter as tk
-from tkinter import messagebox
 
-#Lista
-funcionarios = []
 
-# Função para adicionar
-def adicionar_funcionario():
-    nome = entry_nome.get()
-    cargo = entry_cargo.get()
-    salario = entry_salario.get()
+class CRUDApp:
 
-    if not nome or not cargo or not salario:
-        messagebox.showerror("Erro", "Por favor, preencha todos os campos.")
-        return
+    def __init__(self,root):
+        self.root = root
+        self.root.title("CADASTRO DE FUNCIONARIOS") #Define o titulo
+        self.root.geometry("600x630") #Define o tamanho da janela
+        self.root.configure(background = "BLUE") #Configura a cor de fundo da janela
+        self.root.resizable(width = False,height = False) #Impede que a janela seja redimensionada 
+        #Criação de Widgets
+        self.create_widgets()
 
-    funcionario = {
-        "nome": nome,
-        "cargo": cargo,
-        "salario": salario
-    }
 
-    funcionarios.append(funcionario)
-    atualizar_lista_funcionarios()
+    def create_widgets(self):
 
-    entry_nome.delete(0, tk.END)
-    entry_cargo.delete(0, tk.END)
-    entry_salario.delete(0, tk.END)
+        #CARREGAR IMAGEM:
+        #logo = PhotoImage (file = "icons/LogoMobiliariaSa.png") 
 
-    messagebox.showinfo("Sucesso", "Funcionário adicionado com sucesso!")
+        # #ADICIONAR LOGO:
+        # LogoLabel = Label(image = logo,bg = "PINK") #Cria um label para a imagem
+        # LogoLabel.place(x=50,y=100)#Posiciona o label da imagem
 
-# Função para atualizar a lista de funcionários
-def atualizar_lista_funcionarios():
-    listbox_funcionarios.delete(0, tk.END)
-    for funcionario in funcionarios:
-        listbox_funcionarios.insert(tk.END, f"Nome: {funcionario['nome']}    Cargo: {funcionario['cargo']}    Salário: {funcionario['salario']}")
+        #CRIANDO LABELS:
+        TituloLabel = Label(self.root,text="FUNCIONARIOS: ",font=("Century Gothic",25),bg = "BLACK",fg = "WHITE") #Cria Label TITULO
 
-# Função para selecionar o funcionário da lista e carregar nos campos
-def selecionar_funcionario(event):
-    try:
-        indice_selecionado = listbox_funcionarios.curselection()[0]
-        funcionario = funcionarios[indice_selecionado]
-        entry_nome.delete(0, tk.END)
-        entry_nome.insert(tk.END, funcionario['nome'])
-        entry_cargo.delete(0, tk.END)
-        entry_cargo.insert(tk.END, funcionario['cargo'])
-        entry_salario.delete(0, tk.END)
-        entry_salario.insert(tk.END, funcionario['salario'])
-    except IndexError:
-        pass
+        nome = Label(self.root,text = "Produto: ",font = ("Century Gothic",13)) #Cria Label Nome
+        cargo = Label(self.root,text= "Descrição: ",font= ("Century Gothic",13))#Cria Label Salari0
+        salario = Label (self.root,text= "Quantidade: ",font=("Century Gothic",13)) #Cria Label Cargo
+      
+        #POSICIONANDO LABELS:
+        TituloLabel.pack(pady=40,anchor="center") #POSICIONA O TITULO
 
-# Função para atualizar as informações do funcionário selecionado
-def atualizar_funcionario():
-    try:
-        indice_selecionado = listbox_funcionarios.curselection()[0]
-        funcionario = funcionarios[indice_selecionado]
+        nome.place(x=50,y=100)
+        cargo.place(x=50,y=130)
+        salario.place(x=50,y=160)
+
+        #CRIANDO CAMPOS DE ENTRADAS:
+        self.NomeEntry = tk.Entry(self.root, width=30,font=("Century Gothic",13))
+        self.CargoEntry = tk.Entry(self.root, width=28,font=("Century Gothic",13))
+        self.SalarioEntry = tk.Entry(self.root, width=25,font=("Century Gothic",13))
+
+        #POSICIONA OS CAMPOS DE ENTRADAS:
+        self.NomeEntry.place(x=135,y=101)
+        self.CargoEntry.place(x=155, y= 131)
+        self.SalarioEntryEntry.place(x=175, y= 161)
+     
+        #CRIANDO A LISTA DE CADASTRO DE FUNCIONARIOS:
+        self.text_area = tk.Text(self.root, height=11,width=70)
+        self.text_area.place(x=18,y=440)
         
-        funcionario['nome'] = entry_nome.get()
-        funcionario['cargo'] = entry_cargo.get()
-        funcionario['salario'] = entry_salario.get()
 
-        atualizar_lista_funcionarios()
+        #FUNÇÃO PRA REGISTRAR NO BANCO DE DADOS:
 
-        entry_nome.delete(0, tk.END)
-        entry_cargo.delete(0, tk.END)
-        entry_salario.delete(0, tk.END)
+        def cadastrarFuncionario():
+            #OBTENDO AS INFORMAÇÕES DOS CAMPOS DE TEXTOS
+            nome = self.NomeEntryEntry.get()
+            cargo = self.CargoEntryEntry.get()
+            salario = self.SalarioEntryEntry.get()
 
-        messagebox.showinfo("Sucesso", "Funcionário atualizado com sucesso!")
-    except IndexError:
-        messagebox.showerror("Erro", "Selecione um funcionário da lista.")
+            #VERIFICANDO SE TODOS OS CAMPOS ESTÂO PREENCHIDOS:
+            if nome and cargo and salario:
+                create_funcionario(nome,cargo,salario)
+                #Limpar campos:
+                self.NomeEntryEntry.delete(0, tk.END)
+                self.CargoEntryEntry.delete(0, tk.END)
+                self.SalarioEntryEntry.delete(0, tk.END)
 
-#Função para deletar
-def deletar_funcionario():
-    try:
-        indice_selecionado = listbox_funcionarios.curselection()[0]
-        del funcionarios[indice_selecionado]
-        atualizar_lista_funcionarios()
+                messagebox.showinfo("Success","Usuario criado com sucesso!")
+            else:
+                messagebox.showerror("Error","Todos os campos são obrigatórios" )
 
-        entry_nome.delete(0, tk.END)
-        entry_cargo.delete(0, tk.END)
-        entry_salario.delete(0, tk.END)
+        CadastrarButton = tk.Button (self.root,text = "CADASTRAR",width=15,command=cadastrarFuncionario)
+        CadastrarButton.place(x=178,y=330)
 
-        messagebox.showinfo("Sucesso", "Funcionário deletado com sucesso!")
-    except IndexError:
-        messagebox.showerror("Erro", "Selecione um funcionário da lista.")
-#Função para limpar os campos
-def limpar_campos():
-        entry_nome.delete(0, tk.END)
-        entry_cargo.delete(0, tk.END)
-        entry_salario.delete(0, tk.END)
 
-#Janela principal
-root = tk.Tk()
-root.title("Funcionários")
+        def listar_funcionario():
+            funcionarios = read_funcionario()
+            self.text_area.delete(1.0, tk.END)
+            for funcionario in funcionarios:
+                self.text_area.insert(tk.END, f"idfuncionario: {funcionario[0]}, Nome: {funcionario[1]}, Cargo: {funcionario[2]},Salário: {funcionario[3]}\n")
+    
+        ListarButton = tk.Button (self.root,text="LISTAR",width=15,command=listar_funcionario)
+        ListarButton.place(x=178,y=365)
 
-#Tamanho da janela
-root.geometry("1920x1080")
+        def alterar_funcionario():
+                
+                nome = self.NomeEntryEntry.get()
+                cargo = self.CargoEntryEntry.get()
+                salario= self.SalarioEntryEntry.get()
 
-# Labels
-label_nome = tk.Label(root, text="Nome:")
-label_nome.place(x=850,y=10)
+                verificar = self.CodigoEntry.get()
+                
+                
+                if nome and cargo and salario:
+                    update_funcionario(nome,cargo,salario)
+                    self.NomeEntryEntry.delete(0, tk.END)
+                    self.CargoEntryEntry.delete(0, tk.END)
+                    self.SalarioEntryEntry.delete(0, tk.END)
+                    messagebox.showinfo("Success","Produto alterado com sucesso!")
+                else:
+                    messagebox.showerror("Error","Todos os campos são obrigatórios")
+            
+        AlterarButton = tk.Button(self.root,text = "ALTERAR",width=15,command=alterar_funcionario)
+        AlterarButton.place(x=312,y=330)  
 
-label_cargo = tk.Label(root, text="Cargo:")
-label_cargo.place(x=850,y=40)
+        def excluir_funcionario():
+            idfuncionario = self.CodigoEntry.get()
+            if idfuncionario:
+                delete_funcionario(idfuncionario)
+                self.NomeEntryEntry.delete(0, tk.END)
+                self.CargoEntryEntry.delete(0, tk.END)
+                self.SalarioEntryEntry.delete(0, tk.END)
 
-label_salario = tk.Label(root, text="Salário:")
-label_salario.place(x=850,y=70)
+                messagebox.showinfo("Success","Funcionario excluido com sucesso")
+            else:
+                messagebox.showerror("Error","O ID do funcionario é obrigatório")
 
-# Entradas de texto
-entry_nome = tk.Entry(root)
-entry_nome.place(x=900,y=11)
+        ExcluirButton = tk.Button(self.root,text = "EXCLUIR",width = 15,command=excluir_funcionario)
+        ExcluirButton.place(x=312,y=365)
 
-entry_cargo = tk.Entry(root)
-entry_cargo.place(x=900,y=41)
+        def pesquisar_funcionario():
+            buscar = self.PesquisaEntry.get()
+            funcionario = buscar_funcionario(buscar)
 
-entry_salario = tk.Entry(root)
-entry_salario.place(x=900,y=71)
+            if funcionario:
+                self.NomeEntryEntry.delete(0, tk.END)
+                self.NomeEntryEntry.insert(0, funcionario[1])
+                self.CargoEntryEntry.delete(0, tk.END)
+                self.CargoEntryEntry.insert(0, funcionario[2])
+                self.SalarioEntryEntry.delete(0, tk.END)
+                self.SalarioEntryEntry.insert(0, funcionario[3])
+            else:
+                messagebox.showerror("Funcionário não encontrando, verifique a informação dada!")
 
-# Botões de ação
-botao_adicionar = tk.Button(root, text="Adicionar Funcionário", command=adicionar_funcionario)
-botao_adicionar.place(x=889,y=110)
+        PesquisarButton = tk.Button(self.root,text = "Pesquisar",width = 15,command=pesquisar_funcionario)
+        PesquisarButton.place(x = 20,y=405)
 
-botao_atualizar = tk.Button(root, text="Atualizar Funcionário", command=atualizar_funcionario)
-botao_atualizar.place(x=891,y=150)
 
-botao_deletar = tk.Button(root, text="Deletar Funcionário", command=deletar_funcionario)
-botao_deletar.place(x=896,y=190)
 
-botao_limpar = tk.Button(root, text="Limpar campos", command=limpar_campos)
-botao_limpar.place(x=905,y=230)
-
-# Lista de funcionários
-listbox_funcionarios = tk.Listbox(root, width=50, height=20)
-listbox_funcionarios.place(x=800,y=275)
-listbox_funcionarios.bind("<ButtonRelease-1>", selecionar_funcionario)
-
-# Inicializa a lista
-atualizar_lista_funcionarios()
-
-# Iniciando a interface
-root.mainloop()
+if __name__ == "__main__":
+    root = tk.Tk()
+    app = CRUDApp(root)
+    root.mainloop()
