@@ -6,7 +6,7 @@ from crud import up_fornecedores,atualizar_fornecedor,deletar_fornecedor
 fornecedores = []
 
 # Função para adicionar
-def adicionar_fornecedores():
+def up_fornecedores():
     nome_fornecedor = entry_nome_fornecedor.get()
     endereco = entry_endereco.get()
     telefone = entry_telefone.get()
@@ -154,7 +154,7 @@ entry_produto.place(x=240,y=190)
 
 
 # Botões de ação
-botao_adicionar = tk.Button(root, text="Adicionar Fornecedor", command=adicionar_fornecedores)
+botao_adicionar = tk.Button(root, text="Adicionar Fornecedor", command=up_fornecedores)
 botao_adicionar.place(x=160,y=260)
 
 botao_atualizar = tk.Button(root, text="Atualizar Fornecedor", command=atualizar_fornecedor)
