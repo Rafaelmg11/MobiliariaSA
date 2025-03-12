@@ -27,7 +27,7 @@ def up_fornecedores():
     }
 
     fornecedores.append(fornecedor)
-    atualizar_fornecedores()
+    atualizar_lista_fornecedores()
 
     entry_nome_fornecedor.delete(0, tk.END)
     entry_endereco.delete(0, tk.END)
@@ -38,7 +38,7 @@ def up_fornecedores():
     messagebox.showinfo("Sucesso", "Funcionário adicionado com sucesso!")
 
 # Função para atualizar a lista de funcionários
-def atualizar_fornecedores():
+def atualizar_lista_fornecedores():
     listbox_fornecedores.delete(0, tk.END)
     for fornecedor in fornecedores:
         listbox_fornecedores.insert(tk.END, f"Fornecedor: {fornecedor['nome_fornecedor']}   Endereço: {fornecedor['endereco']}   Telefone: {fornecedor['telefone']}   Email: {fornecedor['email']}   Produto: {fornecedor['produto']}")
