@@ -19,23 +19,26 @@ RightFrame = Frame(jan,width=395, height=300, bg="MIDNIGHTBLUE", relief="raise")
 RightFrame.pack(side = RIGHT)
 
 #ADICIONAR CAMPOS DE USUARIO E SENHA
-UsuarioLabel = Label(RightFrame, text="Usuario: ",font=("Century Gothic",20),bg="MIDNIGHTBLUE",fg="White")
-UsuarioLabel.place(x=5,y=100)
-UsuarioEntry = ttk.Entry(RightFrame,width=30)
-UsuarioEntry.place(x=120, y=115)
+NomeLabel = Label(RightFrame, text="Usuario: ",font=("Century Gothic",20),bg="MIDNIGHTBLUE",fg="White")
+NomeLabel.place(x=5,y=100)
+
+NomeEntry = ttk.Entry(RightFrame,width=30)
+NomeEntry.place(x=120, y=115)
+
 SenhaLabel = Label(RightFrame,text="Senha: ",font=("Century Gothic",20), bg="MIDNIGHTBLUE", fg="White")
 SenhaLabel.place(x=5,y=150)
-SenhaEntry = ttk.Entry(RightFrame, width = 30, show =".")
+
+SenhaEntry = ttk.Entry(RightFrame, width = 30, show ="*")
 SenhaEntry.place(x=120, y=165)
 
 #FUNÇÃO DE LOGIN 
 def Login():
-    usuario = UsuarioEntry.get()
-    senha =SenhaEntry.get()
+    nome = NomeEntry.get()
+    senha = SenhaEntry.get()
 
     # Conecta ao banco de dados
     db = DataBase()
-    db.cursor.execute("""SELECT*FROM usuario WHERE usuario = %s AND senha = %s""",(usuario,senha))
+    db.cursor.execute("""SELECT*FROM usuario WHERE nome = %s AND senha = %s""",(nome,senha))
     VerifyLogin = db.cursor.fetchone() 
     
     if VerifyLogin:
@@ -60,30 +63,21 @@ def Registrar():
     NomeEntry = ttk.Entry(RightFrame, width=30)
     NomeEntry.place(x=120, y=20)
 
-    EmailLabel = Label(RightFrame, text="Email", font=("Century Gothic",20),bg="MIDNIGHTBLUE",fg="White")
-    EmailLabel.place(x=5, y=40)
-    EmailEntry = ttk.Entry(RightFrame, width=30)
-    EmailEntry.place(x=120, y=55)
-
 #FUNÇÃO PARA REGISTRAR NO BANCO DE DADOS
     def RegistrarNoBanco(): 
         nome = NomeEntry.get() 
-        email = EmailEntry.get() 
-        usuario = UsuarioEntry.get() 
         senha = SenhaEntry.get() 
 
     #Verifica se todos os campos estão preenchidos
-        if nome == "" or email == "" or usuario == "" or senha == "":
-            messagebox.showerror(title="Erro de regidtro", message="PREENCHA TODOS OS CAMPOS") 
+        if nome == "" or senha == "":
+            messagebox.showerror(title="Erro de registro", message="PREENCHA TODOS OS CAMPOS") 
         else:
             db = DataBase() 
-            db.RegistrarNoBanco(nome,email,usuario,senha) 
+            db.RegistrarNoBanco(nome,senha) 
             messagebox.showinfo("Sucesso", "Usuario registrado com sucesso!") 
 
             #Limpar os campos após o registro
             NomeEntry.delete(0,END) 
-            EmailEntry.delete(0,END) 
-            UsuarioEntry.delete(0,END) 
             SenhaEntry.delete(0,END) 
 Register = ttk.Button(RightFrame,text="REGISTRAR", width=15)
 Register.place(x=150, y=225)
@@ -91,8 +85,7 @@ Register.place(x=150, y=225)
 #FUNÇÃO PARA VOLTAR Á TELA DE LOGIN
 def VoltarLogin():
         NomeLabel.place(x=5000) 
-        EmailLabel.place(x=5000)
-        Register.place(x=5000) 
+        Register.place(x=5000)
         Voltar.place(x=5000)
 
     #TRAZENDO DE VOLTA OS WIDGETS
