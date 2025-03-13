@@ -33,9 +33,9 @@ class Main:
         root_funcionario.mainloop()  # Inicia a execução da janela do PRODUTO
 
 
-    # def reabrir_janela(self):
-    #     self.root.deiconify()  # Reexibe a janela principal
-    #     self.root.quit()  # Encerra o loop de eventos da janela de cadastro
+    def reabrir_janela(self):
+        self.root.deiconify()  # Reexibe a janela principal
+        self.root.quit()  # Encerra o loop de eventos da janela de cadastro
 
 if __name__ == "__main__":
     root = tk.Tk()

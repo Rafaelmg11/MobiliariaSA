@@ -9,9 +9,9 @@ import mysql.connector
 
 class PRODUTO:  
 
-    def __init__(self,root,main_window):
+    def __init__(self,root):
         self.root = root
-        self.main_window = main_window
+        #self.main_window = main_window
         self.root.title("CADASTRO DE PRODUTOS") #Define o titulo
         self.root.geometry("600x630") #Define o tamanho da janela
         self.root.configure(background = "BLUE") #Configura a cor de fundo da janela
@@ -93,7 +93,7 @@ class PRODUTO:
 
             self.main_window.deiconify()  # Reexibe a janela principal
 
-        voltar_button = tk.Button(self.root, text="Voltar para Tela Principal", width=20, font=("Century Gothic", 12), command=voltar_para_principal)
+        voltar_button = tk.Button(self.root, text="Voltar para Tela Principal", width=15, font=("Century Gothic", 12), command=voltar_para_principal)
         voltar_button.place(x=160, y=320)
 
     
