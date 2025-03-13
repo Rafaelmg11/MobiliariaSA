@@ -1,4 +1,4 @@
-from Usuarios2 import Usuarios2
+from Usuarios import Usuarios
 from tkinter import *
 import mysql.connector
 
@@ -70,11 +70,11 @@ class Application:
         self.bntInsert["command"] = self.inserirUsuario
         self.bntInsert.pack (side=LEFT)
         self.bntAlterar = Button(self.container8, text="Alterar",font=self.fonte, width=12)
-        self.bntAlterar["command"] = self.alterarUsuario
+        self.bntAlterar["command"] = self.alterar_usuario
         self.bntAlterar.pack (side=LEFT)
 
         self.bntExcluir = Button(self.container8, text="Excluir",font=self.fonte, width=12)
-        self.bntExcluir["command"] = self.excluirUsuario
+        self.bntExcluir["command"] = self.deletar_usuario
         self.bntExcluir.pack (side=LEFT)
 
         self.lblmsg = Label(self.container9, text="")
@@ -88,7 +88,7 @@ class Application:
             host="localhost",
             user="root",
             password="",
-            database="testesergio_db" # ESSE É O MEU BANCO, O ALUNO DEVE CRIAR O DELE
+            database="mobiliariasa_db" # ESSE É O MEU BANCO, O ALUNO DEVE CRIAR O DELE
         )
         self.cursor = self.conn.cursor()
         self.cursor.execute('''CREATE TABLE IF NOT EXISTS usuario (
@@ -105,7 +105,7 @@ class Application:
         self.lblmsg["text"] = "Usuário inserido com sucesso"
         self.limparCampos()
 
-    def alterarUsuario(self):
+    def alterar_usuario(self):
         nome = self.txtnome.get()
         senha = self.txtsenha.get()
         self.cursor.execute("UPDATE usuario SET nome=%s,senha=%s",
@@ -114,7 +114,7 @@ class Application:
         self.lblmsg["text"] = "Usuário alterado com sucesso"
         self.limparCampos()
 
-    def excluirUsuario(self):
+    def deletar_usuario(self):
         nome = self.txtnome.get()
         self.cursor.execute("DELETE FROM usuario WHERE nome=%s", (nome,))
         self.conn.commit()
