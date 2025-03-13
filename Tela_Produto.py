@@ -9,8 +9,9 @@ import mysql.connector
 
 class PRODUTO:  
 
-    def __init__(self,root):
+    def __init__(self,root,main_window):
         self.root = root
+        self.main_window = main_window
         self.root.title("CADASTRO DE PRODUTOS") #Define o titulo
         self.root.geometry("600x630") #Define o tamanho da janela
         self.root.configure(background = "BLUE") #Configura a cor de fundo da janela
@@ -84,6 +85,17 @@ class PRODUTO:
         #CRIANDO A LISTA DE CADASTRO DE PRODUTOS:
         self.text_area = tk.Text(self.root, height=11,width=70)
         self.text_area.place(x=18,y=440)
+
+        def voltar_para_principal():
+            # Fechar a janela atual de cadastro de produtos e voltar para a janela principal
+            self.root.quit()  # Fecha a janela de cadastro de produtos (destrói a instância)
+            self.root.destroy()  # Fecha a janela de cadastro de produtos, liberando recursos
+
+            self.main_window.deiconify()  # Reexibe a janela principal
+
+        voltar_button = tk.Button(self.root, text="Voltar para Tela Principal", width=20, font=("Century Gothic", 12), command=voltar_para_principal)
+        voltar_button.place(x=160, y=320)
+
     
         
 
@@ -248,9 +260,10 @@ class PRODUTO:
 
 
 
+
 if __name__ == "__main__":
     root = tk.Tk()
-    app = CRUDApp(root)
+    app = PRODUTO(root)
     root.mainloop()
 
 

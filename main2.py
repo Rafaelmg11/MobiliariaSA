@@ -17,10 +17,13 @@ class Main:
         abrir_funcionario_button.place(x=20,y=50)
 
     def abrir_produto(self):
-        # Cria uma nova janela Tkinter para o cadastro de produto
+        # Oculta a janela principal
         self.root.withdraw()
+
+        # Cria uma nova janela Tkinter para o cadastro de produto
         root_produto = tk.Tk()  # Cria a nova instância da janela para o cadastro de produto
-        app_produto = PRODUTO(root_produto)  # Cria a instância da classe PRODUTO
+        app_produto = PRODUTO(root_produto, self.root)  # Passa a referência da janela principal (self.root)
+        root_produto.protocol("WM_DELETE_WINDOW", lambda: self.reabrir_janela())  # Fechar corretamente ao fechar a janela de cadastro
         root_produto.mainloop()  # Inicia a execução da janela do PRODUTO
 
     def abrir_funcionario(self):
@@ -28,6 +31,11 @@ class Main:
         root_funcionario = tk.Tk()  # Cria a nova instância da janela para o cadastro de produto
         app_funcionario = FUNCIONARIO(root_funcionario)  # Cria a instância da classe PRODUTO
         root_funcionario.mainloop()  # Inicia a execução da janela do PRODUTO
+
+
+    # def reabrir_janela(self):
+    #     self.root.deiconify()  # Reexibe a janela principal
+    #     self.root.quit()  # Encerra o loop de eventos da janela de cadastro
 
 if __name__ == "__main__":
     root = tk.Tk()
