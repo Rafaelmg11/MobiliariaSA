@@ -37,13 +37,14 @@ def up_fornecedores():
 
     messagebox.showinfo("Sucesso", "Funcionário adicionado com sucesso!")
 
-# Função para atualizar a lista de funcionários
+# Função para atualizar a lista de fornecedores
 def atualizar_lista_fornecedores():
     listbox_fornecedores.delete(0, tk.END)
     for fornecedor in fornecedores:
         listbox_fornecedores.insert(tk.END, f"Fornecedor: {fornecedor['nome_fornecedor']}   Endereço: {fornecedor['endereco']}   Telefone: {fornecedor['telefone']}   Email: {fornecedor['email']}   Produto: {fornecedor['produto']}")
+        
 
-# Função para selecionar o funcionário da lista e carregar nos campos
+# Função para selecionar o fornecedor da lista e carregar nos campos
 def selecionar_fornecedor(event):
     try:
         indice_selecionado = listbox_fornecedores.curselection()[0]
@@ -65,7 +66,7 @@ def selecionar_fornecedor(event):
     except IndexError:
         pass
 
-# Função para atualizar as informações do funcionário selecionado
+# Função para atualizar as informações do fornecedor selecionado
 def atualizar_fornecedor():
     try:
         indice_selecionado = listbox_fornecedores.curselection()[0]

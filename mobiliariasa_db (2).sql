@@ -13,7 +13,7 @@ create table produto(
 );
 
 create table fornecedor(
-    idfornecedor int not null auto_increment,
+    idfornecedor int null auto_increment,
     nome_fornecedor text,
     endereco text,
     telefone text,
