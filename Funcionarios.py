@@ -6,7 +6,7 @@ from FuncionariosCrud import create_funcionario, read_funcionario, update_funcio
 import tkinter as tk
 
 
-class CRUDApp:
+class FUNCIONARIO:
 
     def __init__(self,root):
         self.root = root
@@ -146,5 +146,5 @@ class CRUDApp:
 
 if __name__ == "__main__":
     root = tk.Tk()
-    app = CRUDApp(root)
+    app = FUNCIONARIO(root)
     root.mainloop()
