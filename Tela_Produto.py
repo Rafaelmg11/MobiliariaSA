@@ -9,9 +9,9 @@ import mysql.connector
 
 class PRODUTO:  
 
-    def __init__(self,root):
+    def __init__(self,root,main_window):
         self.root = root
-        #self.main_window = main_window
+        self.main_window = main_window
         self.root.title("CADASTRO DE PRODUTOS") #Define o titulo
         self.root.geometry("600x630") #Define o tamanho da janela
         self.root.configure(background = "BLUE") #Configura a cor de fundo da janela
