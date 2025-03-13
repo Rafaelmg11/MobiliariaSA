@@ -10,30 +10,26 @@ def get_connection():
         database=MYSQL_DATABASE,
     )
 
-def up_fornecedores(idfornecedor, nome_fornecedor, endereco, telefone, email, produto):
-    """Insert a new supplier into the database."""
+def create_fornecedores(idfornecedor, nome_fornecedor, endereco, telefone, email, produto):
     conn = get_connection()
     cursor = conn.cursor()
-    query = "INSERT INTO fornecedores (nome_fornecedor, endereco, telefone, email, produto) VALUES (%s, %s, %s, %s, %s)"
+    query = "INSERT INTO fornecedor (nome_fornecedor, endereco, telefone, email, produto) VALUES (%s, %s, %s, %s, %s)"
     cursor.execute(query, (idfornecedor, nome_fornecedor, endereco, telefone, email, produto))
     conn.commit()
     cursor.close()
     conn.close()
 
+
 def atualizar_fornecedor(idfornecedor, nome_fornecedor, endereco, telefone, email, produto):
-    """Update supplier details in the database."""
     conn = get_connection()
     cursor = conn.cursor()
-    query = """UPDATE fornecedores 
-               SET nome_fornecedor = %s, endereco = %s, telefone = %s, email = %s, produto = %s 
-               WHERE idfornecedor = %s"""
+    query = """UPDATE fornecedor SET nome_fornecedor = %s, endereco = %s, telefone = %s, email = %s, produto = %s WHERE idfornecedor = %s"""
     cursor.execute(query, (idfornecedor, nome_fornecedor, endereco, telefone, email, produto, idfornecedor))
     conn.commit()
     cursor.close()
     conn.close()
 
 def deletar_fornecedor(idfornecedor):
-    """Delete a supplier from the database."""
     conn = get_connection()
     cursor = conn.cursor()
     query = "DELETE FROM fornecedores WHERE idfornecedor = %s"
@@ -42,11 +38,10 @@ def deletar_fornecedor(idfornecedor):
     cursor.close()
     conn.close()
 
-def fetch_fornecedores():
-    """Fetch all suppliers from the database."""
+def listar_fornecedores():
     conn = get_connection()
-    cursor = conn.cursor(dictionary=True)
-    query = "SELECT * FROM fornecedores"
+    cursor = conn.cursor()
+    query = "SELECT * FROM fornecedor"
     cursor.execute(query)
     fornecedores = cursor.fetchall()
     cursor.close()

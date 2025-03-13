@@ -2,7 +2,7 @@
 from tkinter import* #Importa tudo do tkinter
 from tkinter import messagebox #Importa as caixas de mensagem
 from tkinter import ttk #Importa o widgets tematicos do tkinter
-from crud import get_connection,create_produto, read_produto , update_produto , delete_produto 
+from crudPrincipal import get_connection,create_produto, read_produto , update_produto , delete_produto 
 import tkinter as tk
 import mysql.connector
 
