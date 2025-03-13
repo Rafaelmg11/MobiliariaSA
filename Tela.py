@@ -13,6 +13,13 @@ class PRODUTO:
     
     #CRIANDO TELA PRODUTOS
     def __init__(self,root):
+        #CRIAR A JANELA
+        jan = Tk() # Cria uma instanci da janela principal
+        jan.title("SL Sytens - Painel de Acesso") #Define o título da janela
+        jan.geometry("600x300") #Define o tamanho da janela
+        jan.configure(background="white")#Configura a cor de fundo da janela
+        jan.resizable(width=False,height=False)#Impede que a janela seja redimensionada
+
         self.root = root
         self.root.title("CADASTRO DE PRODUTOS") #Define o titulo
         self.root.geometry("600x630") #Define o tamanho da janela
