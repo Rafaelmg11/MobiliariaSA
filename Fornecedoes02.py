@@ -1,12 +1,11 @@
 import tkinter as tk
 from tkinter import messagebox
-from crud import up_fornecedores,atualizar_fornecedor,deletar_fornecedor
 
-#Lista
+# Lista
 fornecedores = []
 
 # Função para adicionar
-def up_fornecedores():
+def adicionar_fornecedor():
     nome_fornecedor = entry_nome_fornecedor.get()
     endereco = entry_endereco.get()
     telefone = entry_telefone.get()
@@ -14,7 +13,6 @@ def up_fornecedores():
     produto = entry_produto.get()
 
     if not nome_fornecedor or not endereco or not telefone or not email or not produto:
-        up_fornecedores(nome_fornecedor,endereco,telefone,email,produto)
         messagebox.showerror("Erro", "Por favor, preencha todos os campos.")
         return
 
@@ -35,14 +33,13 @@ def up_fornecedores():
     entry_email.delete(0, tk.END)
     entry_produto.delete(0, tk.END)
 
-    messagebox.showinfo("Sucesso", "Funcionário adicionado com sucesso!")
+    messagebox.showinfo("Sucesso", "Fornecedor adicionado com sucesso!")
 
 # Função para atualizar a lista de fornecedores
 def atualizar_lista_fornecedores():
     listbox_fornecedores.delete(0, tk.END)
     for fornecedor in fornecedores:
         listbox_fornecedores.insert(tk.END, f"Fornecedor: {fornecedor['nome_fornecedor']}   Endereço: {fornecedor['endereco']}   Telefone: {fornecedor['telefone']}   Email: {fornecedor['email']}   Produto: {fornecedor['produto']}")
-        
 
 # Função para selecionar o fornecedor da lista e carregar nos campos
 def selecionar_fornecedor(event):
@@ -75,7 +72,7 @@ def atualizar_fornecedor():
         fornecedor['nome_fornecedor'] = entry_nome_fornecedor.get()
         fornecedor['endereco'] = entry_endereco.get()
         fornecedor['telefone'] = entry_telefone.get()
-        fornecedor['email'] = entry_telefone.get()
+        fornecedor['email'] = entry_email.get()
         fornecedor['produto'] = entry_produto.get()
 
         atualizar_lista_fornecedores()
@@ -90,7 +87,7 @@ def atualizar_fornecedor():
     except IndexError:
         messagebox.showerror("Erro", "Selecione um fornecedor da lista.")
 
-#Função para deletar
+# Função para deletar fornecedor
 def deletar_fornecedor():
     try:
         indice_selecionado = listbox_fornecedores.curselection()[0]
@@ -106,19 +103,20 @@ def deletar_fornecedor():
         messagebox.showinfo("Sucesso", "Fornecedor deletado com sucesso!")
     except IndexError:
         messagebox.showerror("Erro", "Selecione um fornecedor da lista.")
-#Função para limpar os campos
-def limpar_campos():
-        entry_nome_fornecedor.delete(0, tk.END)
-        entry_endereco.delete(0, tk.END)
-        entry_telefone.delete(0, tk.END)
-        entry_email.delete(0, tk.END)
-        entry_produto.delete(0, tk.END)
 
-#Janela principal
+# Função para limpar os campos
+def limpar_campos():
+    entry_nome_fornecedor.delete(0, tk.END)
+    entry_endereco.delete(0, tk.END)
+    entry_telefone.delete(0, tk.END)
+    entry_email.delete(0, tk.END)
+    entry_produto.delete(0, tk.END)
+
+# Janela principal
 root = tk.Tk()
 root.title("Fornecedores")
 
-#Tamanho da janela
+# Tamanho da janela
 root.geometry("800x730")
 
 # Labels
@@ -153,9 +151,8 @@ entry_email.place(x=240,y=160)
 entry_produto = tk.Entry(root)
 entry_produto.place(x=240,y=190)
 
-
 # Botões de ação
-botao_adicionar = tk.Button(root, text="Adicionar Fornecedor", command=up_fornecedores)
+botao_adicionar = tk.Button(root, text="Adicionar Fornecedor", command=adicionar_fornecedor)
 botao_adicionar.place(x=160,y=260)
 
 botao_atualizar = tk.Button(root, text="Atualizar Fornecedor", command=atualizar_fornecedor)
@@ -167,7 +164,7 @@ botao_deletar.place(x=310,y=260)
 botao_limpar = tk.Button(root, text="Limpar campos", command=limpar_campos)
 botao_limpar.place(x=310,y=290)
 
-# Lista de funcionários
+# Lista de fornecedores
 listbox_fornecedores = tk.Listbox(root, width=140, height=30)
 listbox_fornecedores.place(x=0,y=360)
 listbox_fornecedores.bind("<ButtonRelease-1>", selecionar_fornecedor)
