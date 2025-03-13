@@ -10,12 +10,12 @@ def get_connection():
         database=MYSQL_DATABASE,
     )
 
-def up_fornecedores(nome_fornecedor, endereco, telefone, email, produto):
+def up_fornecedores(idfornecedor, nome_fornecedor, endereco, telefone, email, produto):
     """Insert a new supplier into the database."""
     conn = get_connection()
     cursor = conn.cursor()
     query = "INSERT INTO fornecedores (nome_fornecedor, endereco, telefone, email, produto) VALUES (%s, %s, %s, %s, %s)"
-    cursor.execute(query, (nome_fornecedor, endereco, telefone, email, produto))
+    cursor.execute(query, (idfornecedor, nome_fornecedor, endereco, telefone, email, produto))
     conn.commit()
     cursor.close()
     conn.close()
@@ -27,7 +27,7 @@ def atualizar_fornecedor(idfornecedor, nome_fornecedor, endereco, telefone, emai
     query = """UPDATE fornecedores 
                SET nome_fornecedor = %s, endereco = %s, telefone = %s, email = %s, produto = %s 
                WHERE idfornecedor = %s"""
-    cursor.execute(query, (nome_fornecedor, endereco, telefone, email, produto, idfornecedor))
+    cursor.execute(query, (idfornecedor, nome_fornecedor, endereco, telefone, email, produto, idfornecedor))
     conn.commit()
     cursor.close()
     conn.close()
