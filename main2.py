@@ -2,6 +2,12 @@ import tkinter as tk
 from Tela_Produto import PRODUTO  # Importa a classe PRODUTO do arquivo produto.py
 from Funcionario import FUNCIONARIO
 
+#TEM QUE FAZER O FUNCIONARIO FECHAR
+#TEM QUE FAZER O FORNECEDOR ABRIR E FECHAR
+#ARRUMAR OS FRONT ENDS
+#TELA DE LOGIN
+#TELA DE FATURA
+
 class Main:
     def __init__(self, root):
         self.root = root
@@ -15,6 +21,9 @@ class Main:
 
         abrir_funcionario_button = tk.Button(self.root, text="Abrir Cadastro de Funcionario", width=30, font=("Century Gothic", 13), command=self.abrir_funcionario)
         abrir_funcionario_button.place(x=20,y=50)
+
+        abrir_fornecedor_button = tk.Button(self.root, text="Abrir Aba de Fornecedor", width=30, font=("Century Gothic", 13), command=self.abrir_fornecedor)
+        abrir_fornecedor_button.place(x=20,y=50)
 
     def abrir_produto(self):
         # Oculta a janela principal
@@ -32,6 +41,11 @@ class Main:
         app_funcionario = FUNCIONARIO(root_funcionario)  # Cria a instância da classe PRODUTO
         root_funcionario.mainloop()  # Inicia a execução da janela do PRODUTO
 
+    def abrir_fornecedor(self):
+        # Cria uma nova janela Tkinter para o cadastro de produto
+        root_fornecedor = tk.Tk()  # Cria a nova instância da janela para o cadastro de produto
+        app_fornecedor = FUNCIONARIO(root_fornecedor)  # Cria a instância da classe PRODUTO
+        root_fornecedor.mainloop()  # Inicia a execução da janela do PRODUTO
 
     def reabrir_janela(self):
         self.root.deiconify()  # Reexibe a janela principal
