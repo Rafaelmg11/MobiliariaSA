@@ -155,23 +155,38 @@ class PRODUTO:
                 valorDeVenda = self.ValorDeVendaEntry.get()
                 fornecedor = self.FornecedorEntry.get()
                 codigo_produto = self.CodigoEntry.get()
-                
-                #SE CAMPOS NÃO ESTIVER VAZIOS:
-                if codigo_produto and produto and descricao and quantidade and valorDeCompra and valorDeVenda and fornecedor:
-                    update_produto(produto,descricao,quantidade,valorDeCompra,valorDeVenda,fornecedor,codigo_produto) #PUXANDO A FUNÇÃO DO CRUD E AS VARIAVEIS
 
-                    #LIMPAR CAMPOS
-                    self.ProdutoEntry.delete(0, tk.END)
-                    self.DescricaoEntry.delete(0, tk.END)
-                    self.QuantidadeEntry.delete(0, tk.END)
-                    self.ValorDeCompraEntry.delete(0, tk.END)
-                    self.ValorDeVendaEntry.delete(0, tk.END)
-                    self.FornecedorEntry.delete(0, tk.END)
-                    self.CodigoEntry.delete(0, tk.END)
-                    self.PesquisaEntry.delete(0, END)
-                    messagebox.showinfo("Success","Produto alterado com sucesso!")
-                else:
-                    messagebox.showerror("Error","Todos os campos são obrigatórios")
+                codigo_produto = self.CodigoEntry.get() #RECEBENDO O VALOR QUE É PRA SER O CODPRODUTO DA TABELA
+                conn = get_connection() #VARIAVEL PARA RECEBER A CONEXÃO
+                self.cursor = conn.cursor() #sell.conn TRABALHAR COM A CONEXAO
+
+                try:
+                    self.cursor.execute("SELECT * FROM produto WHERE codproduto=%s ",(codigo_produto,)) 
+                    # CONSULTA NO BANCO
+                    produto_pesquisa = self.cursor.fetchone()
+        
+                    # Verificando se o produto foi encontrado
+                    if produto_pesquisa:  # SE FOI ENCONTRADO...
+                        if codigo_produto and produto and descricao and quantidade and valorDeCompra and valorDeVenda and fornecedor:
+                            update_produto(produto,descricao,quantidade,valorDeCompra,valorDeVenda,fornecedor,codigo_produto) #PUXANDO A FUNÇÃO DO CRUD E AS VARIAVEIS
+
+                            #LIMPAR CAMPOS
+                            self.ProdutoEntry.delete(0, tk.END)
+                            self.DescricaoEntry.delete(0, tk.END)
+                            self.QuantidadeEntry.delete(0, tk.END)
+                            self.ValorDeCompraEntry.delete(0, tk.END)
+                            self.ValorDeVendaEntry.delete(0, tk.END)
+                            self.FornecedorEntry.delete(0, tk.END)
+                            self.CodigoEntry.delete(0, tk.END)
+                            self.PesquisaEntry.delete(0, END)
+                            messagebox.showinfo("Success","Produto alterado com sucesso!")
+                        else:
+                            messagebox.showerror("Error","Todos os campos são obrigatórios")
+                    else:
+                        messagebox.showerror("Error","Cadastro de Produto não existe")
+
+                except:
+                    print("expect")
         
         #BOTÃO ALTERAR
         AlterarButton = tk.Button(self.root,text = "ALTERAR",font= ("Georgia",10),width=13,command=alterar_produto)
@@ -190,7 +205,6 @@ class PRODUTO:
         
                 # Verificando se o produto foi encontrado
                 if produto_pesquisa:  # SE FOI ENCONTRADO...
-                    produto_pesquisa #ESSAS VARIAVEIS VAI RECEBER OS VALORES DA COLUNA DE ACORDO COM A ORDEM
                     delete_produto(codigo_produto) #PUXANDO FUNÇÃO DO CRUD
 
                     #LIMPAR CAMPOS
