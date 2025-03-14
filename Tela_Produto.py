@@ -9,15 +9,12 @@ import mysql.connector
 
 class PRODUTO:  
 
-    def __init__(self,root): #main_window
+    def __init__(self,root,main_window): #PARA EXECUTAR ESSE CODIGO SEPAPARADEMENTE DEVE TIRAR O "main_window"
         self.root = root
-        # self.main_window = main_window
+        self.main_window = main_window #PARA EXECUTAR ESSE CODIGO SEPAPARADEMENTE DEVE COMENTAR ESSA LINHA DE CODIGO
         self.root.title("CADASTRO DE PRODUTOS") #Define o titulo
         self.root.geometry("700x680") #Define o tamanho da janela
         self.root.configure(background = ("#5424A2")) #Configura a cor de fundo da janela
-        #ROXO #001703'''  #5424A2'''  ".#4D0DC1" #581AC0
-        #VERDE LESBICO "#266F5A''
-        #CIANO/VERDE #00D9CC  #32A8A0 ###2FCDC3
         self.root.resizable(width = False,height = False) #Impede que a janela seja redimensionada 
         #Criação de Widgets
         self.create_widgets()
@@ -35,13 +32,6 @@ class PRODUTO:
 
 
     def create_widgets(self):
-
-        #CARREGAR IMAGEM:
-        #logo = PhotoImage (file = "icons/LogoMobiliariaSa.png") 
-
-        # #ADICIONAR LOGO:
-        # LogoLabel = Label(image = logo,bg = "PINK") #Cria um label para a imagem
-        # LogoLabel.place(x=50,y=100)#Posiciona o label da imagem
 
         #CRIANDO LABELS:
         TituloLabel = Label(self.root,text="PRODUTOS: ",font=("Georgia",25),bg = "#5424A2",fg = "WHITE") #Cria Label TITULO
