@@ -54,23 +54,23 @@ class FUNCIONARIO:
 
 
         #CRIANDO CAMPOS DE ENTRADAS:
-        self.NomeEntry = tk.Entry(self.root, width=44,font=("Georgia",12))
-        self.cpfEntry =  tk.Entry(self.root, width=44,font=("Georgia",12))
-        self.TelefoneEntry = tk.Entry(self.root, width=44,font=("Georgia",12))
-        self.EmailEntry = tk.Entry(self.root, width=44,font=("Georgia",12))
-        self.CargoEntry = tk.Entry(self.root, width=44,font=("Georgia",12))
-        self.SalarioEntry = tk.Entry(self.root, width=44,font=("Georgia",12))
-        self.idfuncionarioEntry = tk.Entry(self.root, width=44,font=("Georgia",12))
+        self.NomeEntry = tk.Entry(self.root, width=50,font=("Georgia",12))
+        self.cpfEntry =  tk.Entry(self.root, width=11,font=("Georgia",12))
+        self.TelefoneEntry = tk.Entry(self.root, width=12,font=("Georgia",12))
+        self.EmailEntry = tk.Entry(self.root, width=50,font=("Georgia",12))
+        self.CargoEntry = tk.Entry(self.root, width=40,font=("Georgia",12))
+        self.SalarioEntry = tk.Entry(self.root, width=8,font=("Georgia",12))
+        self.idfuncionarioEntry = tk.Entry(self.root, width=20,font=("Georgia",12))
         self.PesquisaEntry = tk.Entry(self.root, width=53,font= ("Georgia",13))
 
         #POSICIONA OS CAMPOS DE ENTRADAS:
-        self.NomeEntry.place(x=132,y=110)
-        self.cpfEntry.place(x=151, y= 140)
-        self.TelefoneEntry.place(x=166, y= 170)
-        self.EmailEntry.place(x=214, y= 200)
-        self.CargoEntry.place(x=199, y= 230)
-        self.SalarioEntry.place(x=166, y= 260)
-        self.idfuncionarioEntry.place(x=166, y= 290)
+        self.NomeEntry.place(x=112,y=110)
+        self.cpfEntry.place(x=98, y= 140)
+        self.TelefoneEntry.place(x=135, y= 170)
+        self.EmailEntry.place(x=113, y= 200)
+        self.CargoEntry.place(x=113, y= 230)
+        self.SalarioEntry.place(x=123, y= 260)
+        self.idfuncionarioEntry.place(x=200, y= 290)
         self.PesquisaEntry.place(x=143,y=392)
      
         #CRIANDO A LISTA DE CADASTRO DE FUNCIONARIOS:
