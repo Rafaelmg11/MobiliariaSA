@@ -9,12 +9,15 @@ import mysql.connector
 
 class PRODUTO:  
 
-    def __init__(self,root,main_window):
+    def __init__(self,root): #main_window
         self.root = root
-        self.main_window = main_window
+        # self.main_window = main_window
         self.root.title("CADASTRO DE PRODUTOS") #Define o titulo
-        self.root.geometry("600x630") #Define o tamanho da janela
-        self.root.configure(background = "BLUE") #Configura a cor de fundo da janela
+        self.root.geometry("700x680") #Define o tamanho da janela
+        self.root.configure(background = ("#00B2BF")) #Configura a cor de fundo da janela
+        #ROXO #001703'''  #5424A2'''
+        #VERDE LESBICO "#266F5A''
+        #CIANO/VERDE #00D9CC  #32A8A0 ###2FCDC3
         self.root.resizable(width = False,height = False) #Impede que a janela seja redimensionada 
         #Criação de Widgets
         self.create_widgets()
@@ -41,50 +44,50 @@ class PRODUTO:
         # LogoLabel.place(x=50,y=100)#Posiciona o label da imagem
 
         #CRIANDO LABELS:
-        TituloLabel = Label(self.root,text="PRODUTOS: ",font=("Century Gothic",25),bg = "BLACK",fg = "WHITE") #Cria Label TITULO
-
-        ProdutoLabel = Label(self.root,text = "Produto: ",font = ("Century Gothic",13)) #Cria Label Produtos
-        DescricaoLabel = Label(self.root,text= "Descrição: ",font= ("Century Gothic",13))#Cria Label Descrição
-        QuantidadeLabel = Label (self.root,text= "Quantidade: ",font=("Century Gothic",13)) #Cria Label Quantidade
-        ValorDeCompraLabel = Label(self.root,text="Valor de Compra: ",font=("Century Gothic",13)) #Cria Label Valor de Compra
-        ValorDeVendaLabel = Label (self.root,text="Valor de Venda: ",font=("Century Gothic",13)) #Cria Label Valor de Venda
-        FornecedorLabel = Label (self.root,text="Fornecedor: ",font = ("Century Gothic",13)) #Cria Label Fornecedor
-        CodigoLabel = Label (self.root,text="Codigo de Produto: ",font = ("Century Gothic",13)) #Cria Label Codigo de Produto
+        TituloLabel = Label(self.root,text="PRODUTOS: ",font=("Georgia",25),bg = "#00B2BF",fg = "WHITE") #Cria Label TITULO
+        ##1D201F  ###040C24  ###1A1A1A  ###001703
+        ProdutoLabel = Label(self.root,text = "Produto: ",font = ("Georgia",16),bg = "#00B2BF", fg = "WHITE") #Cria Label Produtos
+        DescricaoLabel = Label(self.root,text= "Descrição: ",font= ("Georgia",16),bg = "#00B2BF", fg = "WHITE")#Cria Label Descrição
+        QuantidadeLabel = Label (self.root,text= "Quantidade: ",font = ("Georgia",16),bg = "#00B2BF", fg = "WHITE") #Cria Label Quantidade
+        ValorDeCompraLabel = Label(self.root,text="Valor de Compra: ",font=("Georgia",16),bg = "#00B2BF", fg = "WHITE") #Cria Label Valor de Compra
+        ValorDeVendaLabel = Label (self.root,text="Valor de Venda: ",font=("Georgia",16),bg = "#00B2BF", fg = "WHITE") #Cria Label Valor de Venda
+        FornecedorLabel = Label (self.root,text="Fornecedor: ",font = ("Georgia",16),bg = "#00B2BF", fg = "WHITE") #Cria Label Fornecedor
+        CodigoLabel = Label (self.root,text="Codigo de Produto: ",font = ("Georgia",16),bg = "#00B2BF", fg = "WHITE") #Cria Label Codigo de Produto
 
         #POSICIONANDO LABELS:
         TituloLabel.pack(pady=40,anchor="center") #POSICIONA O TITULO
 
-        ProdutoLabel.place(x=50,y=100)
-        DescricaoLabel.place(x=50,y=130)
-        QuantidadeLabel.place(x=50,y=160)
-        ValorDeCompraLabel.place(x=50,y=190)
-        ValorDeVendaLabel.place(x=50,y=220)
-        FornecedorLabel.place(x=50,y=250)
-        CodigoLabel.place(x=50,y=280)
+        ProdutoLabel.place(x=40,y=105)
+        DescricaoLabel.place(x=40,y=135)
+        QuantidadeLabel.place(x=40,y=165)
+        ValorDeCompraLabel.place(x=40,y=195)
+        ValorDeVendaLabel.place(x=40,y=225)
+        FornecedorLabel.place(x=40,y=255)
+        CodigoLabel.place(x=40,y=285)
 
         #CRIANDO CAMPOS DE ENTRADAS:
-        self.ProdutoEntry = tk.Entry(self.root, width=30,font=("Century Gothic",13))
-        self.DescricaoEntry = tk.Entry(self.root, width=28,font=("Century Gothic",13))
-        self.QuantidadeEntry = tk.Entry(self.root, width=25,font=("Century Gothic",13))
-        self.ValorDeCompraEntry = tk.Entry(self.root, width=21,font=("Century Gothic",13))
-        self.ValorDeVendaEntry = tk.Entry(self.root, width=23,font=("Century Gothic",13))
-        self.FornecedorEntry = tk.Entry(self.root, width=27,font=("Century Gothic",13))
-        self.CodigoEntry = tk.Entry(self.root, width=21,font=("Century Gothic",13))
-        self.PesquisaEntry = tk.Entry(self.root, width=47,font= ("Century Gothic",13))
+        self.ProdutoEntry = tk.Entry(self.root, width=50,font=("Century Gothic",11))
+        self.DescricaoEntry = tk.Entry(self.root, width=48,font=("Century Gothic",11))
+        self.QuantidadeEntry = tk.Entry(self.root, width=46,font=("Century Gothic",11))
+        self.ValorDeCompraEntry = tk.Entry(self.root, width=21,font=("Century Gothic",11))
+        self.ValorDeVendaEntry = tk.Entry(self.root, width=23,font=("Century Gothic",11))
+        self.FornecedorEntry = tk.Entry(self.root, width=27,font=("Century Gothic",11))
+        self.CodigoEntry = tk.Entry(self.root, width=21,font=("Century Gothic",11))
+        self.PesquisaEntry = tk.Entry(self.root, width=66,font= ("Century Gothic",11))
 
         #POSICIONA OS CAMPOS DE ENTRADAS:
-        self.ProdutoEntry.place(x=135,y=101)
-        self.DescricaoEntry.place(x=155, y= 131)
-        self.QuantidadeEntry.place(x=175, y= 161)
-        self.ValorDeCompraEntry.place(x=217, y= 191)
-        self.ValorDeVendaEntry.place(x=205, y= 221)
-        self.FornecedorEntry.place(x=165, y= 251)
-        self.CodigoEntry.place(x=233,y=281)
-        self.PesquisaEntry.place(x=155,y=405)
+        self.ProdutoEntry.place(x=135,y=108)
+        self.DescricaoEntry.place(x=151, y= 139)
+        self.QuantidadeEntry.place(x=166, y= 169)
+        self.ValorDeCompraEntry.place(x=217, y= 198)
+        self.ValorDeVendaEntry.place(x=205, y= 228)
+        self.FornecedorEntry.place(x=165, y= 258)
+        self.CodigoEntry.place(x=233,y=288)
+        self.PesquisaEntry.place(x=145,y=390)
 
         #CRIANDO A LISTA DE CADASTRO DE PRODUTOS:
-        self.text_area = tk.Text(self.root, height=11,width=70)
-        self.text_area.place(x=18,y=440)
+        self.text_area = tk.Text(self.root, height=11,width=82)
+        self.text_area.place(x=18,y=423)
 
         def voltar_para_principal():
             # Fechar a janela atual de cadastro de produtos e voltar para a janela principal
@@ -93,8 +96,8 @@ class PRODUTO:
 
             self.main_window.deiconify()  # Reexibe a janela principal
 
-        voltar_button = tk.Button(self.root, text="Voltar para Tela Principal", width=15, font=("Century Gothic", 12), command=voltar_para_principal)
-        voltar_button.place(x=160, y=320)
+        # voltar_button = tk.Button(self.root, text="Voltar para Tela Principal", width=15, font=("Century Gothic", 12), command=voltar_para_principal)
+        # voltar_button.place(x=160, y=320)
 
     
         
@@ -128,7 +131,7 @@ class PRODUTO:
 
         #BOTÃO DE PRODUTO
         CadastrarButton = tk.Button (self.root,text = "CADASTRAR",width=15,command=cadastrarProduto)
-        CadastrarButton.place(x=178,y=330)
+        CadastrarButton.place(x=40,y=335)
 
         #LISTAR PRODUTO
         def listar_produto():
@@ -139,8 +142,7 @@ class PRODUTO:
     
         #BOTÃO DE LISTAR:
         ListarButton = tk.Button (self.root,text="LISTAR",width=15,command=listar_produto)
-        ListarButton.place(x=178,y=365)
-
+        ListarButton.place(x=290,y=335)
         #FUNÇÃO DE ALTERAR PRODUTO:
         def alterar_produto():
                 
@@ -171,7 +173,7 @@ class PRODUTO:
         
         #BOTÃO ALTERAR
         AlterarButton = tk.Button(self.root,text = "ALTERAR",width=15,command=alterar_produto)
-        AlterarButton.place(x=312,y=330)  
+        AlterarButton.place(x=164,y=335)  
 
         #FUNÇÃO DE EXCLUIR
         def excluir_produto():
@@ -193,7 +195,7 @@ class PRODUTO:
 
         #BOTAO DE EXCLUIR
         ExcluirButton = tk.Button(self.root,text = "EXCLUIR",width = 15,command=excluir_produto)
-        ExcluirButton.place(x=312,y=365)
+        ExcluirButton.place(x=418,y=335)
   
 
         #FUNÇÃO DE PESQUISAR :) ;) OBS: NAO TEM RELAÇÃO COM O CRUD
@@ -243,7 +245,7 @@ class PRODUTO:
 
         #BOTAO DE PESQUISA :)
         PesquisarButton = tk.Button(self.root,text = "Pesquisar",width = 15,command=pesquisar_produto)
-        PesquisarButton.place(x = 20,y=405)
+        PesquisarButton.place(x = 20,y=390)
 
         #FUNÇÃO DE LIMPAR
         def limparCampos():
@@ -256,7 +258,7 @@ class PRODUTO:
                 self.CodigoEntry.delete(0, tk.END)
         #BOTÃO DE LIMPAR
         limparButton = tk.Button(self.root,text = "LIMPAR",width = 15,command=limparCampos)
-        limparButton.place(x = 440,y=200)
+        limparButton.place(x = 547,y=335)
 
 
 
