@@ -4,9 +4,9 @@ create table produto(
 	codproduto int not null auto_increment,
     produto text,
     descricao text,
-    quantidade int,
-    valordecompra float,
-    valordevenda float,
+    quantidade text,
+    valordecompra text,
+    valordevenda text,
     fornecedor text,
     primary key (codproduto)
 
