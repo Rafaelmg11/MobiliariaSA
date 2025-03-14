@@ -107,33 +107,34 @@ def delete_funcionario(idfuncionario):
 #FUNÇÕES FORNECEDORES:
 
 
-def create_fornecedores(idfornecedor, nome_fornecedor, endereco, telefone, email, produto):
+def create_fornecedores(nome_fornecedor, endereco, telefone, email, produto):
     conn = get_connection()
     cursor = conn.cursor()
     query = "INSERT INTO fornecedor (nome_fornecedor, endereco, telefone, email, produto) VALUES (%s, %s, %s, %s, %s)"
-    cursor.execute(query, (idfornecedor, nome_fornecedor, endereco, telefone, email, produto))
+    cursor.execute(query, (nome_fornecedor, endereco, telefone, email, produto))
     conn.commit()
     cursor.close()
     conn.close()
 
 
-def atualizar_fornecedor(idfornecedor, nome_fornecedor, endereco, telefone, email, produto):
+def atualizar_fornecedor( nome_fornecedor, endereco, telefone, email, produto, id_produto):
     conn = get_connection()
     cursor = conn.cursor()
-    query = """UPDATE fornecedor SET nome_fornecedor = %s, endereco = %s, telefone = %s, email = %s, produto = %s WHERE idfornecedor = %s"""
-    cursor.execute(query, (idfornecedor, nome_fornecedor, endereco, telefone, email, produto, idfornecedor))
+    query = "UPDATE fornecedor SET nome_fornecedor = %s, endereco = %s, telefone = %s, email = %s, produto = %s WHERE idfornecedor = %s"
+    cursor.execute(query, ( nome_fornecedor, endereco, telefone, email, produto, id_produto ))
     conn.commit()
     cursor.close()
     conn.close()
 
-def deletar_fornecedor(idfornecedor):
+def deletar_fornecedor(id_fornecedor):
     conn = get_connection()
     cursor = conn.cursor()
-    query = "DELETE FROM fornecedores WHERE idfornecedor = %s"
-    cursor.execute(query, (idfornecedor,))
+    query = "DELETE FROM fornecedor WHERE idfornecedor = %s"
+    cursor.execute(query, (id_fornecedor,))
     conn.commit()
     cursor.close()
     conn.close()
+
 
 def listar_fornecedores():
     conn = get_connection()
