@@ -13,8 +13,8 @@ class FORNECEDOR:
         self.root = root
         # self.main_window = main_window
         self.root.title("FORNECEDORES") #Define o titulo
-        self.root.geometry("600x630") #Define o tamanho da janela
-        self.root.configure(background = "BLUE") #Configura a cor de fundo da janela
+        self.root.geometry("700x680") #Define o tamanho da janela
+        self.root.configure(background = "#5424A2") #Configura a cor de fundo da janela
         self.root.resizable(width = False,height = False) #Impede que a janela seja redimensionada 
         #Criação de Widgets
         self.create_widgets()
@@ -32,54 +32,63 @@ class FORNECEDOR:
 
     def create_widgets(self):
         #LABELS
-        label_titulo_fornecedor= Label(self.root,text = "FORNECEDOR: ",font = ("Century Gothic",13)) #Cria Label Produtos
+        label_titulo_fornecedor= Label(self.root,text = "FORNECEDOR: ",font=("Georgia",25),bg = "#5424A2",fg = "WHITE" ) #Cria Label Produtos
         label_titulo_fornecedor.pack(pady=40,anchor="center") #POSICIONA O TITULO
 
-        label_nome_fornecedor = Label(self.root,text = "Fornecedor: ",font = ("Century Gothic",13)) #Cria Label Produtos
-        label_nome_fornecedor.place(x=50,y=100)
+        label_nome_fornecedor = Label(self.root,text = "Fornecedor: ",font = ("Georgia",16), bg = "#5424A2", fg = "WHITE" ) #Cria Label Produtos
+        label_nome_fornecedor.place(x=40,y=105)
 
-        label_endereco = Label(self.root,text = "Endereço: ",font = ("Century Gothic",13)) #Cria Label Produtos
-        label_endereco.place(x=50,y=130)
+        label_endereco = Label(self.root,text = "Endereço: ",font = ("Georgia",16), bg = "#5424A2", fg = "WHITE" ) #Cria Label Produtos
+        label_endereco.place(x=40,y=135)
 
-        label_telefone = Label(self.root,text = "Telefone: ",font = ("Century Gothic",13)) #Cria Label Produtos
-        label_telefone.place(x=50,y=160)
+        label_telefone = Label(self.root,text = "Telefone: ",font = ("Georgia",16), bg = "#5424A2", fg = "WHITE" ) #Cria Label Produtos
+        label_telefone.place(x=40,y=165)
 
-        label_email = Label(self.root,text = "Email: ",font = ("Century Gothic",13)) #Cria Label Produtos
-        label_email.place(x=50,y=190)
+        label_email = Label(self.root,text = "Email: ",font = ("Georgia",16), bg = "#5424A2", fg = "WHITE" ) #Cria Label Produtos
+        label_email.place(x=40,y=195)
 
-        label_produto= Label(self.root,text = "Produto: ",font = ("Century Gothic",13)) #Cria Label Produtos
-        label_produto.place(x=50,y=220)
+        label_produto= Label(self.root,text = "Produto: ",font = ("Georgia",16), bg = "#5424A2", fg = "WHITE" ) #Cria Label Produtos
+        label_produto.place(x=40,y=225)
 
-        label_idFornecedor = Label (self.root,text="ID Fornecedor: ",font = ("Century Gothic",13)) #Cria Label Codigo de Produto
-        label_idFornecedor.place(x=50,y=280)
+        label_idFornecedor = Label (self.root,text="ID Fornecedor: ",font = ("Georgia",16), bg = "#5424A2", fg = "WHITE" ) #Cria Label Codigo de Produto
+        label_idFornecedor.place(x=40,y=255)
 
         #CAMPOS DE ENTRADA
-        self.entry_nome_fornecedor = tk.Entry(self.root, width=30,font=("Century Gothic",13))
-        self.entry_nome_fornecedor.place(x=170,y=101)
+        self.entry_nome_fornecedor = tk.Entry(self.root, width=30,font=("Georgia",12))
+        self.entry_nome_fornecedor.place(x=170,y=111)
 
-        self.entry_endereco = tk.Entry(self.root, width=30,font=("Century Gothic",13))
-        self.entry_endereco.place(x=155,y=131)
+        self.entry_endereco = tk.Entry(self.root, width=30,font=("Georgia",12))
+        self.entry_endereco.place(x=155,y=141)
 
-        self.entry_telefone = tk.Entry(self.root, width=30,font=("Century Gothic",13))
-        self.entry_telefone.place(x=145,y=161)
+        self.entry_telefone = tk.Entry(self.root, width=30,font=("Georgia",12))
+        self.entry_telefone.place(x=145,y=171)
 
-        self.entry_email = tk.Entry(self.root, width=30,font=("Century Gothic",13))
-        self.entry_email.place(x=115, y= 191)
+        self.entry_email = tk.Entry(self.root, width=30,font=("Georgia",12))
+        self.entry_email.place(x=115, y= 201)
 
-        self.entry_produto = tk.Entry(self.root, width=30,font=("Century Gothic",13))
-        self.entry_produto.place(x=140, y= 221)
+        self.entry_produto = tk.Entry(self.root, width=30,font=("Georgia",12))
+        self.entry_produto.place(x=140, y= 231)
 
-        self.entry_pesquisa = tk.Entry(self.root, width=47,font= ("Century Gothic",13))
-        self.entry_pesquisa.place(x=155,y=405)
+        self.entry_pesquisa = tk.Entry(self.root, width=53,font= ("Georgia",13))
+        self.entry_pesquisa.place(x=143,y=392)
 
 
-        self.entry_idFornecedor = tk.Entry (self.root, width=30,font = ("Century Gothic",13)) #Cria Label Codigo de Produto
-        self.entry_idFornecedor.place(x=190,y=281)
+        self.entry_idFornecedor = tk.Entry (self.root, width=30,font = ("Georgia",12)) #Cria Label Codigo de Produto
+        self.entry_idFornecedor.place(x=190,y=261)
 
         #CRIANDO A LISTA DE CADASTRO DE PRODUTOS:
-        self.text_area = tk.Text(self.root, height=11,width=70)
-        self.text_area.place(x=18,y=440)
+        self.text_area = tk.Text(self.root, height=13,width=82)
+        self.text_area.place(x=18,y=423)
 
+        def voltar_para_principal():
+            # Fechar a janela atual de cadastro de produtos e voltar para a janela principal
+            self.root.quit()  # Fecha a janela de cadastro de produtos (destrói a instância)
+            self.root.destroy()  # Fecha a janela de cadastro de produtos, liberando recursos
+
+            self.main_window.deiconify()  # Reexibe a janela principal
+
+        voltar_button = tk.Button(self.root, text="VOLTAR", width=11, font=("Georgia", 10), command=voltar_para_principal)
+        voltar_button.place(x=20, y=645)
     
         def cadastrarFornecedor():
             #OBTENDO AS INFORMAÇÕES DOS CAMPOS DE TEXTOS
@@ -98,13 +107,14 @@ class FORNECEDOR:
                 self.entry_email.delete(0, tk.END)
                 self.entry_produto.delete(0, tk.END)
                 self.entry_idFornecedor.delete(0, tk.END)
+                self.entry_pesquisa.delete(0, tk.END)
 
                 messagebox.showinfo("Success","Fornecedor criado com sucesso!")
             else:
                 messagebox.showerror("Error","Todos os campos são obrigatórios" )
 
-        botao_adicionar = tk.Button (self.root,text = "CADASTRAR",width=15,command=cadastrarFornecedor)
-        botao_adicionar.place(x=178,y=330)
+        botao_adicionar = tk.Button (self.root,text = "CADASTRAR",font= ("Georgia",10),width=13,command=cadastrarFornecedor)
+        botao_adicionar.place(x=40,y=330)
 
         #LISTAR PRODUTO
         def listar_fornecedor():
@@ -113,8 +123,8 @@ class FORNECEDOR:
             for fornecedor in fornecedores: #produto ANDANDO EM produtos
                 self.text_area.insert(tk.END, f"id.Fornecedor: {fornecedor[0]}, Fornecedor: {fornecedor[1]}, Endereço: {fornecedor[2]},Telefone: {fornecedor[3]},Email: {fornecedor[4]},Produto: {fornecedor[5]}\n")
 
-        botao_listar  = tk.Button (self.root,text="LISTARR",width=15,command=listar_fornecedor)
-        botao_listar.place(x=178,y=365)
+        botao_listar  = tk.Button(self.root,text="LISTAR",font= ("Georgia",10),width=13,command=listar_fornecedor)
+        botao_listar.place(x=290,y=330)
 
 
         
@@ -128,44 +138,75 @@ class FORNECEDOR:
                 email = self.entry_email.get()
                 produto = self.entry_produto.get()
                 id_fornecedor=self.entry_idFornecedor.get()
-                
-                #SE CAMPOS NÃO ESTIVER VAZIOS:
-                if id_fornecedor and nome and endereco and telefone and email and produto:
-                    atualizar_fornecedor(nome,endereco,telefone,email,produto,id_fornecedor) #PUXANDO A FUNÇÃO DO CRUD E AS VARIAVEIS
+                id_fornecedor = self.entry_idFornecedor.get() #RECEBENDO O VALOR QUE É PRA SER O CODPRODUTO DA TABELA
+                conn = get_connection() #VARIAVEL PARA RECEBER A CONEXÃO
+                self.cursor = conn.cursor() #sell.conn TRABALHAR COM A CONEXAO
 
-                    #LIMPAR CAMPOS
-                    self.entry_nome_fornecedor.delete(0, tk.END)
-                    self.entry_endereco.delete(0, tk.END)
-                    self.entry_telefone.delete(0, tk.END)
-                    self.entry_email.delete(0, tk.END)
-                    self.entry_produto.delete(0, tk.END)
-                    self.entry_idFornecedor.delete(0, tk.END)
-                    messagebox.showinfo("Success","Fornecedor alterado com sucesso!")
-                else:
-                    messagebox.showerror("Error","Todos os campos são obrigatórios")
-        
-        botao_atualizar = tk.Button(self.root, text="EDITAR", command=alterar_fornecedor)
-        botao_atualizar.place(x=312,y=330)  
+                try:
+                    self.cursor.execute("SELECT * FROM fornecedor WHERE idfornecedor=%s ",(id_fornecedor,)) 
+                    # CONSULTA NO BANCO
+                    fornecedor_pesquisa = self.cursor.fetchone()
+
+                     # Verificando se o produto foi encontrado
+                    if fornecedor_pesquisa:  # SE FOI ENCONTRADO...
+                        #SE CAMPOS NÃO ESTIVER VAZIOS:
+                        if id_fornecedor and nome and endereco and telefone and email and produto:
+                            atualizar_fornecedor(nome,endereco,telefone,email,produto,id_fornecedor) #PUXANDO A FUNÇÃO DO CRUD E AS VARIAVEIS
+
+                            #LIMPAR CAMPOS
+                            self.entry_nome_fornecedor.delete(0, tk.END)
+                            self.entry_endereco.delete(0, tk.END)
+                            self.entry_telefone.delete(0, tk.END)
+                            self.entry_email.delete(0, tk.END)
+                            self.entry_produto.delete(0, tk.END)
+                            self.entry_idFornecedor.delete(0, tk.END)
+                            self.entry_pesquisa.delete(0, tk.END)
+                            messagebox.showinfo("Success","Fornecedor alterado com sucesso!")
+                        else:
+                            messagebox.showerror("Error","Todos os campos são obrigatórios")   
+
+                    else:
+                        messagebox.showerror("Error","Cadastro de Produto não existe")
+                except:
+                    print("Expect")
+        botao_atualizar = tk.Button(self.root,text = "ALTERAR",font= ("Georgia",10),width=13, command=alterar_fornecedor)
+        botao_atualizar.place(x=164,y=330)  
 
         def excluir_fornecedor():
             id_fornecedor = self.entry_idFornecedor.get() #RECEBENDO O VALOR QUE É PRA SER O CODPRODUTO DA TABELA
-            if id_fornecedor: #SE codigo_produto RECEBER UM VALOR
-                deletar_fornecedor(id_fornecedor) #PUXANDO FUNÇÃO DO CRUD
+            conn = get_connection() #VARIAVEL PARA RECEBER A CONEXÃO
+            self.cursor = conn.cursor() #sell.conn TRABALHAR COM A CONEXAO
+            try:
+                self.cursor.execute("SELECT * FROM fornecedor WHERE idfornecedor=%s ",(id_fornecedor,)) 
+                # CONSULTA NO BANCO
+                produto_pesquisa = self.cursor.fetchone()
+                # Verificando se o produto foi encontrado
+                if produto_pesquisa:  # SE FOI ENCONTRADO...
 
-                #LIMPAR CAMPOS
-                self.entry_nome_fornecedor.delete(0, tk.END)
-                self.entry_endereco.delete(0, tk.END)
-                self.entry_telefone.delete(0, tk.END)
-                self.entry_email.delete(0, tk.END)
-                self.entry_produto.delete(0, tk.END)
-                self.entry_idFornecedor.delete(0, tk.END)
+                    if id_fornecedor: #SE codigo_produto RECEBER UM VALOR
+                        deletar_fornecedor(id_fornecedor) #PUXANDO FUNÇÃO DO CRUD
 
-                messagebox.showinfo("Success","Fornecedor excluido com sucesso")
-            else:
-                messagebox.showerror("Error","O ID do Fornecedor é obrigatório")
+                        #LIMPAR CAMPOS
+                        self.entry_nome_fornecedor.delete(0, tk.END)
+                        self.entry_endereco.delete(0, tk.END)
+                        self.entry_telefone.delete(0, tk.END)
+                        self.entry_email.delete(0, tk.END)
+                        self.entry_produto.delete(0, tk.END)
+                        self.entry_idFornecedor.delete(0, tk.END)
+                        self.entry_pesquisa.delete(0, tk.END)
 
-        botao_deletar = tk.Button(self.root, text="EXCLUIR", command=excluir_fornecedor)
-        botao_deletar.place(x=312,y=365)
+                        messagebox.showinfo("Success","Fornecedor excluido com sucesso")
+                    else:
+                        messagebox.showerror("Error","O ID do Fornecedor é obrigatório")
+
+                else:
+                        messagebox.showerror("Error","Cadastro de Produto não existe")
+            except:
+                print("Expect")
+
+
+        botao_deletar = tk.Button(self.root,text = "EXCLUIR",font= ("Georgia",10),width=13, command=excluir_fornecedor)
+        botao_deletar.place(x=418,y=330)
 
 
 
@@ -186,7 +227,7 @@ class FORNECEDOR:
         
                 # Verificando se o produto foi encontrado
                 if fornecedor_pesquisa:  # SE FOI ENCONTRADO...
-                    nome_fornecedor, endereco, telefone, email, produto, idfornecedor  = fornecedor_pesquisa #ESSAS VARIAVEIS VAI RECEBER OS VALORES DA COLUNA DE ACORDO COM A ORDEM
+                    nome_fornecedor, endereco, telefone, email, produto, id_fornecedor  = fornecedor_pesquisa #ESSAS VARIAVEIS VAI RECEBER OS VALORES DA COLUNA DE ACORDO COM A ORDEM
 
                     #LIMPAR CAMPOS
                     self.entry_nome_fornecedor.delete(0, tk.END)
@@ -195,6 +236,7 @@ class FORNECEDOR:
                     self.entry_email.delete(0, tk.END)
                     self.entry_produto.delete(0, tk.END)
                     self.entry_idFornecedor.delete(0, tk.END)
+                    self.entry_pesquisa.delete(0, tk.END)
 
                     # Inserindo os dados nas entradas (Entry)
                     self.entry_nome_fornecedor.insert(0, nome_fornecedor )
@@ -212,8 +254,8 @@ class FORNECEDOR:
 
 
         #BOTAO DE PESQUISA :)
-        PesquisarButton = tk.Button(self.root,text = "Pesquisar",width = 15,command=pesquisar_fornecedor)
-        PesquisarButton.place(x = 20,y=405)
+        PesquisarButton = tk.Button(self.root,text = "Pesquisar",font= ("Georgia",10),width=13,command=pesquisar_fornecedor)
+        PesquisarButton.place(x = 20,y=390)
 
         #FUNÇÃO DE LIMPAR
         def limparCampos():
@@ -224,9 +266,10 @@ class FORNECEDOR:
             self.entry_email.delete(0, tk.END)
             self.entry_produto.delete(0, tk.END)
             self.entry_idFornecedor.delete(0, tk.END)
+            self.entry_pesquisa.delete(0, tk.END)
         #BOTÃO DE LIMPAR
-        limparButton = tk.Button(self.root,text = "LIMPAR",width = 15,command=limparCampos)
-        limparButton.place(x = 440,y=200)
+        limparButton = tk.Button(self.root,text = "LIMPAR",font= ("Georgia",10),width=13,command=limparCampos)
+        limparButton.place(x = 547,y=330)
 
 if __name__ == "__main__":
     root = tk.Tk()

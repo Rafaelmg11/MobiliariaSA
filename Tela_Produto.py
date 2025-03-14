@@ -35,7 +35,6 @@ class PRODUTO:
 
         #CRIANDO LABELS:
         TituloLabel = Label(self.root,text="PRODUTOS: ",font=("Georgia",25),bg = "#5424A2",fg = "WHITE") #Cria Label TITULO
-        ##1D201F  ###040C24  ###1A1A1A  ###001703
         ProdutoLabel = Label(self.root,text = "Produto: ",font = ("Georgia",16),bg = "#5424A2", fg = "WHITE") #Cria Label Produtos
         DescricaoLabel = Label(self.root,text= "Descrição: ",font= ("Georgia",16),bg = "#5424A2", fg = "WHITE")#Cria Label Descrição
         QuantidadeLabel = Label (self.root,text= "Quantidade: ",font = ("Georgia",16),bg = "#5424A2", fg = "WHITE") #Cria Label Quantidade
@@ -210,7 +209,7 @@ class PRODUTO:
                 else:
                     messagebox.showerror("Error","Codigo de Produto não existe")
             except Exception as e:
-                print(f'Error: {e}') #SE EXEPT, EXIBE O ERRO (SALVOU O CODIGO)
+                print(f'Error: {e}') #SE EXEPT, EXIBE O ERRO 
 
         #BOTAO DE EXCLUIR
         ExcluirButton = tk.Button(self.root,text = "EXCLUIR",font= ("Georgia",10),width=13,command=excluir_produto)
