@@ -7,11 +7,11 @@ import tkinter as tk
 import mysql.connector
 
 
-class PRODUTO:  
+class FORNECEDOR:  
 
-    def __init__(self,root,main_window):
+    def __init__(self,root): #,main_window
         self.root = root
-        self.main_window = main_window
+        # self.main_window = main_window
         self.root.title("FORNECEDORES") #Define o titulo
         self.root.geometry("600x630") #Define o tamanho da janela
         self.root.configure(background = "BLUE") #Configura a cor de fundo da janela
@@ -32,6 +32,9 @@ class PRODUTO:
 
     def create_widgets(self):
         #LABELS
+        label_titulo_fornecedor= Label(self.root,text = "FORNECEDOR: ",font = ("Century Gothic",13)) #Cria Label Produtos
+        label_titulo_fornecedor.pack(pady=40,anchor="center") #POSICIONA O TITULO
+
         label_nome_fornecedor = Label(self.root,text = "Fornecedor: ",font = ("Century Gothic",13)) #Cria Label Produtos
         label_nome_fornecedor.place(x=50,y=100)
 
@@ -47,45 +50,35 @@ class PRODUTO:
         label_produto= Label(self.root,text = "Produto: ",font = ("Century Gothic",13)) #Cria Label Produtos
         label_produto.place(x=50,y=220)
 
+        label_idFornecedor = Label (self.root,text="ID Fornecedor: ",font = ("Century Gothic",13)) #Cria Label Codigo de Produto
+        label_idFornecedor.place(x=50,y=280)
+
         #CAMPOS DE ENTRADA
         self.entry_nome_fornecedor = tk.Entry(self.root, width=30,font=("Century Gothic",13))
-        self.entry_nome_fornecedor.place(x=135,y=101)
+        self.entry_nome_fornecedor.place(x=170,y=101)
 
         self.entry_endereco = tk.Entry(self.root, width=30,font=("Century Gothic",13))
         self.entry_endereco.place(x=155,y=131)
 
         self.entry_telefone = tk.Entry(self.root, width=30,font=("Century Gothic",13))
-        self.entry_telefone.place(x=175,y=161)
+        self.entry_telefone.place(x=145,y=161)
 
         self.entry_email = tk.Entry(self.root, width=30,font=("Century Gothic",13))
-        self.entry_email.place(x=217, y= 191)
+        self.entry_email.place(x=115, y= 191)
 
         self.entry_produto = tk.Entry(self.root, width=30,font=("Century Gothic",13))
-        self.entry_produto.place(x=205, y= 221)
+        self.entry_produto.place(x=140, y= 221)
 
         self.entry_pesquisa = tk.Entry(self.root, width=47,font= ("Century Gothic",13))
         self.entry_pesquisa.place(x=155,y=405)
 
 
-        self.entry_idFornecedor = Label (self.root,text="ID Fornecedor: ",font = ("Century Gothic",13)) #Cria Label Codigo de Produto
-        self.entry_idFornecedor.place(x=50,y=280)
+        self.entry_idFornecedor = tk.Entry (self.root, width=30,font = ("Century Gothic",13)) #Cria Label Codigo de Produto
+        self.entry_idFornecedor.place(x=190,y=281)
 
         #CRIANDO A LISTA DE CADASTRO DE PRODUTOS:
         self.text_area = tk.Text(self.root, height=11,width=70)
         self.text_area.place(x=18,y=440)
-
-        # Botões de ação
-        botao_adicionar = tk.Button (self.root,text = "CADASTRAR",width=15,command=cadastrarFornecedor)
-        botao_adicionar.place(x=178,y=330)
-
-        botao_atualizar = tk.Button(self.root, text="EDITAR", command=alterar_fornecedor)
-        botao_atualizar.place(x=312,y=330)  
-
-        botao_deletar = tk.Button(self.root, text="EXCLUIR", command=excluir_fornecedor)
-        botao_deletar.place(x=312,y=365)
-
-        botao_listar  = tk.Button (self.root,text="LISTARR",width=15,command=listar_fornecedor)
-        botao_listar.place(x=178,y=365)
 
     
         def cadastrarFornecedor():
@@ -110,12 +103,19 @@ class PRODUTO:
             else:
                 messagebox.showerror("Error","Todos os campos são obrigatórios" )
 
+        botao_adicionar = tk.Button (self.root,text = "CADASTRAR",width=15,command=cadastrarFornecedor)
+        botao_adicionar.place(x=178,y=330)
+
         #LISTAR PRODUTO
         def listar_fornecedor():
             fornecedores = listar_fornecedores() #PUXANDO FUNÇÃO DO CRUD
             self.text_area.delete(1.0, tk.END) #ACESSANDO A "LISTA" DA TELA
             for fornecedor in fornecedores: #produto ANDANDO EM produtos
                 self.text_area.insert(tk.END, f"id.Fornecedor: {fornecedor[0]}, Fornecedor: {fornecedor[1]}, Endereço: {fornecedor[2]},Telefone: {fornecedor[3]},Email: {fornecedor[4]},Produto: {fornecedor[5]}\n")
+
+        botao_listar  = tk.Button (self.root,text="LISTARR",width=15,command=listar_fornecedor)
+        botao_listar.place(x=178,y=365)
+
 
         
         #FUNÇÃO DE ALTERAR PRODUTO:
@@ -143,6 +143,9 @@ class PRODUTO:
                     messagebox.showinfo("Success","Fornecedor alterado com sucesso!")
                 else:
                     messagebox.showerror("Error","Todos os campos são obrigatórios")
+        
+        botao_atualizar = tk.Button(self.root, text="EDITAR", command=alterar_fornecedor)
+        botao_atualizar.place(x=312,y=330)  
 
         def excluir_fornecedor():
             id_fornecedor = self.entry_idFornecedor.get() #RECEBENDO O VALOR QUE É PRA SER O CODPRODUTO DA TABELA
@@ -160,6 +163,9 @@ class PRODUTO:
                 messagebox.showinfo("Success","Fornecedor excluido com sucesso")
             else:
                 messagebox.showerror("Error","O ID do Fornecedor é obrigatório")
+
+        botao_deletar = tk.Button(self.root, text="EXCLUIR", command=excluir_fornecedor)
+        botao_deletar.place(x=312,y=365)
 
 
 
@@ -208,6 +214,26 @@ class PRODUTO:
         #BOTAO DE PESQUISA :)
         PesquisarButton = tk.Button(self.root,text = "Pesquisar",width = 15,command=pesquisar_fornecedor)
         PesquisarButton.place(x = 20,y=405)
+
+        #FUNÇÃO DE LIMPAR
+        def limparCampos():
+            #LIMPAR CAMPOS
+            self.entry_nome_fornecedor.delete(0, tk.END)
+            self.entry_endereco.delete(0, tk.END)
+            self.entry_telefone.delete(0, tk.END)
+            self.entry_email.delete(0, tk.END)
+            self.entry_produto.delete(0, tk.END)
+            self.entry_idFornecedor.delete(0, tk.END)
+        #BOTÃO DE LIMPAR
+        limparButton = tk.Button(self.root,text = "LIMPAR",width = 15,command=limparCampos)
+        limparButton.place(x = 440,y=200)
+
+if __name__ == "__main__":
+    root = tk.Tk()
+    app = FORNECEDOR(root)
+    root.mainloop()
+
+
 
                     
             
