@@ -13,7 +13,7 @@ class Main:
     def __init__(self, root):
         self.root = root
         self.root.title("Tela Principal")
-        self.root.geometry("400x300")
+        self.root.geometry("500x500")
         self.root.configure(background="lightblue")  # Cor de fundo da janela principal
         
         # Criando um botão para abrir a janela do PRODUTO
