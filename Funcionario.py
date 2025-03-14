@@ -66,10 +66,11 @@ class FUNCIONARIO:
         #POSICIONA OS CAMPOS DE ENTRADAS:
         self.NomeEntry.place(x=132,y=110)
         self.cpfEntry.place(x=151, y= 140)
-        self.EmailEntry.place(x=166, y= 170)
-        self.CargoEntry.place(x=214, y= 200)
-        self.SalarioEntry.place(x=199, y= 230)
-        self.idfuncionarioEntry.place(x=166, y= 260)
+        self.TelefoneEntry.place(x=166, y= 170)
+        self.EmailEntry.place(x=214, y= 200)
+        self.CargoEntry.place(x=199, y= 230)
+        self.SalarioEntry.place(x=166, y= 260)
+        self.idfuncionarioEntry.place(x=166, y= 290)
         self.PesquisaEntry.place(x=143,y=392)
      
         #CRIANDO A LISTA DE CADASTRO DE FUNCIONARIOS:
@@ -100,7 +101,7 @@ class FUNCIONARIO:
 
             #VERIFICANDO SE TODOS OS CAMPOS ESTÂO PREENCHIDOS:
             if nome and cpf and telefone and email and cargo and salario:
-                create_funcionario(nome,cargo,salario)
+                create_funcionario(nome,cpf,telefone,email,cargo,salario)
                 #Limpar campos:
                 self.NomeEntry.delete(0, tk.END)
                 self.cpfEntry.delete(0, tk.END)
@@ -123,7 +124,7 @@ class FUNCIONARIO:
             funcionarios = read_funcionario()
             self.text_area.delete(1.0, tk.END)
             for funcionario in funcionarios:
-                self.text_area.insert(tk.END, f"idfuncionario: {funcionario[0]}, Nome: {funcionario[1]}, Cargo: {funcionario[2]},Salário: {funcionario[3]}\n")
+                self.text_area.insert(tk.END, f"idfuncionario: {funcionario[0]}, Nome: {funcionario[1]},CPF: {funcionario[2]}, Telefone: {funcionario[3]}, Email: {funcionario[4]}, Cargo: {funcionario[5]},Salário: {funcionario[6]}\n")
     
         ListarButton = tk.Button (self.root,text="LISTAR",font= ("Georgia",10),width=13,command=listar_funcionario)
         ListarButton.place(x=290,y=335)
@@ -131,8 +132,11 @@ class FUNCIONARIO:
         def alterar_funcionario():
                 
                 nome = self.NomeEntry.get()
+                cpf = self.cpfEntry.get()
+                telefone = self.TelefoneEntry.get()
+                email = self.EmailEntry.get()
                 cargo = self.CargoEntry.get()
-                salario= self.SalarioEntry.get()
+                salario = self.SalarioEntry.get()
                 idFuncionario = self.idfuncionarioEntry.get()
 
 
@@ -148,8 +152,8 @@ class FUNCIONARIO:
                     # Verificando se o produto foi encontrado
                     if funcionario_pesquisa:  # SE FOI ENCONTRADO...
                 
-                        if idFuncionario and nome and cargo and salario:
-                            update_funcionario(nome,cargo,salario,idFuncionario)
+                        if idFuncionario and nome and cargo and salario and telefone and cpf and email:
+                            update_funcionario(nome,cpf,telefone,email,cargo,salario,idFuncionario)
                             self.NomeEntry.delete(0, tk.END)
                             self.cpfEntry.delete(0, tk.END)
                             self.TelefoneEntry.delete(0, tk.END)
@@ -165,8 +169,8 @@ class FUNCIONARIO:
                     else:
                         messagebox.showerror("Error","Cadastro de Produto não existe")
 
-                except:
-                    print("expect")
+                except Exception as e:
+                    print(f'Error: {e}') #SE EXEPT, EXIBE O ERRO 
             
         AlterarButton = tk.Button(self.root,text = "ALTERAR",font= ("Georgia",10),width=13,command=alterar_funcionario)
         AlterarButton.place(x=164,y=335)  
@@ -210,14 +214,14 @@ class FUNCIONARIO:
             self.cursor = conn.cursor() #sell.conn TRABALHAR COM A CONEXAO
             try:
                 
-                self.cursor.execute("SELECT idfuncionario,nome,cargo,salario FROM funcionario WHERE idfuncionario=%s or nome=%s", (codigo_funcionario,codigo_funcionario,)) 
+                self.cursor.execute("SELECT idfuncionario,nome,cpf,telefone,email,cargo,salario FROM funcionario WHERE idfuncionario=%s or nome=%s", (codigo_funcionario,codigo_funcionario,)) 
 
                 # CONSULTA NO BANCO
                 funcionario_pesquisa = self.cursor.fetchone()
         
                 # Verificando se o produto foi encontrado
                 if funcionario_pesquisa:  # SE FOI ENCONTRADO...
-                    id_funcionario ,nome ,cargo , salario = funcionario_pesquisa #ESSAS VARIAVEIS VAI RECEBER OS VALORES DA COLUNA DE ACORDO COM A ORDEM
+                    id_funcionario ,nome ,cpf,telefone,email,cargo , salario = funcionario_pesquisa #ESSAS VARIAVEIS VAI RECEBER OS VALORES DA COLUNA DE ACORDO COM A ORDEM
 
                     #LIMPA TODOS OS CAMPOS ANTES DE RECEBER AS INFORMAÇOES
                     self.NomeEntry.delete(0, tk.END)
@@ -231,6 +235,9 @@ class FUNCIONARIO:
 
                     # Inserindo os dados nas entradas (Entry)
                     self.NomeEntry.insert(0, nome)
+                    self.cpfEntry.insert(0, cpf)
+                    self.TelefoneEntry.insert(0, telefone)
+                    self.EmailEntry.insert(0, email)
                     self.CargoEntry.insert(0, cargo)
                     self.SalarioEntry.insert(0, salario)
                     self.idfuncionarioEntry.insert(0, id_funcionario)

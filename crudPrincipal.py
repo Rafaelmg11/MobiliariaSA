@@ -62,7 +62,7 @@ def create_funcionario(nome,cpf,telefone,email,cargo,salario):
 
     conn = get_connection()
     cursor = conn.cursor()
-    query = "insert funcionario (nome,cpf,telefone,email,cargo,salario) VALUES (%s, %s, %s)"
+    query = "insert funcionario (nome,cpf,telefone,email,cargo,salario) VALUES (%s, %s, %s,%s,%s,%s)"
     cursor.execute(query, (nome,cpf,telefone,email,cargo,salario))
     conn.commit()
     cursor.close()
@@ -79,11 +79,11 @@ def read_funcionario():
     conn.close()
     return result
 
-def update_funcionario(nome,cargo,salario,idfuncionario):
+def update_funcionario(nome,cpf,telefone,email,cargo,salario,idfuncionario):
     conn = get_connection()
     cursor = conn.cursor()
-    query = "UPDATE funcionario SET nome = %s, cargo = %s, salario = %s WHERE idfuncionario = %s"
-    cursor.execute(query,(nome,cargo,salario,idfuncionario))
+    query = "UPDATE funcionario SET nome = %s, cpf = %s , telefone = %s ,email = %s ,  cargo = %s, salario = %s WHERE idfuncionario = %s"
+    cursor.execute(query,(nome,cpf,telefone,email,cargo,salario,idfuncionario))
     conn.commit()
     cursor.close()
     conn.close()
