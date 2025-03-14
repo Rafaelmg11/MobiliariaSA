@@ -218,7 +218,7 @@ class PRODUTO:
 
         #FUNÇÃO DE PESQUISAR :) ;) OBS: NAO TEM RELAÇÃO COM O CRUD
         def pesquisar_produto():
-            codigo_produto = self.PesquisaEntry.get() #CONEXÃO COM O BANCO DE DADOS
+            codigo_produto = self.PesquisaEntry.get() 
             conn = get_connection() #VARIAVEL PARA RECEBER A CONEXÃO
             self.cursor = conn.cursor() #sell.conn TRABALHAR COM A CONEXAO
             try:

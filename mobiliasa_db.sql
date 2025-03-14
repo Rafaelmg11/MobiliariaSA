@@ -25,6 +25,9 @@ create table fornecedor(
 create table funcionario(
     idfuncionario int not null auto_increment,
     nome text,
+    cpf text,
+    telefone,
+    email text,
     cargo text,
     salario text,
     primary key (idfuncionario)

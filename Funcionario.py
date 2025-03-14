@@ -2,58 +2,89 @@
 from tkinter import* #Importa tudo do tkinter
 from tkinter import messagebox #Importa as caixas de mensagem
 from tkinter import ttk #Importa o widgets tematicos do tkinter
-from crudPrincipal import create_funcionario, read_funcionario, update_funcionario , delete_funcionario 
+from crudPrincipal import create_funcionario, read_funcionario, update_funcionario , delete_funcionario ,get_connection
 import tkinter as tk
-
+import mysql.connector
 
 class FUNCIONARIO:
 
     def __init__(self,root):
         self.root = root
         self.root.title("CADASTRO DE FUNCIONARIOS") #Define o titulo
-        self.root.geometry("600x630") #Define o tamanho da janela
-        self.root.configure(background = "BLUE") #Configura a cor de fundo da janela
+        self.root.geometry("700x680") #Define o tamanho da janela
+        self.root.configure(background = "#5424A2") #Configura a cor de fundo da janela
         self.root.resizable(width = False,height = False) #Impede que a janela seja redimensionada 
         #Criação de Widgets
         self.create_widgets()
 
+    def conectarBanco(self):
+        self.conn = mysql.connector.connect(
+            host = "localhost",
+            user = "root",
+            password = "",
+            database = "mobiliariasa_db"
+        )
+        self.cursor = self.conn.cursor()
+        self.conn.commit()
 
     def create_widgets(self):
 
-        #CARREGAR IMAGEM:
-        #logo = PhotoImage (file = "icons/LogoMobiliariaSa.png") 
-
-        # #ADICIONAR LOGO:
-        # LogoLabel = Label(image = logo,bg = "PINK") #Cria um label para a imagem
-        # LogoLabel.place(x=50,y=100)#Posiciona o label da imagem
-
         #CRIANDO LABELS:
-        TituloLabel = Label(self.root,text="CADASTRAR FUNCIONÁRIOS: ",font=("Century Gothic",25),bg = "BLACK",fg = "WHITE") #Cria Label TITULO
+        TituloLabel = Label(self.root,text="CADASTRAR FUNCIONÁRIOS: ",font=("Georgia",25),bg = "#5424A2",fg = "WHITE") #Cria Label TITULO
 
-        nome = Label(self.root,text = "Nome: ",font = ("Century Gothic",13)) #Cria Label Nome
-        cargo = Label(self.root,text= "Cargo: ",font= ("Century Gothic",13))#Cria Label Salario
-        salario = Label (self.root,text= "Salário: ",font=("Century Gothic",13)) #Cria Label Cargo
+        nome = Label(self.root,text = "Nome: ",font = ("Georgia",16),bg = "#5424A2", fg = "WHITE") #Cria Label Nome
+        cpf = Label(self.root,text = "CPF: ",font = ("Georgia",16),bg = "#5424A2", fg = "WHITE") #Cria Label CPF
+        telefone = Label(self.root,text = "Telefone: ",font = ("Georgia",16),bg = "#5424A2", fg = "WHITE") #Cria Label Telefone
+        email = Label(self.root,text = "Email: ",font = ("Georgia",16),bg = "#5424A2", fg = "WHITE") #Cria Label Email
+        cargo = Label(self.root,text= "Cargo: ",font = ("Georgia",16),bg = "#5424A2", fg = "WHITE")#Cria Label Salario
+        salario = Label (self.root,text= "Salário: ",font = ("Georgia",16),bg = "#5424A2", fg = "WHITE") #Cria Label Cargo
+        idFuncionario = Label (self.root,text="ID Funcionario: ",font = ("Georgia",16),bg = "#5424A2", fg = "WHITE") #Cria Label Fornecedor
       
         #POSICIONANDO LABELS:
         TituloLabel.pack(pady=40,anchor="center") #POSICIONA O TITULO
 
-        nome.place(x=50,y=100)
-        cargo.place(x=50,y=130)
-        salario.place(x=50,y=160)
+        nome.place(x=40,y=105)
+        cpf.place(x=40,y=135)
+        telefone.place(x=40,y=165)
+        email.place(x=40,y=195)
+        cargo.place(x=40,y=225)
+        salario.place(x=40,y=255)
+        idFuncionario.place(x=40,y=285)
+
+
 
         #CRIANDO CAMPOS DE ENTRADAS:
-        self.NomeEntry = tk.Entry(self.root, width=30,font=("Century Gothic",13))
-        self.CargoEntry = tk.Entry(self.root, width=30,font=("Century Gothic",13))
-        self.SalarioEntry = tk.Entry(self.root, width=30,font=("Century Gothic",13))
+        self.NomeEntry = tk.Entry(self.root, width=44,font=("Georgia",12))
+        self.cpfEntry =  tk.Entry(self.root, width=44,font=("Georgia",12))
+        self.TelefoneEntry = tk.Entry(self.root, width=44,font=("Georgia",12))
+        self.EmailEntry = tk.Entry(self.root, width=44,font=("Georgia",12))
+        self.CargoEntry = tk.Entry(self.root, width=44,font=("Georgia",12))
+        self.SalarioEntry = tk.Entry(self.root, width=44,font=("Georgia",12))
+        self.idfuncionarioEntry = tk.Entry(self.root, width=44,font=("Georgia",12))
+        self.PesquisaEntry = tk.Entry(self.root, width=53,font= ("Georgia",13))
 
         #POSICIONA OS CAMPOS DE ENTRADAS:
-        self.NomeEntry.place(x=135,y=101)
-        self.CargoEntry.place(x=135,y=131)
-        self.SalarioEntry.place(x=135,y=161)
+        self.NomeEntry.place(x=132,y=110)
+        self.cpfEntry.place(x=151, y= 140)
+        self.EmailEntry.place(x=166, y= 170)
+        self.CargoEntry.place(x=214, y= 200)
+        self.SalarioEntry.place(x=199, y= 230)
+        self.idfuncionarioEntry.place(x=166, y= 260)
+        self.PesquisaEntry.place(x=143,y=392)
      
         #CRIANDO A LISTA DE CADASTRO DE FUNCIONARIOS:
-        self.text_area = tk.Text(self.root, height=11,width=70)
-        self.text_area.place(x=18,y=440)
+        self.text_area = tk.Text(self.root, height=13,width=82)
+        self.text_area.place(x=18,y=423)
+
+        def voltar_para_principal():
+            # Fechar a janela atual de cadastro de produtos e voltar para a janela principal
+            self.root.quit()  # Fecha a janela de cadastro de produtos (destrói a instância)
+            self.root.destroy()  # Fecha a janela de cadastro de produtos, liberando recursos
+
+            self.main_window.deiconify()  # Reexibe a janela principal
+
+        voltar_button = tk.Button(self.root, text="VOLTAR", width=11, font=("Georgia", 10), command=voltar_para_principal)
+        voltar_button.place(x=20, y=645)
         
 
         #FUNÇÃO PRA REGISTRAR NO BANCO DE DADOS:
@@ -61,23 +92,31 @@ class FUNCIONARIO:
         def cadastrarFuncionario():
             #OBTENDO AS INFORMAÇÕES DOS CAMPOS DE TEXTOS
             nome = self.NomeEntry.get()
+            cpf = self.cpfEntry.get()
+            telefone = self.TelefoneEntry.get()
+            email = self.EmailEntry.get()
             cargo = self.CargoEntry.get()
             salario = self.SalarioEntry.get()
 
             #VERIFICANDO SE TODOS OS CAMPOS ESTÂO PREENCHIDOS:
-            if nome and cargo and salario:
+            if nome and cpf and telefone and email and cargo and salario:
                 create_funcionario(nome,cargo,salario)
                 #Limpar campos:
                 self.NomeEntry.delete(0, tk.END)
+                self.cpfEntry.delete(0, tk.END)
+                self.TelefoneEntry.delete(0, tk.END)
+                self.EmailEntry.delete(0, tk.END)
                 self.CargoEntry.delete(0, tk.END)
                 self.SalarioEntry.delete(0, tk.END)
+                self.idfuncionarioEntry.delete(0, tk.END)
+                self.PesquisaEntry.delete(0, tk.END)
 
                 messagebox.showinfo("Success","Usuario criado com sucesso!")
             else:
                 messagebox.showerror("Error","Todos os campos são obrigatórios")
 
-        CadastrarButton = tk.Button (self.root,text = "CADASTRAR",width=15,command=cadastrarFuncionario)
-        CadastrarButton.place(x=178,y=330)
+        CadastrarButton = tk.Button (self.root,text = "CADASTRAR",font= ("Georgia",10),width=13,command=cadastrarFuncionario)
+        CadastrarButton.place(x=40,y=335)
 
 
         def listar_funcionario():
@@ -86,44 +125,140 @@ class FUNCIONARIO:
             for funcionario in funcionarios:
                 self.text_area.insert(tk.END, f"idfuncionario: {funcionario[0]}, Nome: {funcionario[1]}, Cargo: {funcionario[2]},Salário: {funcionario[3]}\n")
     
-        ListarButton = tk.Button (self.root,text="LISTAR",width=15,command=listar_funcionario)
-        ListarButton.place(x=178,y=365)
+        ListarButton = tk.Button (self.root,text="LISTAR",font= ("Georgia",10),width=13,command=listar_funcionario)
+        ListarButton.place(x=290,y=335)
 
         def alterar_funcionario():
                 
                 nome = self.NomeEntry.get()
                 cargo = self.CargoEntry.get()
                 salario= self.SalarioEntry.get()
+                idFuncionario = self.idfuncionarioEntry.get()
 
-                verificar = self.idusuario.get()
+
+                id_Funcionario = self.idfuncionarioEntry.get() #RECEBENDO O VALOR QUE É PRA SER O CODPRODUTO DA TABELA
+                conn = get_connection() #VARIAVEL PARA RECEBER A CONEXÃO
+                self.cursor = conn.cursor() #sell.conn TRABALHAR COM A CONEXAO
+
+                try:
+                    self.cursor.execute("SELECT * FROM funcionario WHERE idfuncionario=%s ",(id_Funcionario,)) 
+                    # CONSULTA NO BANCO
+                    funcionario_pesquisa = self.cursor.fetchone()
+        
+                    # Verificando se o produto foi encontrado
+                    if funcionario_pesquisa:  # SE FOI ENCONTRADO...
                 
-                
-                if nome and cargo and salario:
-                    update_funcionario(nome,cargo,salario)
-                    self.NomeEntry.delete(0, tk.END)
-                    self.CargoEntry.delete(0, tk.END)
-                    self.SalarioEntry.delete(0, tk.END)
-                    messagebox.showinfo("Success","Funcionário alterado com sucesso!")
-                else:
-                    messagebox.showerror("Error","Todos os campos são obrigatórios")
+                        if idFuncionario and nome and cargo and salario:
+                            update_funcionario(nome,cargo,salario,idFuncionario)
+                            self.NomeEntry.delete(0, tk.END)
+                            self.cpfEntry.delete(0, tk.END)
+                            self.TelefoneEntry.delete(0, tk.END)
+                            self.EmailEntry.delete(0, tk.END)
+                            self.CargoEntry.delete(0, tk.END)
+                            self.SalarioEntry.delete(0, tk.END)
+                            self.idfuncionarioEntry.delete(0, tk.END)
+                            self.PesquisaEntry.delete(0, tk.END)
+                            messagebox.showinfo("Success","Funcionário alterado com sucesso!")
+                        else:
+                            messagebox.showerror("Error","Todos os campos são obrigatórios")
+
+                    else:
+                        messagebox.showerror("Error","Cadastro de Produto não existe")
+
+                except:
+                    print("expect")
             
-        AlterarButton = tk.Button(self.root,text = "ALTERAR",width=15,command=alterar_funcionario)
-        AlterarButton.place(x=312,y=330)  
+        AlterarButton = tk.Button(self.root,text = "ALTERAR",font= ("Georgia",10),width=13,command=alterar_funcionario)
+        AlterarButton.place(x=164,y=335)  
 
         def excluir_funcionario():
-            idfuncionario = self.CodigoEntry.get()
-            if idfuncionario:
-                delete_funcionario(idfuncionario)
+            id_funcionario = self.idfuncionarioEntry.get()
+            conn = get_connection() #VARIAVEL PARA RECEBER A CONEXÃO
+            self.cursor = conn.cursor() #sell.conn TRABALHAR COM A CONEXAO
+            try:
+                self.cursor.execute("SELECT * FROM funcionario WHERE idfuncionario=%s ",(id_funcionario,)) 
+
+                # CONSULTA NO BANCO
+                funciario_pesquisa = self.cursor.fetchone()
+        
+                # Verificando se o produto foi encontrado
+                if funciario_pesquisa:  # SE FOI ENCONTRADO...
+                        delete_funcionario(id_funcionario)
+                        self.NomeEntry.delete(0, tk.END)
+                        self.cpfEntry.delete(0, tk.END)
+                        self.TelefoneEntry.delete(0, tk.END)
+                        self.EmailEntry.delete(0, tk.END)
+                        self.CargoEntry.delete(0, tk.END)
+                        self.SalarioEntry.delete(0, tk.END)
+                        self.idfuncionarioEntry.delete(0, tk.END)
+                        self.PesquisaEntry.delete(0, tk.END)
+
+                        messagebox.showinfo("Success","Funcionario excluido com sucesso")
+                else:
+                    messagebox.showerror("Error","ID Funcionario não existe")
+            except Exception as e:
+                print(f'Error: {e}') #SE EXEPT, EXIBE O ERRO 
+
+        ExcluirButton = tk.Button(self.root,text = "EXCLUIR",font= ("Georgia",10),width=13,command=excluir_funcionario)
+        ExcluirButton.place(x=418,y=335)
+
+
+         #FUNÇÃO DE PESQUISAR :) ;) OBS: NAO TEM RELAÇÃO COM O CRUD
+        def pesquisar_funcionario():
+            codigo_funcionario = self.PesquisaEntry.get() #CONEXÃO COM O BANCO DE DADOS
+            conn = get_connection() #VARIAVEL PARA RECEBER A CONEXÃO
+            self.cursor = conn.cursor() #sell.conn TRABALHAR COM A CONEXAO
+            try:
+                
+                self.cursor.execute("SELECT idfuncionario,nome,cargo,salario FROM funcionario WHERE idfuncionario=%s or nome=%s", (codigo_funcionario,codigo_funcionario,)) 
+
+                # CONSULTA NO BANCO
+                funcionario_pesquisa = self.cursor.fetchone()
+        
+                # Verificando se o produto foi encontrado
+                if funcionario_pesquisa:  # SE FOI ENCONTRADO...
+                    id_funcionario ,nome ,cargo , salario = funcionario_pesquisa #ESSAS VARIAVEIS VAI RECEBER OS VALORES DA COLUNA DE ACORDO COM A ORDEM
+
+                    #LIMPA TODOS OS CAMPOS ANTES DE RECEBER AS INFORMAÇOES
+                    self.NomeEntry.delete(0, tk.END)
+                    self.cpfEntry.delete(0, tk.END)
+                    self.TelefoneEntry.delete(0, tk.END)
+                    self.EmailEntry.delete(0, tk.END)
+                    self.CargoEntry.delete(0, tk.END)
+                    self.SalarioEntry.delete(0, tk.END)
+                    self.idfuncionarioEntry.delete(0, tk.END)
+                    self.PesquisaEntry.delete(0, tk.END)
+
+                    # Inserindo os dados nas entradas (Entry)
+                    self.NomeEntry.insert(0, nome)
+                    self.CargoEntry.insert(0, cargo)
+                    self.SalarioEntry.insert(0, salario)
+                    self.idfuncionarioEntry.insert(0, id_funcionario)
+                    messagebox.showinfo("Success", "Funcionario encontrado")
+                else:
+                    messagebox.showwarning("Não encontrado", "Funcionario não encontrado")
+
+            except Exception as e:
+                print(f'Error: {e}') #SE EXEPT, EXIBE O ERRO (SALVOU O CODIGO)
+
+
+        #BOTAO DE PESQUISA :)
+        PesquisarButton = tk.Button(self.root,text = "Pesquisar",font= ("Georgia",10),width=13,command=pesquisar_funcionario)
+        PesquisarButton.place(x = 20,y=390)
+
+        #FUNÇÃO DE LIMPAR
+        def limparCampos():
                 self.NomeEntry.delete(0, tk.END)
+                self.cpfEntry.delete(0, tk.END)
+                self.TelefoneEntry.delete(0, tk.END)
+                self.EmailEntry.delete(0, tk.END)
                 self.CargoEntry.delete(0, tk.END)
                 self.SalarioEntry.delete(0, tk.END)
-
-                messagebox.showinfo("Success","Funcionario excluido com sucesso")
-            else:
-                messagebox.showerror("Error","O ID do funcionario é obrigatório")
-
-        ExcluirButton = tk.Button(self.root,text = "EXCLUIR",width = 15,command=excluir_funcionario)
-        ExcluirButton.place(x=312,y=365)
+                self.idfuncionarioEntry.delete(0, tk.END)
+                self.PesquisaEntry.delete(0, tk.END)
+        #BOTÃO DE LIMPAR
+        limparButton = tk.Button(self.root,text = "LIMPAR",font= ("Georgia",10),width=13,command=limparCampos)
+        limparButton.place(x = 547,y=335)
 
 
 if __name__ == "__main__":

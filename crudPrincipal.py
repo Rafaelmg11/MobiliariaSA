@@ -58,12 +58,12 @@ def delete_produto(codigo_produto):
 #---------------------------------------------------------------------------------------------------------------------------------------------------------------------#
 
 #FUNÇÕES FUNCIONARIO:
-def create_funcionario(nome,cargo,salario):
+def create_funcionario(nome,cpf,telefone,email,cargo,salario):
 
     conn = get_connection()
     cursor = conn.cursor()
-    query = "insert funcionario (nome,cargo,salario) VALUES (%s, %s, %s)"
-    cursor.execute(query, (nome,cargo,salario))
+    query = "insert funcionario (nome,cpf,telefone,email,cargo,salario) VALUES (%s, %s, %s)"
+    cursor.execute(query, (nome,cpf,telefone,email,cargo,salario))
     conn.commit()
     cursor.close()
     conn.close()
@@ -72,27 +72,27 @@ def read_funcionario():
 
     conn = get_connection()
     cursor = conn.cursor()
-    query = "SELECT * FROM funcionarios"
+    query = "SELECT * FROM funcionario"
     cursor.execute(query)
     result = cursor.fetchall()
     cursor.close()
     conn.close()
     return result
 
-def update_funcionario(nome,cargo,salario):
+def update_funcionario(nome,cargo,salario,idfuncionario):
     conn = get_connection()
     cursor = conn.cursor()
-    query = "UPDATE funcionario SET funcionario = %s, nome = %s, cargo = %s, salario = %s"
-    cursor.execute(query,(nome,cargo,salario))
+    query = "UPDATE funcionario SET nome = %s, cargo = %s, salario = %s WHERE idfuncionario = %s"
+    cursor.execute(query,(nome,cargo,salario,idfuncionario))
     conn.commit()
     cursor.close()
     conn.close()
 
-def delete_funcionario(idfuncionario):
+def delete_funcionario(id_funcionario):
     conn = get_connection()
     cursor = conn.cursor()
     query = "DELETE FROM funcionario WHERE idfuncionario = %s"
-    cursor.execute(query, (idfuncionario,))
+    cursor.execute(query, (id_funcionario,))
     conn.commit()
     cursor.close()
     conn.close()
