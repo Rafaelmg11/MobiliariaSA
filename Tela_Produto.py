@@ -122,7 +122,7 @@ class PRODUTO:
                 self.FornecedorEntry.delete(0, tk.END)
                 self.CodigoEntry.delete(0, tk.END)
 
-                messagebox.showinfo("Success","Usuario criado com sucesso!")
+                messagebox.showinfo("Success","Produto criado com sucesso!")
             else:
                 messagebox.showerror("Error","Todos os campos são obrigatórios" )
 

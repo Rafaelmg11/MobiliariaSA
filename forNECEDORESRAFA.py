@@ -63,6 +63,9 @@ class PRODUTO:
         self.entry_produto = tk.Entry(self.root, width=30,font=("Century Gothic",13))
         self.entry_produto.place(x=205, y= 221)
 
+        self.entry_idFornecedor = Label (self.root,text="ID Fornecedor: ",font = ("Century Gothic",13)) #Cria Label Codigo de Produto
+        self.entry_idFornecedor.place(x=50,y=280)
+
         #CRIANDO A LISTA DE CADASTRO DE PRODUTOS:
         self.text_area = tk.Text(self.root, height=11,width=70)
         self.text_area.place(x=18,y=440)
@@ -77,7 +80,7 @@ class PRODUTO:
         botao_deletar = tk.Button(self.root, text="EXCLUIR", command=)
         botao_deletar.place(x=312,y=365)
 
-        botao_listar  = tk.Button (self.root,text="LISTARR",width=15,command=listar_fornecedores)
+        botao_listar  = tk.Button (self.root,text="LISTARR",width=15,command=listar_fornecedor)
         botao_listar.place(x=178,y=365)
 
     
@@ -97,8 +100,9 @@ class PRODUTO:
                 self.entry_telefone.delete(0, tk.END)
                 self.entry_email.delete(0, tk.END)
                 self.entry_produto.delete(0, tk.END)
+                self.entry_idFornecedor.delete(0, tk.END)
 
-                messagebox.showinfo("Success","Usuario criado com sucesso!")
+                messagebox.showinfo("Success","Fornecedor criado com sucesso!")
             else:
                 messagebox.showerror("Error","Todos os campos são obrigatórios" )
 
@@ -108,6 +112,34 @@ class PRODUTO:
             self.text_area.delete(1.0, tk.END) #ACESSANDO A "LISTA" DA TELA
             for fornecedor in fornecedores: #produto ANDANDO EM produtos
                 self.text_area.insert(tk.END, f"id.Fornecedor: {fornecedor[0]}, Fornecedor: {fornecedor[1]}, Endereço: {fornecedor[2]},Telefone: {fornecedor[3]},Email: {fornecedor[4]},Produto: {fornecedor[5]}\n")
+
+        
+        #FUNÇÃO DE ALTERAR PRODUTO:
+        def alterar_produto():
+                
+                #OBTENDO AS INFORMAÇÕES DOS CAMPOS DE TEXTOS
+                nome = self.entry_nome_fornecedor.get()
+                endereco = self.entry_endereco.get()
+                telefone = self.entry_telefone.get()
+                email = self.entry_email.get()
+                produto = self.entry_produto.get()
+                id_fornecedor=self.entry_idFornecedor.get()
+                
+                #SE CAMPOS NÃO ESTIVER VAZIOS:
+                if id_fornecedor and nome and endereco and telefone and email and produto:
+                    atualizar_fornecedor(nome,endereco,telefone,email,produto,id_fornecedor) #PUXANDO A FUNÇÃO DO CRUD E AS VARIAVEIS
+
+                    #LIMPAR CAMPOS
+                    self.entry_nome_fornecedor.delete(0, tk.END)
+                    self.entry_endereco.delete(0, tk.END)
+                    self.entry_telefone.delete(0, tk.END)
+                    self.entry_email.delete(0, tk.END)
+                    self.entry_produto.delete(0, tk.END)
+                    self.entry_idFornecedor.delete(0, tk.END)
+                    messagebox.showinfo("Success","Fornecedor alterado com sucesso!")
+                else:
+                    messagebox.showerror("Error","Todos os campos são obrigatórios")
+                    
 
 
         
