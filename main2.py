@@ -1,6 +1,6 @@
 import tkinter as tk
 from Tela_Produto import PRODUTO  # Importa a classe PRODUTO do arquivo produto.py
-from Funcionario import FUNCIONARIO
+from Tela_Funcionario import FUNCIONARIO
 from Tela_Fornecedor import FORNECEDOR
 
 #TEM QUE FAZER O FUNCIONARIO FECHAR
