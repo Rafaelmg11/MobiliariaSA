@@ -9,7 +9,7 @@ from Tela_Fornecedor import FORNECEDOR
 #TELA DE LOGIN
 #TELA DE FATURA
 
-class Main:
+class Menu:
     def __init__(self, root):
         self.root = root
         self.root.title("Tela Principal")
