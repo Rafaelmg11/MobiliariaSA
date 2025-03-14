@@ -104,7 +104,6 @@ def deletar_fornecedor():
     except IndexError:
         messagebox.showerror("Erro", "Selecione um fornecedor da lista.")
 
-
 # Função para limpar os campos
 def limpar_campos():
     entry_nome_fornecedor.delete(0, tk.END)
@@ -112,6 +111,15 @@ def limpar_campos():
     entry_telefone.delete(0, tk.END)
     entry_email.delete(0, tk.END)
     entry_produto.delete(0, tk.END)
+
+# Função para pesquisar fornecedores
+def pesquisar_fornecedores():
+    termo_pesquisa = entry_pesquisar.get().lower()
+    listbox_fornecedores.delete(0, tk.END)
+    
+    for fornecedor in fornecedores:
+        if termo_pesquisa in fornecedor['nome_fornecedor'].lower() or termo_pesquisa in fornecedor['endereco'].lower() or termo_pesquisa in fornecedor['telefone'].lower() or termo_pesquisa in fornecedor['email'].lower() or termo_pesquisa in fornecedor['produto'].lower():
+            listbox_fornecedores.insert(tk.END, f"Fornecedor: {fornecedor['nome_fornecedor']}   Endereço: {fornecedor['endereco']}   Telefone: {fornecedor['telefone']}   Email: {fornecedor['email']}   Produto: {fornecedor['produto']}")
 
 # Janela principal
 root = tk.Tk()
@@ -122,52 +130,61 @@ root.geometry("800x730")
 
 # Labels
 label_nome_fornecedor = tk.Label(root, text="Fornecedor :")
-label_nome_fornecedor.place(x=160,y=70)
+label_nome_fornecedor.place(x=160, y=70)
 
 label_endereco = tk.Label(root, text="Endereço :")
-label_endereco.place(x=160,y=100)
+label_endereco.place(x=160, y=100)
 
 label_telefone = tk.Label(root, text="Telefone :")
-label_telefone.place(x=160,y=130)
+label_telefone.place(x=160, y=130)
 
 label_email = tk.Label(root, text="Email :")
-label_email.place(x=160,y=160)
+label_email.place(x=160, y=160)
 
 label_produto = tk.Label(root, text="Produto :")
-label_produto.place(x=160,y=190)
+label_produto.place(x=160, y=190)
+
+label_pesquisar = tk.Label(root, text="Pesquisar :")
+label_pesquisar.place(x=160, y=230)
 
 # Entradas de texto
 entry_nome_fornecedor = tk.Entry(root)
-entry_nome_fornecedor.place(x=240,y=70)
+entry_nome_fornecedor.place(x=240, y=70)
 
 entry_endereco = tk.Entry(root)
-entry_endereco.place(x=240,y=100)
+entry_endereco.place(x=240, y=100)
 
 entry_telefone = tk.Entry(root)
-entry_telefone.place(x=240,y=130)
+entry_telefone.place(x=240, y=130)
 
 entry_email = tk.Entry(root)
-entry_email.place(x=240,y=160)
+entry_email.place(x=240, y=160)
 
 entry_produto = tk.Entry(root)
-entry_produto.place(x=240,y=190)
+entry_produto.place(x=240, y=190)
+
+entry_pesquisar = tk.Entry(root)
+entry_pesquisar.place(x=240, y=230)
 
 # Botões de ação
 botao_adicionar = tk.Button(root, text="Adicionar Fornecedor", command=adicionar_fornecedor)
-botao_adicionar.place(x=160,y=260)
+botao_adicionar.place(x=160, y=260)
 
 botao_atualizar = tk.Button(root, text="Atualizar Fornecedor", command=atualizar_fornecedor)
-botao_atualizar.place(x=160,y=290)
+botao_atualizar.place(x=160, y=290)
 
 botao_deletar = tk.Button(root, text="Deletar Fornecedor", command=deletar_fornecedor)
-botao_deletar.place(x=310,y=260)
+botao_deletar.place(x=310, y=260)
 
 botao_limpar = tk.Button(root, text="Limpar campos", command=limpar_campos)
-botao_limpar.place(x=310,y=290)
+botao_limpar.place(x=310, y=290)
+
+botao_pesquisar = tk.Button(root, text="Pesquisar", command=pesquisar_fornecedores)
+botao_pesquisar.place(x=480, y=230)
 
 # Lista de fornecedores
 listbox_fornecedores = tk.Listbox(root, width=140, height=30)
-listbox_fornecedores.place(x=0,y=360)
+listbox_fornecedores.place(x=0, y=360)
 listbox_fornecedores.bind("<ButtonRelease-1>", selecionar_fornecedor)
 
 # Inicializa a lista
