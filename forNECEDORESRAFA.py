@@ -63,6 +63,10 @@ class PRODUTO:
         self.entry_produto = tk.Entry(self.root, width=30,font=("Century Gothic",13))
         self.entry_produto.place(x=205, y= 221)
 
+        self.entry_pesquisa = tk.Entry(self.root, width=47,font= ("Century Gothic",13))
+        self.entry_pesquisa.place(x=155,y=405)
+
+
         self.entry_idFornecedor = Label (self.root,text="ID Fornecedor: ",font = ("Century Gothic",13)) #Cria Label Codigo de Produto
         self.entry_idFornecedor.place(x=50,y=280)
 
@@ -74,10 +78,10 @@ class PRODUTO:
         botao_adicionar = tk.Button (self.root,text = "CADASTRAR",width=15,command=cadastrarFornecedor)
         botao_adicionar.place(x=178,y=330)
 
-        botao_atualizar = tk.Button(self.root, text="EDITAR", command=)
+        botao_atualizar = tk.Button(self.root, text="EDITAR", command=alterar_fornecedor)
         botao_atualizar.place(x=312,y=330)  
 
-        botao_deletar = tk.Button(self.root, text="EXCLUIR", command=)
+        botao_deletar = tk.Button(self.root, text="EXCLUIR", command=excluir_fornecedor)
         botao_deletar.place(x=312,y=365)
 
         botao_listar  = tk.Button (self.root,text="LISTARR",width=15,command=listar_fornecedor)
@@ -115,7 +119,7 @@ class PRODUTO:
 
         
         #FUNÇÃO DE ALTERAR PRODUTO:
-        def alterar_produto():
+        def alterar_fornecedor():
                 
                 #OBTENDO AS INFORMAÇÕES DOS CAMPOS DE TEXTOS
                 nome = self.entry_nome_fornecedor.get()
@@ -139,7 +143,77 @@ class PRODUTO:
                     messagebox.showinfo("Success","Fornecedor alterado com sucesso!")
                 else:
                     messagebox.showerror("Error","Todos os campos são obrigatórios")
+
+        def excluir_fornecedor():
+            id_fornecedor = self.entry_idFornecedor.get() #RECEBENDO O VALOR QUE É PRA SER O CODPRODUTO DA TABELA
+            if id_fornecedor: #SE codigo_produto RECEBER UM VALOR
+                deletar_fornecedor(id_fornecedor) #PUXANDO FUNÇÃO DO CRUD
+
+                #LIMPAR CAMPOS
+                self.entry_nome_fornecedor.delete(0, tk.END)
+                self.entry_endereco.delete(0, tk.END)
+                self.entry_telefone.delete(0, tk.END)
+                self.entry_email.delete(0, tk.END)
+                self.entry_produto.delete(0, tk.END)
+                self.entry_idFornecedor.delete(0, tk.END)
+
+                messagebox.showinfo("Success","Fornecedor excluido com sucesso")
+            else:
+                messagebox.showerror("Error","O ID do Fornecedor é obrigatório")
+
+
+
+        #FUNÇÃO DE PESQUISAR :) ;) OBS: NAO TEM RELAÇÃO COM O CRUD
+        def pesquisar_fornecedor():
+            id_fornecedor = self.entry_pesquisa.get() #CONEXÃO COM O BANCO DE DADOS
+            conn = get_connection() #VARIAVEL PARA RECEBER A CONEXÃO
+            self.cursor = conn.cursor() #sell.conn TRABALHAR COM A CONEXAO
+            try:
+                
+                self.cursor.execute("SELECT produto, descricao, quantidade, valorDeCompra, valorDeVenda, fornecedor, codproduto FROM produto WHERE codproduto=%s or produto=%s or descricao=%s", (codigo_produto,codigo_produto,codigo_produto)) 
+                # ACIMA SELECIONA AS COLUNAS DA TABELA SE codproduto OU produto OU descricao == codigo_produto
+                # codproduto E produto E descricao PERMITE FAZER A BUSCA POR PRODUTO,DESCRICAO, E CODIGO DE PRODUTO
+                #EM OUTROS CASOS PODERIA SER CPF E NÚMERO DE TELEFONE
+
+                # CONSULTA NO BANCO
+                produto_pesquisa = self.cursor.fetchone()
+        
+                # Verificando se o produto foi encontrado
+                if produto_pesquisa:  # SE FOI ENCONTRADO...
+                    produto, descricao, quantidade, valorDeCompra, valorDeVenda, fornecedor, codigo_produto = produto_pesquisa #ESSAS VARIAVEIS VAI RECEBER OS VALORES DA COLUNA DE ACORDO COM A ORDEM
+
+                    #LIMPA TODOS OS CAMPOS ANTES DE RECEBER AS INFORMAÇOES
+                    self.ProdutoEntry.delete(0, tk.END)
+                    self.DescricaoEntry.delete(0, tk.END)
+                    self.QuantidadeEntry.delete(0, tk.END)
+                    self.ValorDeCompraEntry.delete(0, tk.END)
+                    self.ValorDeVendaEntry.delete(0, tk.END)
+                    self.FornecedorEntry.delete(0, tk.END)
+                    self.CodigoEntry.delete(0, tk.END)
+
+                    # Inserindo os dados nas entradas (Entry)
+                    self.ProdutoEntry.insert(0, produto)
+                    self.DescricaoEntry.insert(0, descricao)
+                    self.QuantidadeEntry.insert(0, quantidade)
+                    self.ValorDeCompraEntry.insert(0, valorDeCompra)
+                    self.ValorDeVendaEntry.insert(0, valorDeVenda)
+                    self.FornecedorEntry.insert(0, fornecedor)
+                    self.CodigoEntry.insert(0, codigo_produto)
+            
+                    messagebox.showinfo("Success", "Produto encontrado")
+                else:
+                    messagebox.showwarning("Não encontrado", "Produto não encontrado")
+
+            except Exception as e:
+                print(f'Error: {e}') #SE EXEPT, EXIBE O ERRO (SALVOU O CODIGO)
+
+
+        #BOTAO DE PESQUISA :)
+        PesquisarButton = tk.Button(self.root,text = "Pesquisar",width = 15,command=pesquisar_produto)
+        PesquisarButton.place(x = 20,y=405)
+
                     
+            
 
 
         
