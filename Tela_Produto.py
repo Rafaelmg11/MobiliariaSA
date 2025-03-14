@@ -180,22 +180,33 @@ class PRODUTO:
         #FUNÇÃO DE EXCLUIR
         def excluir_produto():
             codigo_produto = self.CodigoEntry.get() #RECEBENDO O VALOR QUE É PRA SER O CODPRODUTO DA TABELA
-            condicao = "DELETE FROM produto WHERE codproduto = %s",(codigo_produto)
-            if condicao: #SE codigo_produto RECEBER UM VALOR
-                delete_produto(codigo_produto) #PUXANDO FUNÇÃO DO CRUD
+            conn = get_connection() #VARIAVEL PARA RECEBER A CONEXÃO
+            self.cursor = conn.cursor() #sell.conn TRABALHAR COM A CONEXAO
+            try:
+                self.cursor.execute("SELECT * FROM produto WHERE codproduto=%s ",(codigo_produto,)) 
 
-                #LIMPAR CAMPOS
-                self.ProdutoEntry.delete(0, tk.END)
-                self.DescricaoEntry.delete(0, tk.END)
-                self.QuantidadeEntry.delete(0, tk.END)
-                self.ValorDeCompraEntry.delete(0, tk.END)
-                self.ValorDeVendaEntry.delete(0, tk.END)
-                self.FornecedorEntry.delete(0, tk.END)
-                self.CodigoEntry.delete(0, tk.END)
-                self.PesquisaEntry.delete(0, END)
-                messagebox.showinfo("Success","Produto excluido com sucesso")
-            else:
-                messagebox.showerror("Error","O Codigo de Produto é obrigatório")
+                # CONSULTA NO BANCO
+                produto_pesquisa = self.cursor.fetchone()
+        
+                # Verificando se o produto foi encontrado
+                if produto_pesquisa:  # SE FOI ENCONTRADO...
+                    produto_pesquisa #ESSAS VARIAVEIS VAI RECEBER OS VALORES DA COLUNA DE ACORDO COM A ORDEM
+                    delete_produto(codigo_produto) #PUXANDO FUNÇÃO DO CRUD
+
+                    #LIMPAR CAMPOS
+                    self.ProdutoEntry.delete(0, tk.END)
+                    self.DescricaoEntry.delete(0, tk.END)
+                    self.QuantidadeEntry.delete(0, tk.END)
+                    self.ValorDeCompraEntry.delete(0, tk.END)
+                    self.ValorDeVendaEntry.delete(0, tk.END)
+                    self.FornecedorEntry.delete(0, tk.END)
+                    self.CodigoEntry.delete(0, tk.END)
+                    self.PesquisaEntry.delete(0, END)
+                    messagebox.showinfo("Success","Produto excluido com sucesso")
+                else:
+                    messagebox.showerror("Error","Codigo de Produto não existe")
+            except Exception as e:
+                print(f'Error: {e}') #SE EXEPT, EXIBE O ERRO (SALVOU O CODIGO)
 
         #BOTAO DE EXCLUIR
         ExcluirButton = tk.Button(self.root,text = "EXCLUIR",font= ("Georgia",10),width=13,command=excluir_produto)
