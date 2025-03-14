@@ -124,6 +124,7 @@ class PRODUTO:
                 self.ValorDeVendaEntry.delete(0, tk.END)
                 self.FornecedorEntry.delete(0, tk.END)
                 self.CodigoEntry.delete(0, tk.END)
+                self.PesquisaEntry.delete(0, END)
 
                 messagebox.showinfo("Success","Produto criado com sucesso!")
             else:
@@ -167,6 +168,7 @@ class PRODUTO:
                     self.ValorDeVendaEntry.delete(0, tk.END)
                     self.FornecedorEntry.delete(0, tk.END)
                     self.CodigoEntry.delete(0, tk.END)
+                    self.PesquisaEntry.delete(0, END)
                     messagebox.showinfo("Success","Produto alterado com sucesso!")
                 else:
                     messagebox.showerror("Error","Todos os campos são obrigatórios")
@@ -178,7 +180,8 @@ class PRODUTO:
         #FUNÇÃO DE EXCLUIR
         def excluir_produto():
             codigo_produto = self.CodigoEntry.get() #RECEBENDO O VALOR QUE É PRA SER O CODPRODUTO DA TABELA
-            if codigo_produto: #SE codigo_produto RECEBER UM VALOR
+            condicao = "DELETE FROM produto WHERE codproduto = %s",(codigo_produto)
+            if condicao: #SE codigo_produto RECEBER UM VALOR
                 delete_produto(codigo_produto) #PUXANDO FUNÇÃO DO CRUD
 
                 #LIMPAR CAMPOS
@@ -189,6 +192,7 @@ class PRODUTO:
                 self.ValorDeVendaEntry.delete(0, tk.END)
                 self.FornecedorEntry.delete(0, tk.END)
                 self.CodigoEntry.delete(0, tk.END)
+                self.PesquisaEntry.delete(0, END)
                 messagebox.showinfo("Success","Produto excluido com sucesso")
             else:
                 messagebox.showerror("Error","O Codigo de Produto é obrigatório")
@@ -225,6 +229,7 @@ class PRODUTO:
                     self.ValorDeVendaEntry.delete(0, tk.END)
                     self.FornecedorEntry.delete(0, tk.END)
                     self.CodigoEntry.delete(0, tk.END)
+                    self.PesquisaEntry.delete(0, END)
 
                     # Inserindo os dados nas entradas (Entry)
                     self.ProdutoEntry.insert(0, produto)
@@ -256,6 +261,7 @@ class PRODUTO:
                 self.ValorDeVendaEntry.delete(0, tk.END)
                 self.FornecedorEntry.delete(0, tk.END)
                 self.CodigoEntry.delete(0, tk.END)
+                self.PesquisaEntry.delete(0, END)
         #BOTÃO DE LIMPAR
         limparButton = tk.Button(self.root,text = "LIMPAR",font= ("Georgia",10),width=13,command=limparCampos)
         limparButton.place(x = 547,y=335)
