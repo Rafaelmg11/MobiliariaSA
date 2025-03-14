@@ -45,7 +45,8 @@ class Main:
     def abrir_fornecedor(self):
         # Cria uma nova janela Tkinter para o cadastro de produto
         root_fornecedor = tk.Tk()  # Cria a nova instância da janela para o cadastro de produto
-        app_fornecedor = FORNECEDOR(root_fornecedor)  # Cria a instância da classe PRODUTO
+        app_fornecedor = FORNECEDOR(root_fornecedor,self.root)  # Cria a instância da classe PRODUTO
+        root_fornecedor.protocol("WM_DELETE_WINDOW", lambda: self.reabrir_janela())  # Fechar corretamente ao fechar a janela de cadastro
         root_fornecedor.mainloop()  # Inicia a execução da janela do PRODUTO
 
     def reabrir_janela(self):
