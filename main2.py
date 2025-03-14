@@ -39,7 +39,8 @@ class Main:
     def abrir_funcionario(self):
         # Cria uma nova janela Tkinter para o cadastro de produto
         root_funcionario = tk.Tk()  # Cria a nova instância da janela para o cadastro de produto
-        app_funcionario = FUNCIONARIO(root_funcionario)  # Cria a instância da classe PRODUTO
+        app_funcionario = FUNCIONARIO(root_funcionario,self.root)  # Cria a instância da classe PRODUTO
+        root_funcionario.protocol("WM_DELETE_WINDOW", lambda: self.reabrir_janela())  # Fechar corretamente ao fechar a janela de cadastro
         root_funcionario.mainloop()  # Inicia a execução da janela do PRODUTO
 
     def abrir_fornecedor(self):

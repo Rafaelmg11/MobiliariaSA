@@ -8,8 +8,9 @@ import mysql.connector
 
 class FUNCIONARIO:
 
-    def __init__(self,root):
-        self.root = root
+    def __init__(self,root,main_window): #PARA EXECUTAR ESSE CODIGO SEPAPARADEMENTE DEVE TIRAR O "main_window"
+        self.root = root  #PARA EXECUTAR ESSE CODIGO SEPAPARADEMENTE DEVE COMENTAR ESSA LINHA DE CODIGO IRA DAR UM ERROR NO BOTAO VOLTAR
+        self.main_window = main_window
         self.root.title("CADASTRO DE FUNCIONARIOS") #Define o titulo
         self.root.geometry("700x680") #Define o tamanho da janela
         self.root.configure(background = "#5424A2") #Configura a cor de fundo da janela
