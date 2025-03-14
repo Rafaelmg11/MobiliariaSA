@@ -1,6 +1,6 @@
 import tkinter as tk
 from Tela_Produto import PRODUTO  # Importa a classe PRODUTO do arquivo produto.py
-from Funcionarios import FUNCIONARIO
+from Funcionario import FUNCIONARIO
 
 class Main:
     def __init__(self, root):

@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import messagebox
 
+
 # Lista
 fornecedores = []
 
@@ -152,7 +153,7 @@ entry_produto = tk.Entry(root)
 entry_produto.place(x=240,y=190)
 
 # Botões de ação
-botao_adicionar = tk.Button(root, text="Adicionar Fornecedor", command=adicionar_fornecedor)
+botao_adicionar = tk.Button(self.root, text="Voltar para Tela Principal", width=15, font=("Century Gothic", 12), command=voltar_para_principal)
 botao_adicionar.place(x=160,y=260)
 
 botao_atualizar = tk.Button(root, text="Atualizar Fornecedor", command=atualizar_fornecedor)
