@@ -170,36 +170,33 @@ class PRODUTO:
             self.cursor = conn.cursor() #sell.conn TRABALHAR COM A CONEXAO
             try:
                 
-                self.cursor.execute("SELECT produto, descricao, quantidade, valorDeCompra, valorDeVenda, fornecedor, codproduto FROM produto WHERE codproduto=%s or produto=%s or descricao=%s", (codigo_produto,codigo_produto,codigo_produto)) 
+                self.cursor.execute("SELECT nome_fornecedor, endereco, telefone, email, produto, idfornecedor FROM fornecedor WHERE idfornecedor=%s or endereco=%s or nome_fornecedor=%s or telefone=%s or email=%s or produto=%s", (id_fornecedor,id_fornecedor,id_fornecedor,id_fornecedor,id_fornecedor,id_fornecedor,)) 
                 # ACIMA SELECIONA AS COLUNAS DA TABELA SE codproduto OU produto OU descricao == codigo_produto
                 # codproduto E produto E descricao PERMITE FAZER A BUSCA POR PRODUTO,DESCRICAO, E CODIGO DE PRODUTO
                 #EM OUTROS CASOS PODERIA SER CPF E NÚMERO DE TELEFONE
 
                 # CONSULTA NO BANCO
-                produto_pesquisa = self.cursor.fetchone()
+                fornecedor_pesquisa = self.cursor.fetchone()
         
                 # Verificando se o produto foi encontrado
-                if produto_pesquisa:  # SE FOI ENCONTRADO...
-                    produto, descricao, quantidade, valorDeCompra, valorDeVenda, fornecedor, codigo_produto = produto_pesquisa #ESSAS VARIAVEIS VAI RECEBER OS VALORES DA COLUNA DE ACORDO COM A ORDEM
+                if fornecedor_pesquisa:  # SE FOI ENCONTRADO...
+                    nome_fornecedor, endereco, telefone, email, produto, idfornecedor  = fornecedor_pesquisa #ESSAS VARIAVEIS VAI RECEBER OS VALORES DA COLUNA DE ACORDO COM A ORDEM
 
-                    #LIMPA TODOS OS CAMPOS ANTES DE RECEBER AS INFORMAÇOES
-                    self.ProdutoEntry.delete(0, tk.END)
-                    self.DescricaoEntry.delete(0, tk.END)
-                    self.QuantidadeEntry.delete(0, tk.END)
-                    self.ValorDeCompraEntry.delete(0, tk.END)
-                    self.ValorDeVendaEntry.delete(0, tk.END)
-                    self.FornecedorEntry.delete(0, tk.END)
-                    self.CodigoEntry.delete(0, tk.END)
+                    #LIMPAR CAMPOS
+                    self.entry_nome_fornecedor.delete(0, tk.END)
+                    self.entry_endereco.delete(0, tk.END)
+                    self.entry_telefone.delete(0, tk.END)
+                    self.entry_email.delete(0, tk.END)
+                    self.entry_produto.delete(0, tk.END)
+                    self.entry_idFornecedor.delete(0, tk.END)
 
                     # Inserindo os dados nas entradas (Entry)
-                    self.ProdutoEntry.insert(0, produto)
-                    self.DescricaoEntry.insert(0, descricao)
-                    self.QuantidadeEntry.insert(0, quantidade)
-                    self.ValorDeCompraEntry.insert(0, valorDeCompra)
-                    self.ValorDeVendaEntry.insert(0, valorDeVenda)
-                    self.FornecedorEntry.insert(0, fornecedor)
-                    self.CodigoEntry.insert(0, codigo_produto)
-            
+                    self.entry_nome_fornecedor.insert(0, nome_fornecedor )
+                    self.entry_endereco.insert(0, endereco )
+                    self.entry_telefone.insert(0,telefone )
+                    self.entry_email.insert(0,email )
+                    self.entry_produto.insert(0,produto )
+                    self.entry_idFornecedor.insert(0,id_fornecedor )
                     messagebox.showinfo("Success", "Produto encontrado")
                 else:
                     messagebox.showwarning("Não encontrado", "Produto não encontrado")
@@ -209,7 +206,7 @@ class PRODUTO:
 
 
         #BOTAO DE PESQUISA :)
-        PesquisarButton = tk.Button(self.root,text = "Pesquisar",width = 15,command=pesquisar_produto)
+        PesquisarButton = tk.Button(self.root,text = "Pesquisar",width = 15,command=pesquisar_fornecedor)
         PesquisarButton.place(x = 20,y=405)
 
                     
