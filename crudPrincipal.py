@@ -1,6 +1,7 @@
 import mysql.connector
 from config import MYSQL_HOST, MYSQL_USER, MYSQL_PASSWORD, MYSQL_DATABASE
 
+#pip install mysql-connector-python
 
 def get_connection():
     return mysql.connector.connect(
@@ -52,7 +53,35 @@ def delete_produto(codigo_produto):
     conn.close()
 
 #---------------------------------------------------------------------------------------------------------------------------------------------------------------------#
+#FUNÇÕES CADASTRO:
 
+def create_usuario(usuario,senha):
+    conn = get_connection()
+    cursor = conn.cursor()
+    query = "INSERT INTO cadastro(usuario,senha) VALUES (%s, %s)"
+    cursor.execute(query, (usuario,senha))
+    conn.commit()
+    cursor.close()
+    conn.close()
+
+def read_usuario():
+    conn = get_connection()
+    cursor = conn.cursor()
+    query = "SELECT * FROM cadastro"
+    cursor.execute(query)
+    result = cursor.fetchall()
+    cursor.close()
+    conn.close()
+    return result
+
+def update_usuario(usuario,senha,id_usuario):
+    conn = get_connection()
+    cursor = conn.cursor()
+    query = "UPDATE cadastro SET usuario = %s, senha = %s WHERE idusuario = %s"
+    cursor.execute(query,(usuario,senha,id_usuario))
+    conn.commit()
+    cursor.close()
+    conn.close()
 
 
 #---------------------------------------------------------------------------------------------------------------------------------------------------------------------#

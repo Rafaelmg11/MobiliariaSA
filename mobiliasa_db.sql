@@ -33,6 +33,12 @@ create table funcionario(
     primary key (idfuncionario)
 );
 
+create table cadastro(
+    idusuario int not null auto_increment,
+    usuario text,
+    senha text,
+    primary key (idusuario)
+);
 
 
 # pip install mysql-connector-python
