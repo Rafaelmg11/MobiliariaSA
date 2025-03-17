@@ -59,11 +59,11 @@ class CADASTRO:
         self.PesquisaEntry = tk.Entry(self.root, width=53,font= ("Georgia",13))
 
         #POSICIONA OS CAMPOS DE ENTRADAS:
-        self.NomeEntry.place(x=132,y=110)
-        self.UsuarioEntry.place(x=151, y= 140)
-        self.EmailEntry.place(x=166, y= 170)
-        self.TelefoneEntry.place(x=214, y= 200)
-        self.SenhaEntry.place(x=199, y= 230)
+        self.NomeEntry.place(x=110,y=110)
+        self.UsuarioEntry.place(x=130, y= 140)
+        self.EmailEntry.place(x=115, y= 170)
+        self.TelefoneEntry.place(x=140, y= 200)
+        self.SenhaEntry.place(x=120, y= 230)
         self.idUsuarioEntry.place(x=166, y= 260)
         self.PesquisaEntry.place(x=143,y=392)
 

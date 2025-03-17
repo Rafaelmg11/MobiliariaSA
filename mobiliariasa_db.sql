@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 17/03/2025 às 21:59
+-- Tempo de geração: 18/03/2025 às 00:12
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -38,6 +38,16 @@ CREATE TABLE `cadastro` (
   `senha` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Despejando dados para a tabela `cadastro`
+--
+
+INSERT INTO `cadastro` (`idusuario`, `nome`, `usuario`, `email`, `telefone`, `senha`) VALUES
+(1, 'Alisson Mecedez Fronza', 'ADM_AlissonFronza007', 'alissonn007@gmail.com', '47 99722-1010', 'spiderman007'),
+(2, 'Bernado Luiz da Silva', 'ADM_BernadoSilva', 'bernadinhorico@gmail.com', '47 99887-3220', 'ricodemais@.com'),
+(3, 'Henrrique Lima', 'lima_henrrique12', 'limas2020@gmail.com', 'limas2020@gmail.com', 'palmeirasmundial55'),
+(4, 'Andressa Souza', 'souzax_ands', 'souzaandressapalmeiras@gmail.com', '47 99687-3243', 'luizagusto008');
+
 -- --------------------------------------------------------
 
 --
@@ -52,6 +62,15 @@ CREATE TABLE `fornecedor` (
   `email` text DEFAULT NULL,
   `produto` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `fornecedor`
+--
+
+INSERT INTO `fornecedor` (`idfornecedor`, `nome_fornecedor`, `endereco`, `telefone`, `email`, `produto`) VALUES
+(1, 'Carpintaria da Filha', 'rua iririu 890, bairro iririu Joinville/SC', '47 3434-0836', 'carpintariadafilha1900@gmail.com', 'Moveis de madeira'),
+(2, 'Estofaria Bernedez', 'rua castelo-azul 1080, Jaragua do Sul/SC', '47 99834-0934', 'bernedezestofaria@gmail.com', 'Sofas,colchões,almofadas'),
+(3, 'Vridraria Santos', 'rua ponte serrada 2321, Balneario do Sul/SC', '47 99943-0096', 'santosdevidro@gmail.com', 'Espelhos');
 
 -- --------------------------------------------------------
 
@@ -69,6 +88,17 @@ CREATE TABLE `funcionario` (
   `salario` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Despejando dados para a tabela `funcionario`
+--
+
+INSERT INTO `funcionario` (`idfuncionario`, `nome`, `cpf`, `telefone`, `email`, `cargo`, `salario`) VALUES
+(1, 'Matheus dos Santos', '125.566.789-32', '47 99880-3421', 'corinthiastorcedor@gmail.com', 'Capintero de Ajustes', '3000'),
+(2, 'Luiza Amanda de Oliveira', '968.008.231-32', '47 98890-2331', 'luizinhadogole@gmail.com', 'Vendendora', '1700'),
+(3, 'Andressa Souza', '443.897.043-45', '47 99687-3243', 'souzaandressapalmeiras@gmail.com', 'Estoquista', '1500'),
+(4, 'Luiz Costa', '123.443.588-54', '47 99844-0865', 'contapratrabalholuizcosta1972@gmail.com', 'Instalador ambulante de Moveis', '2800'),
+(5, 'Henrrique Lima', '687.498.342-54', '47 9212-0932', 'limas2020@gmail.com', 'Lojista', '2100');
+
 -- --------------------------------------------------------
 
 --
@@ -84,6 +114,17 @@ CREATE TABLE `produto` (
   `valordevenda` text DEFAULT NULL,
   `fornecedor` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `produto`
+--
+
+INSERT INTO `produto` (`codproduto`, `produto`, `descricao`, `quantidade`, `valordecompra`, `valordevenda`, `fornecedor`) VALUES
+(1, 'Guarda-Roupa Luxe', 'Guarda-Roupa tres portas, espelho de corpo, 6 metros, carvalho', '150', '3000', '5400', 'Carpintaria da Filha'),
+(2, 'Sofá 2 lugares marrom', 'Sofá pequeno de 2 lugares, de tecido madeira pau-Brasil marrom', '800', '500', '1200', 'Estofaria Bernedez'),
+(3, 'Espelho de corpo 2x1', 'Espelho de corpo 2 metros por 1', '1100', '130', '240', 'VidrariaSantos'),
+(4, 'Cama de solteiro ', 'Cama de solteiro de carvalho', '300', '400', '699', 'Carpintaria da Filha'),
+(5, 'Mesa de Jantar de Roda', 'Mesa de Jantar com roda, de carvalho, marrom claro e escuro', '145', '650', '1050', 'Carpintaria da Filha');
 
 --
 -- Índices para tabelas despejadas
@@ -121,25 +162,25 @@ ALTER TABLE `produto`
 -- AUTO_INCREMENT de tabela `cadastro`
 --
 ALTER TABLE `cadastro`
-  MODIFY `idusuario` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idusuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de tabela `fornecedor`
 --
 ALTER TABLE `fornecedor`
-  MODIFY `idfornecedor` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idfornecedor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de tabela `funcionario`
 --
 ALTER TABLE `funcionario`
-  MODIFY `idfuncionario` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idfuncionario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de tabela `produto`
 --
 ALTER TABLE `produto`
-  MODIFY `codproduto` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `codproduto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
