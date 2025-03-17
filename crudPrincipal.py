@@ -83,6 +83,16 @@ def update_usuario(usuario,senha,id_usuario):
     cursor.close()
     conn.close()
 
+def delete_usuario(idusuario):
+    conn = get_connection()
+    cursor = conn.cursor()
+    query = "DELETE FROM cadastro WHERE idusuario = %s"
+    cursor.execute(query, (idusuario,))
+    conn.commit()
+    cursor.close()
+    conn.close()
+
+
 
 #---------------------------------------------------------------------------------------------------------------------------------------------------------------------#
 

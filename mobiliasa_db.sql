@@ -35,6 +35,7 @@ create table funcionario(
 
 create table cadastro(
     idusuario int not null auto_increment,
+    nome text,
     usuario text,
     email text,
     telefone text
