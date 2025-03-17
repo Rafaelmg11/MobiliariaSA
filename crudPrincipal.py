@@ -55,11 +55,11 @@ def delete_produto(codigo_produto):
 #---------------------------------------------------------------------------------------------------------------------------------------------------------------------#
 #FUNÇÕES CADASTRO:
 
-def create_usuario(usuario,senha):
+def create_usuario( nome,usuario,email,telefone,senha):
     conn = get_connection()
     cursor = conn.cursor()
-    query = "INSERT INTO cadastro(usuario,senha) VALUES (%s, %s)"
-    cursor.execute(query, (usuario,senha))
+    query = "INSERT INTO cadastro( nome,usuario,email,telefone,senha) VALUES (%s, %s,%s,%s,%s)"
+    cursor.execute(query, ( nome,usuario,email,telefone,senha))
     conn.commit()
     cursor.close()
     conn.close()
@@ -74,11 +74,11 @@ def read_usuario():
     conn.close()
     return result
 
-def update_usuario(usuario,senha,id_usuario):
+def update_usuario( nome,usuario,email,telefone,senha,idUsuario):
     conn = get_connection()
     cursor = conn.cursor()
-    query = "UPDATE cadastro SET usuario = %s, senha = %s WHERE idusuario = %s"
-    cursor.execute(query,(usuario,senha,id_usuario))
+    query = "UPDATE cadastro SET nome = %s,usuario = %s,email = %s,telefone = %s,senha = %s WHERE idusuario = %s"
+    cursor.execute(query,( nome,usuario,email,telefone,senha,idUsuario))
     conn.commit()
     cursor.close()
     conn.close()

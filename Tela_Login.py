@@ -51,14 +51,16 @@ class Tela_Login:
 
         def login():
             usuario = UsuarioEntry.get()
-            senha = SenhaEntry().get()
+            senha = SenhaEntry.get()
 
             conn = get_connection() #CONEXÃO COM O BANCO DE DADOS
             self.cursor = conn.cursor()
-            self.cursor.execute("SELECT*FROM cadastro WHERE usuario = %s AND senha = %s")
+            self.cursor.execute("SELECT*FROM cadastro WHERE usuario = %s AND senha = %s",(usuario,senha))
             VerifyLogin = self.cursor.fetchone() #Obtem o resultado da consulta
             if VerifyLogin:
                 messagebox.showinfo(title = "INFO LOGIN",message="Acesso Confirmado, Bem Vindo!")#Ebibe mensagem de sucesso
+                self.root.quit()  # Fecha a janela de cadastro de produtos (destrói a instância)
+                self.root.destroy()  # Fecha a janela de cadastro de produtos, liberando recursos
 
                 root_main = tk.Tk()  
                 app_main = Menu(root_main, self.root) 

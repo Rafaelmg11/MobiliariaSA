@@ -2,6 +2,7 @@ import tkinter as tk
 from Tela_Produto import PRODUTO  # Importa a classe PRODUTO do arquivo produto.py
 from Tela_Funcionario import FUNCIONARIO
 from Tela_Fornecedor import FORNECEDOR
+from Tela_Cadastro import CADASTRO
 
 #TEM QUE FAZER O FUNCIONARIO FECHAR
 #TEM QUE FAZER O FORNECEDOR ABRIR E FECHAR
@@ -10,8 +11,9 @@ from Tela_Fornecedor import FORNECEDOR
 #TELA DE FATURA
 
 class Menu:
-    def __init__(self, root):
+    def __init__(self, root,main_window):
         self.root = root
+        self.main_window = main_window
         self.root.title("Tela Principal")
         self.root.geometry("500x500")
         self.root.configure(background="lightblue")  # Cor de fundo da janela principal
@@ -25,6 +27,9 @@ class Menu:
 
         abrir_fornecedor_button = tk.Button(self.root, text="Abrir Aba de Fornecedor", width=30, font=("Century Gothic", 13), command=self.abrir_fornecedor)
         abrir_fornecedor_button.place(x=20,y=250)
+
+        abrir_usuario_button = tk.Button(self.root, text="Abrir Aba de Usuario", width=30, font=("Century Gothic", 13), command=self.abrir_usuario)
+        abrir_usuario_button.place(x=20,y=350)
 
     def abrir_produto(self):
         # Oculta a janela principal
@@ -50,11 +55,22 @@ class Menu:
         root_fornecedor.protocol("WM_DELETE_WINDOW", lambda: self.reabrir_janela())  # Fechar corretamente ao fechar a janela de cadastro
         root_fornecedor.mainloop()  # Inicia a execução da janela do PRODUTO
 
+    def abrir_usuario(self):
+        # Oculta a janela principal
+        self.root.withdraw()
+
+        # Cria uma nova janela Tkinter para o cadastro de produto
+        root_usuario = tk.Tk()  # Cria a nova instância da janela para o cadastro de produto
+        app_usuario = CADASTRO(root_usuario, self.root)  # Passa a referência da janela principal (self.root)
+        root_usuario.protocol("WM_DELETE_WINDOW", lambda: self.reabrir_janela())  # Fechar corretamente ao fechar a janela de cadastro
+        root_usuario.mainloop()  # Inicia a execução da janela do PRODUTO
+
+
     def reabrir_janela(self):
         self.root.deiconify()  # Reexibe a janela principal
         self.root.quit()  # Encerra o loop de eventos da janela de cadastro
 
 if __name__ == "__main__":
     root = tk.Tk()
-    app = Main(root)
+    app = Menu(root)
     root.mainloop()
