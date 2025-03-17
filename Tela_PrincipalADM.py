@@ -12,6 +12,7 @@ class Menu:
         self.root.title("Tela Principal")
         self.root.geometry("600x600")
         self.root.configure(background="#5424A2")  # Cor de fundo da janela principal
+        self.root.resizable(width = False,height = False) #Impede que a janela seja redimensionada 
         
         # ABRIR OUTRAS JANELAS
         abrir_produto_button = tk.Button(self.root, text="Abrir Cadastro de Produto", width=30, font=("Century Gothic", 13), command=self.abrir_produto)
@@ -63,7 +64,7 @@ class Menu:
 
     def abrir_usuario(self):
         # Oculta a janela principal
-        self.root.withdraw()
+        self.root.withdraw()        
         # Cria uma nova janela Tkinter para o cadastro de produto
         root_usuario = tk.Tk()  # Cria a nova instância da janela para o cadastro de produto
         app_usuario = CADASTRO(root_usuario, self.root)  # Passa a referência da janela principal (self.root)

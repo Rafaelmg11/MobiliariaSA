@@ -6,6 +6,9 @@ from Tela_PrincipalUSER import Menu2
 import mysql.connector
 import tkinter as tk
 
+
+# OBSERVAÇÕES  SOBRE O LOGIN (para diferenciar o adm de usuario, o adm tem que ter ADM no usuario, qualquer outro usuario sem ADM é apenas um usuario comum)
+
 class Tela_Login:
     def __init__(self,root):
         self.root = root
@@ -75,7 +78,7 @@ class Tela_Login:
                     app_adm = Menu(root_adm, self.root) 
                     root_adm.mainloop()
                 
-            else:messagebox.showerror(title = "INFO LOGIN",message = "Acesso Negado. Verifique se está cadastrado no Sistema!")#Exibe mensagem de erro
+            else:messagebox.showerror(title = "INFO LOGIN",message = "Acesso Negado. Usuario Inválido!")#Exibe mensagem de erro
 
         #CRIANDO BOTAO:
         LoginButton =  tk.Button(self.root, text="LOGIN",  width=12, font=("Georgia", 11),command=login)

@@ -7,7 +7,7 @@ import tkinter as tk
 import mysql.connector
 
 
-class FORNECEDOR:  
+class FORNECEDORUSER:  
 
     def __init__(self,root,main_window): #PARA EXECUTAR ESSE CODIGO SEPAPARADEMENTE DEVE TIRAR O "main_window"
         self.root = root
@@ -37,6 +37,7 @@ class FORNECEDOR:
 
         label_nome_fornecedor = Label(self.root,text = "Fornecedor: ",font = ("Georgia",16), bg = "#5424A2", fg = "WHITE" ) 
         label_nome_fornecedor.place(x=40,y=105)
+
 
         label_endereco = Label(self.root,text = "Endereço: ",font = ("Georgia",16), bg = "#5424A2", fg = "WHITE" )
         label_endereco.place(x=40,y=135)
@@ -112,7 +113,7 @@ class FORNECEDOR:
                 messagebox.showerror("Campos vazios","Todos os campos são obrigatórios" )
 
         botao_adicionar = tk.Button (self.root,text = "CADASTRAR",font= ("Georgia",10),width=13,command=cadastrarFornecedor)
-        botao_adicionar.place(x=40,y=330)
+        botao_adicionar.place(x=150,y=330)
 
         #LISTAR PRODUTO
         def listar_fornecedor():
@@ -123,91 +124,6 @@ class FORNECEDOR:
 
         botao_listar  = tk.Button(self.root,text="LISTAR",font= ("Georgia",10),width=13,command=listar_fornecedor)
         botao_listar.place(x=290,y=330)
-
-
-        
-        #FUNÇÃO DE ALTERAR PRODUTO:
-        def alterar_fornecedor():
-                
-                nome = self.entry_nome_fornecedor.get()
-                endereco = self.entry_endereco.get()
-                telefone = self.entry_telefone.get()
-                email = self.entry_email.get()
-                produto = self.entry_produto.get()
-                id_fornecedor=self.entry_idFornecedor.get()
-                id_fornecedor = self.entry_idFornecedor.get() 
-                conn = get_connection()
-                self.cursor = conn.cursor()
-
-                try:
-                    self.cursor.execute("SELECT * FROM fornecedor WHERE idfornecedor=%s ",(id_fornecedor,)) 
-                    # CONSULTA NO BANCO
-                    fornecedor_pesquisa = self.cursor.fetchone()
-
-                     # Verificando se o fornecedor foi encontrado
-                    if fornecedor_pesquisa:  
-                        #SE CAMPOS NÃO ESTIVER VAZIOS:
-                        if id_fornecedor and nome and endereco and telefone and email and produto:
-                            atualizar_fornecedor(nome,endereco,telefone,email,produto,id_fornecedor) #PUXANDO A FUNÇÃO DO CRUD E AS VARIAVEIS
-
-                            #LIMPAR CAMPOS
-                            self.entry_nome_fornecedor.delete(0, tk.END)
-                            self.entry_endereco.delete(0, tk.END)
-                            self.entry_telefone.delete(0, tk.END)
-                            self.entry_email.delete(0, tk.END)
-                            self.entry_produto.delete(0, tk.END)
-                            self.entry_idFornecedor.delete(0, tk.END)
-                            self.entry_pesquisa.delete(0, tk.END)
-                            messagebox.showinfo("Alterado com Sucesso","Fornecedor alterado com sucesso!")
-                        else:
-                            messagebox.showerror("Campos vazios","Todos os campos são obrigatórios")   
-
-                    else:
-                        messagebox.showerror("Não encontrado","Cadastro de Fornecedor não existe")
-                except:
-                    print("Expect")
-        botao_atualizar = tk.Button(self.root,text = "ALTERAR",font= ("Georgia",10),width=13, command=alterar_fornecedor)
-        botao_atualizar.place(x=164,y=330)  
-
-
-        #FUNÇÃO DE EXCLUIR
-        def excluir_fornecedor():
-            id_fornecedor = self.entry_idFornecedor.get()
-            conn = get_connection()
-            self.cursor = conn.cursor()
-            try:
-                self.cursor.execute("SELECT * FROM fornecedor WHERE idfornecedor=%s ",(id_fornecedor,)) 
-             
-                produto_pesquisa = self.cursor.fetchone()
-             
-                if produto_pesquisa: 
-
-                    if id_fornecedor: 
-                        deletar_fornecedor(id_fornecedor)
-
-                        #LIMPAR CAMPOS
-                        self.entry_nome_fornecedor.delete(0, tk.END)
-                        self.entry_endereco.delete(0, tk.END)
-                        self.entry_telefone.delete(0, tk.END)
-                        self.entry_email.delete(0, tk.END)
-                        self.entry_produto.delete(0, tk.END)
-                        self.entry_idFornecedor.delete(0, tk.END)
-                        self.entry_pesquisa.delete(0, tk.END)
-
-                        messagebox.showinfo("Success","Fornecedor excluido com sucesso")
-                    else:
-                        messagebox.showerror("Error","O ID do Fornecedor é obrigatório")
-
-                else:
-                        messagebox.showerror("Error","Cadastro de Produto não existe")
-            except:
-                print("Expect")
-
-
-        botao_deletar = tk.Button(self.root,text = "EXCLUIR",font= ("Georgia",10),width=13, command=excluir_fornecedor)
-        botao_deletar.place(x=418,y=330)
-
-
 
         #FUNÇÃO DE PESQUISAR
         def pesquisar_fornecedor():
@@ -266,11 +182,11 @@ class FORNECEDOR:
             self.entry_pesquisa.delete(0, tk.END)
         #BOTÃO DE LIMPAR
         limparButton = tk.Button(self.root,text = "LIMPAR",font= ("Georgia",10),width=13,command=limparCampos)
-        limparButton.place(x = 547,y=330)
+        limparButton.place(x = 430,y=330)
 
 if __name__ == "__main__":
     root = tk.Tk()
-    app = FORNECEDOR(root)
+    app = FORNECEDORUSER(root)
     root.mainloop()
 
 
