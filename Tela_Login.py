@@ -28,9 +28,9 @@ class Tela_Login:
 
     def create_widgets(self):
         #CRIANDO E POSICIONANDO AS LABELS:
-        UsuarioLabel = Label(self.root,text="Usuario: ",font=("Georgia",16),bg = "#5424A2",fg = "WHITE") #Cria Label TITULO
+        UsuarioLabel = Label(self.root,text="Usuario: ",font=("Georgia",16),bg = "#5424A2",fg = "WHITE")
         UsuarioLabel.place(x=110,y=200)
-        SenhaLabel = Label(self.root,text= "Senha:",font=("Georgia",16),bg = "#5424A2",fg = "WHITE") #Cr
+        SenhaLabel = Label(self.root,text= "Senha:",font=("Georgia",16),bg = "#5424A2",fg = "WHITE") 
         SenhaLabel.place(x=110,y=260)
         InformaçãoLabel = Label (self.root,text="Sistema Desenvolvido por:\n"
                                                 "\n"
@@ -47,7 +47,7 @@ class Tela_Login:
         #LOGO:
         # CARREGAR IMAGEM
         self.logo = PhotoImage(file="icons/LogoMobiliaria.png") #Carrega a imagem da logo
-        self.LogoLabel = Label(self.root,image = self.logo, bg = "#5424A2") #Cria um label para a image, do logo
+        self.LogoLabel = Label(self.root,image = self.logo, bg = "#5424A2") #Cria um label para a imagem, do logo
         self.LogoLabel.place(x=105,y=35) 
 
         def login():
@@ -60,7 +60,7 @@ class Tela_Login:
             VerifyLogin = self.cursor.fetchone() #Obtem o resultado da consulta
             if VerifyLogin:
                 if not "ADM" in usuario:
-                    messagebox.showinfo(title = "INFO LOGIN",message="Acesso Confirmado, Bem Vindo!")#Ebibe mensagem de sucesso
+                    messagebox.showinfo(title = "INFO LOGIN",message="Acesso Confirmado, Bem Vindo!")#Exibe mensagem de sucesso
                     self.root.quit()  # Fecha a janela de cadastro de produtos (destrói a instância)
                     self.root.destroy()  # Fecha a janela de cadastro de produtos, liberando recursos
                     root_user = tk.Tk()  

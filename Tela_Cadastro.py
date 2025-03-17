@@ -6,9 +6,9 @@ import mysql.connector
 
 class CADASTRO:  
 
-    def __init__(self,root): #PARA EXECUTAR ESSE CODIGO SEPAPARADEMENTE DEVE TIRAR O "main_window"
+    def __init__(self,root,main_window): #PARA EXECUTAR ESSE CODIGO SEPAPARADEMENTE DEVE TIRAR O "main_window"
         self.root = root
-        # self.main_window = main_window #PARA EXECUTAR ESSE CODIGO SEPAPARADEMENTE DEVE COMENTAR ESSA LINHA DE CODIGO IRA DAR UM ERROR NO BOTAO VOLTAR
+        self.main_window = main_window #PARA EXECUTAR ESSE CODIGO SEPAPARADEMENTE DEVE COMENTAR ESSA LINHA DE CODIGO IRA DAR UM ERROR NO BOTAO VOLTAR
         self.root.title("CADASTRO DE USUARIO") #Define o titulo
         self.root.geometry("700x680") #Define o tamanho da janela
         self.root.configure(background = ("#5424A2")) #Configura a cor de fundo da janela
@@ -31,16 +31,16 @@ class CADASTRO:
     def create_widgets(self):
 
         #CRIANDO LABELS:
-        TituloLabel = Label(self.root,text="USUARIOS: ",font=("Georgia",25),bg = "#5424A2",fg = "WHITE") #Cria Label do TITULO
-        NomeLabel = Label(self.root,text = "Nome: ",font = ("Georgia",16),bg = "#5424A2", fg = "WHITE") #Cria Label Nome
-        usuarioLabel = Label(self.root,text= "Usuario: ",font= ("Georgia",16),bg = "#5424A2", fg = "WHITE")#Cria Label usuario
-        emailLabel = Label (self.root,text= "Email: ",font = ("Georgia",16),bg = "#5424A2", fg = "WHITE") #Cria Label email
-        telefoneLabel = Label(self.root,text="Telefone: ",font=("Georgia",16),bg = "#5424A2", fg = "WHITE") #Cria Label telefone
-        senhaLabel = Label (self.root,text="Senha: ",font=("Georgia",16),bg = "#5424A2", fg = "WHITE") #Cria Label senha
-        idusuarioLabel = Label (self.root,text="ID Usuario: ",font=("Georgia",16),bg = "#5424A2", fg = "WHITE") #Cria Label senha
+        TituloLabel = Label(self.root,text="USUARIOS: ",font=("Georgia",25),bg = "#5424A2",fg = "WHITE") 
+        NomeLabel = Label(self.root,text = "Nome: ",font = ("Georgia",16),bg = "#5424A2", fg = "WHITE") 
+        usuarioLabel = Label(self.root,text= "Usuario: ",font= ("Georgia",16),bg = "#5424A2", fg = "WHITE")
+        emailLabel = Label (self.root,text= "Email: ",font = ("Georgia",16),bg = "#5424A2", fg = "WHITE")
+        telefoneLabel = Label(self.root,text="Telefone: ",font=("Georgia",16),bg = "#5424A2", fg = "WHITE") 
+        senhaLabel = Label (self.root,text="Senha: ",font=("Georgia",16),bg = "#5424A2", fg = "WHITE") 
+        idusuarioLabel = Label (self.root,text="ID Usuario: ",font=("Georgia",16),bg = "#5424A2", fg = "WHITE") 
 
         #POSICIONANDO LABELS:
-        TituloLabel.pack(pady=40,anchor="center") #POSICIONA O TITULO
+        TituloLabel.pack(pady=40,anchor="center") 
 
         NomeLabel.place(x=40,y=105)
         usuarioLabel.place(x=40,y=135)
@@ -72,10 +72,10 @@ class CADASTRO:
         self.text_area.place(x=18,y=423)
 
         def voltar_para_principal():
-            # Fechar a janela atual de cadastro de produtos e voltar para a janela principal
-            self.root.quit()  # Fecha a janela de cadastro de produtos (destrói a instância)
-            self.root.destroy()  # Fecha a janela de cadastro de produtos, liberando recursos
-
+            # Fechar a janela atual de usuarios e voltar para a janela principal
+            self.root.quit()  # Fecha a janela de usuarios
+            #OS DOIS FECHAM AS JANELAS
+            self.root.destroy()  # Fecha a janela de usuario
             self.main_window.deiconify()  # Reexibe a janela principal
 
         voltar_button = tk.Button(self.root, text="VOLTAR", width=11, font=("Georgia", 10), command=voltar_para_principal)
@@ -105,9 +105,9 @@ class CADASTRO:
                 self.SenhaEntry.delete(0, tk.END)
                 self.idUsuarioEntry.delete(0, tk.END)
                 self.PesquisaEntry.delete(0, tk.END)
-                messagebox.showinfo("Success","Usuario criado com sucesso!")
+                messagebox.showinfo("Usuario Criado","Usuario criado com sucesso!")
             else:
-                messagebox.showerror("Error","Todos os campos são obrigatórios" )
+                messagebox.showerror("Campos Vazios","Todos os campos são obrigatórios" )
 
         #BOTÃO DE PRODUTO
         CadastrarButton = tk.Button (self.root,text = "CADASTRAR",font= ("Georgia",10),width=13,command=cadastrarUsuario)
@@ -117,13 +117,13 @@ class CADASTRO:
         def listar_usuario():
             usuarios = read_usuario() #PUXANDO FUNÇÃO DO CRUD
             self.text_area.delete(1.0, tk.END) #ACESSANDO A "LISTA" DA TELA
-            for usuario in usuarios: #produto ANDANDO EM produtos
+            for usuario in usuarios: #usuario ANDANDO EM usuarios
                 self.text_area.insert(tk.END, f"idUsuario: {usuario[0]}, Nome: {usuario[1]}, Usuario: {usuario[2]},Email: {usuario[3]},Telefone: {usuario[4]},Senha: {usuario[5]}\n")
     
         #BOTÃO DE LISTAR:
         ListarButton = tk.Button (self.root,text="LISTAR",font= ("Georgia",10),width=13,command=listar_usuario)
         ListarButton.place(x=290,y=335)
-        #FUNÇÃO DE ALTERAR PRODUTO:
+        #FUNÇÃO DE ALTERAR USUARIO:
         def alterar_usuario():
                 
                 #RECEBENDO VALORES
@@ -134,7 +134,7 @@ class CADASTRO:
                 senha = self.SenhaEntry.get()
                 idUsuario = self.idUsuarioEntry.get()
 
-                idUsuario = self.idUsuarioEntry.get() #RECEBENDO O VALOR QUE É PRA SER O CODPRODUTO DA TABELA
+                idUsuario = self.idUsuarioEntry.get() #RECEBENDO O VALOR DA TABELA
                 conn = get_connection() #VARIAVEL PARA RECEBER A CONEXÃO
                 self.cursor = conn.cursor() #sell.conn TRABALHAR COM A CONEXAO
 
@@ -143,7 +143,7 @@ class CADASTRO:
                     # CONSULTA NO BANCO
                     usuario_pesquisa = self.cursor.fetchone()
         
-                    # Verificando se o produto foi encontrado
+                    # Verificando se o usuario foi encontrado
                     if usuario_pesquisa:  # SE FOI ENCONTRADO...
                         if idUsuario and nome and usuario and email and telefone and senha:
                             update_usuario( nome,usuario,email,telefone,senha,idUsuario) #PUXANDO A FUNÇÃO DO CRUD E AS VARIAVEIS
@@ -156,11 +156,11 @@ class CADASTRO:
                             self.SenhaEntry.delete(0, tk.END)
                             self.idUsuarioEntry.delete(0, tk.END)
                             self.PesquisaEntry.delete(0, tk.END)
-                            messagebox.showinfo("Success","Usuario alterado com sucesso!")
+                            messagebox.showinfo("Alteração feita com sucesso","Usuario alterado com sucesso!")
                         else:
-                            messagebox.showerror("Error","Todos os campos são obrigatórios")
+                            messagebox.showerror("Campos Vazios","Todos os campos são obrigatórios")
                     else:
-                        messagebox.showerror("Error","Cadastro de Usuario não existe")
+                        messagebox.showerror("Não encontrado","Cadastro de Usuario não existe")
 
                 except Exception as e:
                     print(f'Error: {e}') #SE EXEPT, EXIBE O ERRO 
@@ -171,7 +171,7 @@ class CADASTRO:
 
         #FUNÇÃO DE EXCLUIR
         def excluir_usuario():
-            idusuario = self.idUsuarioEntry.get() #RECEBENDO O VALOR QUE É PRA SER O CODPRODUTO DA TABELA
+            idusuario = self.idUsuarioEntry.get() #RECEBENDO O VALOR DA TABELA
             conn = get_connection() #VARIAVEL PARA RECEBER A CONEXÃO
             self.cursor = conn.cursor() #sell.conn TRABALHAR COM A CONEXAO
             try:
@@ -180,7 +180,7 @@ class CADASTRO:
                 # CONSULTA NO BANCO
                 usuario_pesquisa = self.cursor.fetchone()
         
-                # Verificando se o produto foi encontrado
+                # Verificando se o usuario foi encontrado
                 if usuario_pesquisa:  # SE FOI ENCONTRADO...
                     delete_usuario(idusuario) #PUXANDO FUNÇÃO DO CRUD
 
@@ -210,14 +210,12 @@ class CADASTRO:
             self.cursor = conn.cursor() #sell.conn TRABALHAR COM A CONEXAO
             try:
                 self.cursor.execute("SELECT nome,usuario,email,telefone,senha,idusuario FROM cadastro WHERE idusuario=%s or nome = %s or email = %s or telefone = %s", (id_usuario,id_usuario,id_usuario,id_usuario,)) 
-                # ACIMA SELECIONA AS COLUNAS DA TABELA SE codproduto OU produto OU descricao == codigo_produto
-                # codproduto E produto E descricao PERMITE FAZER A BUSCA POR PRODUTO,DESCRICAO, E CODIGO DE PRODUTO
-                #EM OUTROS CASOS PODERIA SER CPF E NÚMERO DE TELEFONE
+                # ACIMA SELECIONA AS COLUNAS DA TABELA WHERE(SE) condiçoes forem %s
 
                 # CONSULTA NO BANCO
                 usuario_pesquisa = self.cursor.fetchone()
         
-                # Verificando se o produto foi encontrado
+                # Verificando se o usuario foi encontrado
                 if usuario_pesquisa:  # SE FOI ENCONTRADO...
                     nome,usuario,email,telefone,senha,id_usuario = usuario_pesquisa #ESSAS VARIAVEIS VAI RECEBER OS VALORES DA COLUNA DE ACORDO COM A ORDEM
 
@@ -238,9 +236,9 @@ class CADASTRO:
                     self.SenhaEntry.insert(0, senha)
                     self.idUsuarioEntry.insert(0, id_usuario)
             
-                    messagebox.showinfo("Success", "Produto encontrado")
+                    messagebox.showinfo("Success", "Usuario encontrado")
                 else:
-                    messagebox.showwarning("Não encontrado", "Produto não encontrado")
+                    messagebox.showerror("Não encontrado", "Usuario não encontrado")
 
             except Exception as e:
                 print(f'Error: {e}') #SE EXEPT, EXIBE O ERRO (SALVOU O CODIGO)

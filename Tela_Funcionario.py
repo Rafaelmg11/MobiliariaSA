@@ -8,14 +8,13 @@ import mysql.connector
 
 class FUNCIONARIO:
 
-    def __init__(self,root,main_window): #PARA EXECUTAR ESSE CODIGO SEPAPARADEMENTE DEVE TIRAR O "main_window"
-        self.root = root  #PARA EXECUTAR ESSE CODIGO SEPAPARADEMENTE DEVE COMENTAR ESSA LINHA DE CODIGO IRA DAR UM ERROR NO BOTAO VOLTAR
+    def __init__(self,root,main_window): 
+        self.root = root 
         self.main_window = main_window
-        self.root.title("CADASTRO DE FUNCIONARIOS") #Define o titulo
-        self.root.geometry("700x680") #Define o tamanho da janela
-        self.root.configure(background = "#5424A2") #Configura a cor de fundo da janela
-        self.root.resizable(width = False,height = False) #Impede que a janela seja redimensionada 
-        #Criação de Widgets
+        self.root.title("CADASTRO DE FUNCIONARIOS") 
+        self.root.geometry("700x680") 
+        self.root.configure(background = "#5424A2")
+        self.root.resizable(width = False,height = False)
         self.create_widgets()
 
     def conectarBanco(self):
@@ -31,18 +30,18 @@ class FUNCIONARIO:
     def create_widgets(self):
 
         #CRIANDO LABELS:
-        TituloLabel = Label(self.root,text="CADASTRAR FUNCIONÁRIOS: ",font=("Georgia",25),bg = "#5424A2",fg = "WHITE") #Cria Label TITULO
+        TituloLabel = Label(self.root,text="CADASTRAR FUNCIONÁRIOS: ",font=("Georgia",25),bg = "#5424A2",fg = "WHITE")
 
-        nome = Label(self.root,text = "Nome: ",font = ("Georgia",16),bg = "#5424A2", fg = "WHITE") #Cria Label Nome
-        cpf = Label(self.root,text = "CPF: ",font = ("Georgia",16),bg = "#5424A2", fg = "WHITE") #Cria Label CPF
-        telefone = Label(self.root,text = "Telefone: ",font = ("Georgia",16),bg = "#5424A2", fg = "WHITE") #Cria Label Telefone
-        email = Label(self.root,text = "Email: ",font = ("Georgia",16),bg = "#5424A2", fg = "WHITE") #Cria Label Email
-        cargo = Label(self.root,text= "Cargo: ",font = ("Georgia",16),bg = "#5424A2", fg = "WHITE")#Cria Label Salario
-        salario = Label (self.root,text= "Salário: ",font = ("Georgia",16),bg = "#5424A2", fg = "WHITE") #Cria Label Cargo
-        idFuncionario = Label (self.root,text="ID Funcionario: ",font = ("Georgia",16),bg = "#5424A2", fg = "WHITE") #Cria Label Fornecedor
+        nome = Label(self.root,text = "Nome: ",font = ("Georgia",16),bg = "#5424A2", fg = "WHITE") 
+        cpf = Label(self.root,text = "CPF: ",font = ("Georgia",16),bg = "#5424A2", fg = "WHITE") 
+        telefone = Label(self.root,text = "Telefone: ",font = ("Georgia",16),bg = "#5424A2", fg = "WHITE") 
+        email = Label(self.root,text = "Email: ",font = ("Georgia",16),bg = "#5424A2", fg = "WHITE") 
+        cargo = Label(self.root,text= "Cargo: ",font = ("Georgia",16),bg = "#5424A2", fg = "WHITE")
+        salario = Label (self.root,text= "Salário: ",font = ("Georgia",16),bg = "#5424A2", fg = "WHITE") 
+        idFuncionario = Label (self.root,text="ID Funcionario: ",font = ("Georgia",16),bg = "#5424A2", fg = "WHITE") 
       
         #POSICIONANDO LABELS:
-        TituloLabel.pack(pady=40,anchor="center") #POSICIONA O TITULO
+        TituloLabel.pack(pady=40,anchor="center") 
 
         nome.place(x=40,y=105)
         cpf.place(x=40,y=135)
@@ -141,9 +140,9 @@ class FUNCIONARIO:
                 idFuncionario = self.idfuncionarioEntry.get()
 
 
-                id_Funcionario = self.idfuncionarioEntry.get() #RECEBENDO O VALOR QUE É PRA SER O CODPRODUTO DA TABELA
-                conn = get_connection() #VARIAVEL PARA RECEBER A CONEXÃO
-                self.cursor = conn.cursor() #sell.conn TRABALHAR COM A CONEXAO
+                id_Funcionario = self.idfuncionarioEntry.get() 
+                conn = get_connection() 
+                self.cursor = conn.cursor() 
 
                 try:
                     self.cursor.execute("SELECT * FROM funcionario WHERE idfuncionario=%s ",(id_Funcionario,)) 
@@ -171,15 +170,15 @@ class FUNCIONARIO:
                         messagebox.showerror("Error","Cadastro de Produto não existe")
 
                 except Exception as e:
-                    print(f'Error: {e}') #SE EXEPT, EXIBE O ERRO 
+                    print(f'Error: {e}') 
             
         AlterarButton = tk.Button(self.root,text = "ALTERAR",font= ("Georgia",10),width=13,command=alterar_funcionario)
         AlterarButton.place(x=164,y=335)  
 
         def excluir_funcionario():
             id_funcionario = self.idfuncionarioEntry.get()
-            conn = get_connection() #VARIAVEL PARA RECEBER A CONEXÃO
-            self.cursor = conn.cursor() #sell.conn TRABALHAR COM A CONEXAO
+            conn = get_connection() 
+            self.cursor = conn.cursor() 
             try:
                 self.cursor.execute("SELECT * FROM funcionario WHERE idfuncionario=%s ",(id_funcionario,)) 
 
@@ -202,27 +201,27 @@ class FUNCIONARIO:
                 else:
                     messagebox.showerror("Error","ID Funcionario não existe")
             except Exception as e:
-                print(f'Error: {e}') #SE EXEPT, EXIBE O ERRO 
+                print(f'Error: {e}') 
 
         ExcluirButton = tk.Button(self.root,text = "EXCLUIR",font= ("Georgia",10),width=13,command=excluir_funcionario)
         ExcluirButton.place(x=418,y=335)
 
 
-         #FUNÇÃO DE PESQUISAR :) ;) OBS: NAO TEM RELAÇÃO COM O CRUD
+         #FUNÇÃO DE PESQUISAR 
         def pesquisar_funcionario():
-            codigo_funcionario = self.PesquisaEntry.get() #CONEXÃO COM O BANCO DE DADOS
-            conn = get_connection() #VARIAVEL PARA RECEBER A CONEXÃO
-            self.cursor = conn.cursor() #sell.conn TRABALHAR COM A CONEXAO
+            codigo_funcionario = self.PesquisaEntry.get() 
+            conn = get_connection() 
+            self.cursor = conn.cursor() 
             try:
                 
                 self.cursor.execute("SELECT idfuncionario,nome,cpf,telefone,email,cargo,salario FROM funcionario WHERE idfuncionario=%s or nome=%s", (codigo_funcionario,codigo_funcionario,)) 
 
-                # CONSULTA NO BANCO
+           
                 funcionario_pesquisa = self.cursor.fetchone()
         
                 # Verificando se o produto foi encontrado
                 if funcionario_pesquisa:  # SE FOI ENCONTRADO...
-                    id_funcionario ,nome ,cpf,telefone,email,cargo , salario = funcionario_pesquisa #ESSAS VARIAVEIS VAI RECEBER OS VALORES DA COLUNA DE ACORDO COM A ORDEM
+                    id_funcionario ,nome ,cpf,telefone,email,cargo , salario = funcionario_pesquisa
 
                     #LIMPA TODOS OS CAMPOS ANTES DE RECEBER AS INFORMAÇOES
                     self.NomeEntry.delete(0, tk.END)
@@ -247,10 +246,10 @@ class FUNCIONARIO:
                     messagebox.showwarning("Não encontrado", "Funcionario não encontrado")
 
             except Exception as e:
-                print(f'Error: {e}') #SE EXEPT, EXIBE O ERRO (SALVOU O CODIGO)
+                print(f'Error: {e}') 
 
 
-        #BOTAO DE PESQUISA :)
+        #BOTAO DE PESQUISA 
         PesquisarButton = tk.Button(self.root,text = "Pesquisar",font= ("Georgia",10),width=13,command=pesquisar_funcionario)
         PesquisarButton.place(x = 20,y=390)
 

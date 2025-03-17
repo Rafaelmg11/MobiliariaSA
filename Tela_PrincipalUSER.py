@@ -3,12 +3,6 @@ from Tela_Produto import PRODUTO  # Importa a classe PRODUTO do arquivo produto.
 from Tela_Fornecedor import FORNECEDOR
 
 
-#TEM QUE FAZER O FUNCIONARIO FECHAR
-#TEM QUE FAZER O FORNECEDOR ABRIR E FECHAR
-#ARRUMAR OS FRONT ENDS
-#TELA DE LOGIN
-#TELA DE FATURA
-
 class Menu2:
     def __init__(self, root,main_window):
         self.root = root
@@ -17,7 +11,7 @@ class Menu2:
         self.root.geometry("600x600")
         self.root.configure(background="#5424A2")  # Cor de fundo da janela principal
         
-        # Criando um botão para abrir a janela do PRODUTO
+        # ABRINDO OUTRAS JANELAS:
         abrir_produto_button = tk.Button(self.root, text="Abrir Cadastro de Produto", width=30, font=("Century Gothic", 13), command=self.abrir_produto)
         abrir_produto_button.place(x=150,y=350)
        
@@ -33,19 +27,20 @@ class Menu2:
     def abrir_produto(self):
         # Oculta a janela principal
         self.root.withdraw()
-
         # Cria uma nova janela Tkinter para o cadastro de produto
         root_produto = tk.Tk()  # Cria a nova instância da janela para o cadastro de produto
         app_produto = PRODUTO(root_produto, self.root)  # Passa a referência da janela principal (self.root)
-        root_produto.protocol("WM_DELETE_WINDOW", lambda: self.reabrir_janela())  # Fechar corretamente ao fechar a janela de cadastro
+        root_produto.protocol("WM_DELETE_WINDOW", lambda: self.reabrir_janela())  # Fechar corretamente ao fechar a janela 
         root_produto.mainloop()  # Inicia a execução da janela do PRODUTO
 
     def abrir_fornecedor(self):
-        # Cria uma nova janela Tkinter para o cadastro de produto
+        # Oculta a janela principal
+        self.root.withdraw()
+        # Cria uma nova janela Tkinter para o cadastro de fornecedor
         root_fornecedor = tk.Tk()  # Cria a nova instância da janela para o cadastro de produto
-        app_fornecedor = FORNECEDOR(root_fornecedor,self.root)  # Cria a instância da classe PRODUTO
+        app_fornecedor = FORNECEDOR(root_fornecedor,self.root)  # Cria a instância da classe FORNECEDOR
         root_fornecedor.protocol("WM_DELETE_WINDOW", lambda: self.reabrir_janela())  # Fechar corretamente ao fechar a janela de cadastro
-        root_fornecedor.mainloop()  # Inicia a execução da janela do PRODUTO
+        root_fornecedor.mainloop()  # Inicia a execução da janela de fornecedor
 
 
     def reabrir_janela(self):

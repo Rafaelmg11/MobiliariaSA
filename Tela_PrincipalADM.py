@@ -4,11 +4,6 @@ from Tela_Funcionario import FUNCIONARIO
 from Tela_Fornecedor import FORNECEDOR
 from Tela_Cadastro import CADASTRO
 
-#TEM QUE FAZER O FUNCIONARIO FECHAR
-#TEM QUE FAZER O FORNECEDOR ABRIR E FECHAR
-#ARRUMAR OS FRONT ENDS
-#TELA DE LOGIN
-#TELA DE FATURA
 
 class Menu:
     def __init__(self, root,main_window):
@@ -18,7 +13,7 @@ class Menu:
         self.root.geometry("600x600")
         self.root.configure(background="#5424A2")  # Cor de fundo da janela principal
         
-        # Criando um botão para abrir a janela do PRODUTO
+        # ABRIR OUTRAS JANELAS
         abrir_produto_button = tk.Button(self.root, text="Abrir Cadastro de Produto", width=30, font=("Century Gothic", 13), command=self.abrir_produto)
         abrir_produto_button.place(x=150,y=350)
 
@@ -34,7 +29,7 @@ class Menu:
         #LOGO:
         # CARREGAR IMAGEM
         self.logo = tk.PhotoImage(file="icons/LogoMobiliaria.png") #Carrega a imagem da logo
-        self.LogoLabel = tk.Label(self.root,image = self.logo, bg = "#5424A2") #Cria um label para a image, do logo
+        self.LogoLabel = tk.Label(self.root,image = self.logo, bg = "#5424A2") #Cria um label para a imagem, do logo
         self.LogoLabel.place(x=205,y=100) #Posiciona o label no frama esquerdo 
 
 
@@ -45,27 +40,30 @@ class Menu:
         # Cria uma nova janela Tkinter para o cadastro de produto
         root_produto = tk.Tk()  # Cria a nova instância da janela para o cadastro de produto
         app_produto = PRODUTO(root_produto, self.root)  # Passa a referência da janela principal (self.root)
-        root_produto.protocol("WM_DELETE_WINDOW", lambda: self.reabrir_janela())  # Fechar corretamente ao fechar a janela de cadastro
+        root_produto.protocol("WM_DELETE_WINDOW", lambda: self.reabrir_janela())  # Fechar corretamente ao fechar a janela 
         root_produto.mainloop()  # Inicia a execução da janela do PRODUTO
 
     def abrir_funcionario(self):
-        # Cria uma nova janela Tkinter para o cadastro de produto
-        root_funcionario = tk.Tk()  # Cria a nova instância da janela para o cadastro de produto
-        app_funcionario = FUNCIONARIO(root_funcionario,self.root)  # Cria a instância da classe PRODUTO
-        root_funcionario.protocol("WM_DELETE_WINDOW", lambda: self.reabrir_janela())  # Fechar corretamente ao fechar a janela de cadastro
+        # Oculta a janela principal
+        self.root.withdraw()
+        # Cria uma nova janela Tkinter para o cadastro de funcionario
+        root_funcionario = tk.Tk()  # Cria a nova instância da janela para o cadastro de funcionario
+        app_funcionario = FUNCIONARIO(root_funcionario,self.root)  # Cria a instância da classe FUNCIONARIO
+        root_funcionario.protocol("WM_DELETE_WINDOW", lambda: self.reabrir_janela())  # Fechar corretamente ao fechar a janela 
         root_funcionario.mainloop()  # Inicia a execução da janela do PRODUTO
 
     def abrir_fornecedor(self):
-        # Cria uma nova janela Tkinter para o cadastro de produto
-        root_fornecedor = tk.Tk()  # Cria a nova instância da janela para o cadastro de produto
-        app_fornecedor = FORNECEDOR(root_fornecedor,self.root)  # Cria a instância da classe PRODUTO
-        root_fornecedor.protocol("WM_DELETE_WINDOW", lambda: self.reabrir_janela())  # Fechar corretamente ao fechar a janela de cadastro
+        # Oculta a janela principal
+        self.root.withdraw()
+        # Cria uma nova janela Tkinter para o cadastro de fornecedor
+        root_fornecedor = tk.Tk()  # Cria a nova instância da janela para o cadastro de fornecedor
+        app_fornecedor = FORNECEDOR(root_fornecedor,self.root)  # Cria a instância da classe FORNECEDOR
+        root_fornecedor.protocol("WM_DELETE_WINDOW", lambda: self.reabrir_janela())  # Fechar corretamente ao fechar a janela
         root_fornecedor.mainloop()  # Inicia a execução da janela do PRODUTO
 
     def abrir_usuario(self):
         # Oculta a janela principal
         self.root.withdraw()
-
         # Cria uma nova janela Tkinter para o cadastro de produto
         root_usuario = tk.Tk()  # Cria a nova instância da janela para o cadastro de produto
         app_usuario = CADASTRO(root_usuario, self.root)  # Passa a referência da janela principal (self.root)
