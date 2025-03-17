@@ -15,21 +15,28 @@ class Menu:
         self.root = root
         self.main_window = main_window
         self.root.title("Tela Principal")
-        self.root.geometry("500x500")
-        self.root.configure(background="lightblue")  # Cor de fundo da janela principal
+        self.root.geometry("600x600")
+        self.root.configure(background="#5424A2")  # Cor de fundo da janela principal
         
         # Criando um botão para abrir a janela do PRODUTO
         abrir_produto_button = tk.Button(self.root, text="Abrir Cadastro de Produto", width=30, font=("Century Gothic", 13), command=self.abrir_produto)
-        abrir_produto_button.place(x=20,y=150)
+        abrir_produto_button.place(x=150,y=350)
 
         abrir_funcionario_button = tk.Button(self.root, text="Abrir Cadastro de Funcionario", width=30, font=("Century Gothic", 13), command=self.abrir_funcionario)
-        abrir_funcionario_button.place(x=20,y=50)
+        abrir_funcionario_button.place(x=150,y=400)
 
-        abrir_fornecedor_button = tk.Button(self.root, text="Abrir Aba de Fornecedor", width=30, font=("Century Gothic", 13), command=self.abrir_fornecedor)
-        abrir_fornecedor_button.place(x=20,y=250)
+        abrir_fornecedor_button = tk.Button(self.root, text="Abrir Cadastro de Fornecedor", width=30, font=("Century Gothic", 13), command=self.abrir_fornecedor)
+        abrir_fornecedor_button.place(x=150,y=450)
 
-        abrir_usuario_button = tk.Button(self.root, text="Abrir Aba de Usuario", width=30, font=("Century Gothic", 13), command=self.abrir_usuario)
-        abrir_usuario_button.place(x=20,y=350)
+        abrir_usuario_button = tk.Button(self.root, text="Abrir Cadastro de Usuario", width=30, font=("Century Gothic", 13), command=self.abrir_usuario)
+        abrir_usuario_button.place(x=150,y=500)
+
+        #LOGO:
+        # CARREGAR IMAGEM
+        self.logo = tk.PhotoImage(file="icons/LogoMobiliaria.png") #Carrega a imagem da logo
+        self.LogoLabel = tk.Label(self.root,image = self.logo, bg = "#5424A2") #Cria um label para a image, do logo
+        self.LogoLabel.place(x=205,y=100) #Posiciona o label no frama esquerdo 
+
 
     def abrir_produto(self):
         # Oculta a janela principal

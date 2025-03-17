@@ -1,7 +1,8 @@
 from tkinter import* #Importa tudo do tkinter
 from tkinter import messagebox #Importa as caixas de mensagem
 from crudPrincipal import get_connection
-from Tela_Principal import Menu
+from Tela_PrincipalADM import Menu
+from Tela_PrincipalUSER import Menu2
 import mysql.connector
 import tkinter as tk
 
@@ -47,7 +48,7 @@ class Tela_Login:
         # CARREGAR IMAGEM
         self.logo = PhotoImage(file="icons/LogoMobiliaria.png") #Carrega a imagem da logo
         self.LogoLabel = Label(self.root,image = self.logo, bg = "#5424A2") #Cria um label para a image, do logo
-        self.LogoLabel.place(x=105,y=35) #Posiciona o label no frama esquerdo 
+        self.LogoLabel.place(x=105,y=35) 
 
         def login():
             usuario = UsuarioEntry.get()
@@ -58,15 +59,23 @@ class Tela_Login:
             self.cursor.execute("SELECT*FROM cadastro WHERE usuario = %s AND senha = %s",(usuario,senha))
             VerifyLogin = self.cursor.fetchone() #Obtem o resultado da consulta
             if VerifyLogin:
-                messagebox.showinfo(title = "INFO LOGIN",message="Acesso Confirmado, Bem Vindo!")#Ebibe mensagem de sucesso
-                self.root.quit()  # Fecha a janela de cadastro de produtos (destrói a instância)
-                self.root.destroy()  # Fecha a janela de cadastro de produtos, liberando recursos
+                if not "ADM" in usuario:
+                    messagebox.showinfo(title = "INFO LOGIN",message="Acesso Confirmado, Bem Vindo!")#Ebibe mensagem de sucesso
+                    self.root.quit()  # Fecha a janela de cadastro de produtos (destrói a instância)
+                    self.root.destroy()  # Fecha a janela de cadastro de produtos, liberando recursos
+                    root_user = tk.Tk()  
+                    app_user = Menu2(root_user, self.root) 
+                    root_user.mainloop()
 
-                root_main = tk.Tk()  
-                app_main = Menu(root_main, self.root) 
-                root_main.mainloop()
+                else:
+                    messagebox.showinfo(title = "INFO LOGIN",message="Acesso Confirmado, Bem Vindo!")#Ebibe mensagem de sucesso
+                    self.root.quit()  # Fecha a janela de cadastro de produtos (destrói a instância)
+                    self.root.destroy()  # Fecha a janela de cadastro de produtos, liberando recursos
+                    root_adm = tk.Tk()  
+                    app_adm = Menu(root_adm, self.root) 
+                    root_adm.mainloop()
                 
-            else:messagebox.showinfo(title = "INFO LOGIN",message = "Acesso Negado. Verifique se está cadastrado no Sistema!")#Exibe mensagem de erro
+            else:messagebox.showerror(title = "INFO LOGIN",message = "Acesso Negado. Verifique se está cadastrado no Sistema!")#Exibe mensagem de erro
 
         #CRIANDO BOTAO:
         LoginButton =  tk.Button(self.root, text="LOGIN",  width=12, font=("Georgia", 11),command=login)
